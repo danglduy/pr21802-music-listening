@@ -17,6 +17,7 @@ AllCops:
     - 'bin/*'
     - 'db/**/*'
     - 'spec/**/*'
+    - 'node_modules/**/*'
     - 'script/rails'
     - 'config/**/*'
     - 'config.ru'
