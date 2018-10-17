@@ -5,6 +5,7 @@ ruby "2.5.1"
 
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
+gem "cancancan", "~> 2.0"
 gem "config", "~> 1.7"
 gem "devise"
 gem "jbuilder", "~> 2.5"
@@ -13,6 +14,7 @@ gem "materialize-sass"
 gem "mysql2", ">= 0.4.4", "< 0.6.0"
 gem "puma", "~> 3.11"
 gem "rails", "~> 5.2.1"
+gem "rolify"
 gem "rubocop", "~> 0.54.0", require: false
 gem "sass-rails", "~> 5.0"
 gem "turbolinks", "~> 5"
