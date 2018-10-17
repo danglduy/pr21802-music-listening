@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root "pages#index"
+  get "player", to: "player#index"
 end
