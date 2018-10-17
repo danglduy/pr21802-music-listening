@@ -5,7 +5,6 @@ ruby "2.5.1"
 
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
-gem "coffee-rails", "~> 4.2"
 gem "config", "~> 1.7"
 gem "jbuilder", "~> 2.5"
 gem "mysql2", ">= 0.4.4", "< 0.6.0"
@@ -15,6 +14,7 @@ gem "rubocop", "~> 0.54.0", require: false
 gem "sass-rails", "~> 5.0"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
+gem "webpacker", "~> 3.5", ">= 3.5.5"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
