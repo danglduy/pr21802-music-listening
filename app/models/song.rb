@@ -9,5 +9,5 @@ class Song < ApplicationRecord
 
   has_one_attached :file
 
-  scope :order_track_no_asc, -> {order track_no: :asc}
+  scope :order_track_no_asc, ->{order track_no: :asc}
 end

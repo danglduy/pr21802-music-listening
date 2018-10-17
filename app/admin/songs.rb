@@ -13,22 +13,26 @@ ActiveAdmin.register Song do
     def validate_file
       file = params[:song][:file]
       return if file.blank?
-      validate_size file
-      validate_contenttype file
+      unless validate_size(file) && validate_contenttype(file)
+        if action_name == "update"
+          redirect_to edit_admin_song_path(params[:id])
+        else
+          redirect_to new_admin_song_path
+        end
+        return
+      end
     end
 
     def validate_size file
-      return if file.size <= Settings.file_size
+      return true if file.size <= Settings.file_size
       flash[:danger] = t ".large_size", file_size: Settings.file_size
-      redirect_back fallback_location: request.original_url
-      return
+      false
     end
 
     def validate_contenttype file
-      return if file.content_type.start_with? "audio/"
+      return true if file.content_type.start_with? "audio/"
       flash[:danger] = t ".wrong_format"
-      redirect_back fallback_location: request.original_url
-      return
+      false
     end
   end
 

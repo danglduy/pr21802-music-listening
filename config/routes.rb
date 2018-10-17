@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  root "pages#index"
-
+  devise_for :users, path: "", path_names: {sign_in: "login",
+    sign_out: "logout", edit: "profile", confirmation: "confirmations"},
+    controllers: {omniauth_callbacks: "omniauth_callbacks",
+    registrations: "registrations", sessions: "users/sessions"}
+    
   get "player", to: "player#index"
+  get "pages/home"
+  root to: "pages#home", as: :root
 
   ActiveAdmin.routes(self)
-  devise_for :users, path: "", path_names: {
-    sign_in: "login", sign_out: "logout", edit: "profile", sign_up: "signup"
-  }
 
   devise_scope :user do
     resource :registration,
