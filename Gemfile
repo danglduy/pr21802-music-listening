@@ -3,18 +3,21 @@ git_source(:github){|repo| "https://github.com/#{repo}.git"}
 
 ruby "2.5.1"
 
+gem "activeadmin", "~> 1.3", ">= 1.3.1"
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
-gem "cancancan", "~> 2.0"
+gem "cancancan", "~> 2.3"
 gem "config", "~> 1.7"
-gem "devise"
+gem "devise", "~> 4.5"
 gem "jbuilder", "~> 2.5"
-gem "jquery-rails"
-gem "materialize-sass"
+gem "jquery-rails", "~> 4.3", ">= 4.3.3"
+gem "materialize-sass", "~> 1.0"
 gem "mysql2", ">= 0.4.4", "< 0.6.0"
+gem "omniauth", "~> 1.8", ">= 1.8.1"
 gem "puma", "~> 3.11"
 gem "rails", "~> 5.2.1"
-gem "rolify"
+gem "rails-i18n", "~> 5.1", ">= 5.1.1"
+gem "rolify", "~> 5.2"
 gem "rubocop", "~> 0.54.0", require: false
 gem "sass-rails", "~> 5.0"
 gem "turbolinks", "~> 5"

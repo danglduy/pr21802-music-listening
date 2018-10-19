@@ -1,0 +1,10 @@
+en:
+  admin:
+    songs:
+      update:
+        large_size: "Large size (> %{file_size})!"
+        wrong_format: "Wrong file format!"
+  active_admin:
+    resource:
+      edit:
+        existing: "Existing: "

@@ -6,4 +6,6 @@ class Song < ApplicationRecord
   has_many :categories, through: :song_categories
   has_many :likes, dependent: :destroy
   has_many :users, through: :likes
+
+  has_one_attached :file
 end

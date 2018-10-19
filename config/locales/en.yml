@@ -1,2 +1,19 @@
 en:
   base_title: "Music Listening"
+  attachments:
+    destroy:
+      attachment_deleted: "Attachment deleted!"
+  edit: "Edit"
+  delete: "Delete"
+  delete_attachment: "Delete attachment"
+  delete_confirm: "Are you sure?"
+  activerecord:
+    attributes:
+      file:
+        content_type: "Content type"
+    errors:
+      models:
+        song:
+          attributes:
+            file:
+              content_type: "has the wrong file format"
