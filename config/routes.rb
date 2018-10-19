@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "pages#index"
+
   get "player", to: "player#index"
 
   namespace :api do
@@ -8,7 +10,7 @@ Rails.application.routes.draw do
       resources :artists, only: [:index, :show]
     end
   end
-  devise_for :users, path: '', path_names: { sign_in: 'login', 
-    sign_out: 'logout', edit: 'profile'}
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  devise_for :users, path: "", path_names: { sign_in: "login",
+    sign_out: "logout", edit: "profile"}
 end
