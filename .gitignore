@@ -39,3 +39,7 @@ config/environments/*.local.yml
 /public/packs-test
 yarn-debug.log*
 .yarn-integrity
+
+#Ignore data import folder
+/import/*
+!/import/.keep
