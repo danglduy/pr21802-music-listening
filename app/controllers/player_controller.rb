@@ -1,5 +1,6 @@
 class PlayerController < ApplicationController
   layout "player"
 
-  def index; end
+  def index
+  end
 end

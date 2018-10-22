@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pr21802MusicListening</title>
+    <title><%= full_title yield(:title) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
-    
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= render "layouts/header"%><br>
+      <div class="row">
+        <% flash.each do |message_type, message| %>
+          <% message_type = "success" if message_type == "notice" %>
+          <% message_type = "danger" if message_type == "alert" %>
+          <div class="col-md-12">
+            <div class="alert alert-<%= message_type %>">
+              <%= message %>
+            </div>
+          </div>
+        <% end %>
+        <%= yield %>
+        <%= render "layouts/footer" %>
+      </div>
+    </div>
   </body>
 </html>
