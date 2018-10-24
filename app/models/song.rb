@@ -8,4 +8,6 @@ class Song < ApplicationRecord
   has_many :users, through: :likes
 
   has_one_attached :file
+
+  scope :order_track_no_asc, -> {order track_no: :asc}
 end

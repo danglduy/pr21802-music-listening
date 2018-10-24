@@ -4,10 +4,12 @@ Team3: Duy, Tuyen
 
 ## Deploy
 - Clone project
-- Install: Ruby 2.5.1, Mysql, NodeJs >= 8, Yarn
+- Install: Ruby 2.5.1, Mysql, NodeJs >= 8
+- Prerequisites: ffmpeg, yarn, foreman(gem)
 - Install prerequisites by following commands
 
 ```
+sudo apt-get install ffmpeg
 bundle install
 gem install foreman
 yarn

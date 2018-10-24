@@ -23,3 +23,6 @@ en:
           attributes:
             file:
               content_type: "has the wrong file format"
+  time:
+    formats:
+      duration: "%M:%S"

@@ -1,45 +1,68 @@
 ActiveAdmin.register Song do
   before_action :validate_file, only: [:create, :update]
+  permit_params :track_no, :name, :artist_id, :album_id, :year, :file,
+    category_ids: []
+
+  config.sort_order = "name_asc"
 
   controller do
+    def scoped_collection
+      super.includes :album, :artist, :categories
+    end
+
     def validate_file
       file = params[:song][:file]
-      if file.size > Settings.file_size
-        flash[:danger] = t(".large_size", file_size: Settings.file_size)
-        redirect_back fallback_location: request.original_url
-        return
-      end
+      return if file.blank?
+      validate_size file
+      validate_contenttype file
+    end
 
-      if !file.content_type.start_with?("audio/") && file.present?
-        flash[:danger] = t ".wrong_format"
-        redirect_back fallback_location: request.original_url
-        return
-      end
+    def validate_size file
+      return if file.size <= Settings.file_size
+      flash[:danger] = t ".large_size", file_size: Settings.file_size
+      redirect_back fallback_location: request.original_url
+      return
+    end
+
+    def validate_contenttype file
+      return if file.content_type.start_with? "audio/"
+      flash[:danger] = t ".wrong_format"
+      redirect_back fallback_location: request.original_url
+      return
     end
   end
 
-  permit_params :name, :artist_id, :album_id, :file
-
   filter :name
-  filter :artist
-  filter :album
+  filter :artist, collection: ->{Artist.order :name}
+  filter :album, collection: ->{Album.order :name}
   filter :categories
 
-  form do |f|
-    f.inputs do
-      f.input :name
-      f.input :artist
-      f.input :album
-      if f.object.file.attached?
-        file_hint = t ".existing"
-        file_hint << link_to(f.object.file.attachment.filename, url_for(f.object.file.attachment))
-        file_hint << "&nbsp;" + link_to(t("delete_attachment"), attachment_path(f.object.file.signed_id), method: :delete, data: {confirm: t("delete_confirm")})
-        f.input :file, as: :file, input_html: {"data-direct-upload-url": rails_direct_uploads_url}, hint: file_hint.html_safe
-      else
-        f.input :file, as: :file, input_html: {"data-direct-upload-url": rails_direct_uploads_url}
+  form partial: "form"
+
+  index do
+    selectable_column
+    column :name do |songs|
+      best_in_place songs, :name, as: :input, url: [:admin, songs]
+    end
+    column :album
+    column :album_disc_no do |songs|
+      songs.album.disc_no
+    end
+    column :artist
+    column :duration
+    column :listen do |song|
+      if song.file.attached?
+        link_to t(".listen"),
+          rails_blob_path(song.file, disposition: "preview")
       end
     end
-    f.actions
+    column :download do |song|
+      if song.file.attached?
+        link_to t(".download"),
+          rails_blob_path(song.file, disposition: "attachment")
+      end
+    end
+    actions
   end
 
   show do
@@ -47,10 +70,22 @@ ActiveAdmin.register Song do
       row :name
       row :artist
       row :album
-      row :file do |song|
+      row :listen do |song|
         if song.file.attached?
-          link_to song.file.filename, url_for(song.file)
+          link_to t(".listen"),
+            rails_blob_path(song.file, disposition: "preview")
         end
+      end
+      row :download do |song|
+        if song.file.attached?
+          link_to t(".download"),
+            rails_blob_path(song.file, disposition: "attachment")
+        end
+      end
+      row :genres do
+        song.categories.map do |category|
+          raw link_to(category.name, admin_category_path(category))
+        end.join(", ").html_safe
       end
     end
   end

@@ -4,7 +4,16 @@ en:
       update:
         large_size: "Large size (> %{file_size})!"
         wrong_format: "Wrong file format!"
+      form:
+        cancel: "Cancel"
+        delete_attachment: "Delete attachment"
   active_admin:
     resource:
-      edit:
-        existing: "Existing: "
+      index:
+        listen: "Listen"
+        download: "Download"
+      show:
+        listen: "Listen"
+        download: "Download"
+        albums: "Albums"
+        songs: "Songs"
