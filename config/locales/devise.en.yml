@@ -7,6 +7,7 @@ en:
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
       new:
+        email: "Email"
         resend_confirm: "Resend confirmation instructions"
     failure:
       already_authenticated: "You are already signed in."
@@ -62,6 +63,7 @@ en:
         change_password: "Change my password"
         characters_minimum: "(%{length} characters minimum)"
       new:
+        email: "Email"
         forgot_password: "Forgot your password?"
         send_me: "Send me reset password instructions"
     registrations:
@@ -73,6 +75,12 @@ en:
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
       updated: "Your account has been updated successfully."
       edit:
+        name: "Name"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        current_password: "Current password"
+        leave_blank: "(leave blank if you don't want to change it)"
         edit: "Edit %{resource_name}"
         waiting: "Currently waiting confirmation for: %{unconfirmed_email}"
         characters_minimum: "(%{length} characters minimum)"
@@ -83,6 +91,9 @@ en:
         back: "Back"
         confirm: "Are you sure?"
       new:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
         sign_up: "Sign up"
         characters_minimum: "(%{length} characters minimum)"
     sessions:
@@ -90,6 +101,8 @@ en:
       signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."
       new:
+        email: "Email"
+        password: "Password"
         log_in: "Log in"
     shared:
       links:
@@ -104,7 +117,8 @@ en:
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
       new:
-        resend_unlock: Resend unlock instructions
+        email: "Email"
+        resend_unlock: "Resend unlock instructions"
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"

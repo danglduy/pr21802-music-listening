@@ -1,4 +1,10 @@
 en:
+  layouts:
+    header:
+      edit_profile: "Edit profile"
+      login: "Login"
+      logout: "Logout"
+  logo_header: "Music Listening"
   base_title: "Music Listening"
   attachments:
     destroy:
