@@ -1,91 +1,35 @@
-<div class="container">
-  <div class="row"></div>
-  <div class="row"></div>
+<div class="ui two column centered stackable grid">
+  <div class="column">
+    <div class="ui header"><%= t ".sign_up" %></div>
 
-  <div class="row">
-    <div class="col s12 m12 l4 center">
-      <div class="card-panel">
-        <div class="row s12" id="button-sign-up-google">
-          <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn red darken-1" do %>
-            <i class="fa fa-google-plus"></i>&nbsp; &nbsp;
-            <%= t ".sign_up_with_google" %>
-          <% end %>
-        </div>
+    <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: {class: "ui form segment"} do |f| %>
+      <%= devise_error_messages! %>
 
-        <div class="row s12">
-          <%= link_to user_facebook_omniauth_authorize_path, class: "btn blue darken-4" do %>
-            <i class="fa fa-facebook"></i>&nbsp; &nbsp;
-            <%= t ".sign_up_with_facebook" %>
-          <% end %>
-        </div>
-
-        <div class="row s12">
-          <%= link_to user_twitter_omniauth_authorize_path, class: "btn cyan darken-1" do %>
-            <i class="fa fa-twitter"></i>&nbsp; &nbsp;
-            <%= t ".sign_up_with_twitter" %> &nbsp; &nbsp;
-          <% end %>
-        </div>
+      <div class="field">
+        <%= f.label :email, t(".email") %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
-    </div>
 
-    <div class="col s12 m12 l8">
-      <div class="card">
-        <div class="title-sign-up-page center blue-grey darken-3">
-          <%= t ".sign_up" %>
-        </div>
-
-        <div class="card-content">
-          <%= form_for resource, as: resource_name, url: registration_path(resource_name) do |f| %>
-
-            <%= render partial: "shared/devise_message" %>
-
-            <div class="row">
-              <div class="input-field col s12 sign-up-fields">
-                <i class="material-icons md-36 prefix icon-account-material">account_circle</i>
-                <%= f.text_field :name, autofocus: true, autocomplete: "on", class: "validate", placeholder: t(".name_placeholder") %>
-                <i class="material-icons md-36" id="InforCheckNameMatch">done</i>
-                <i class="material-icons md-36" id="InforCheckNameError">error</i>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="input-field col s12 sign-up-fields">
-                <i class="material-icons md-36 prefix icon-account-material">email</i>
-                <%= f.email_field :email, autocomplete: "on", class: "validate", placeholder: t(".email_placeholder") %>
-                <span id="note-exist-email"><br/><%= t ".exist_email" %></span>
-                <i class="material-icons md-36" id="InforCheckEmailMatch">done</i>
-                <i class="material-icons md-36" id="InforCheckEmailError">error</i>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="input-field col s12 sign-up-fields">
-                <i class="material-icons md-36 prefix icon-account-material">lock_outline</i>
-                <%= f.password_field :password, autocomplete: "off", class: "validate", placeholder: t(".password_placeholder") %>
-                <i class="material-icons md-36" id="InforCheckPasswordLength">done</i>
-                <i class="material-icons md-36" id="InforCheckPasswordLengthError">error</i>
-                <span id="show-message-password"></span>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="input-field col s12 sign-up-fields">
-                <i class="material-icons md-36 prefix icon-account-material">lock_outline</i>
-                <%= f.password_field :password_confirmation, autocomplete: "off", class: "validate", placeholder: t(".password_confirmation_placeholder") %>
-                <i class="material-icons md-36" id="InforCheckPasswordMatch">done</i>
-                <i class="material-icons md-36" id="InforCheckPasswordError">error</i>
-              </div>
-            </div>
-
-            <div class="row center">
-              <%= f.submit t ".sign_up", class: "btn pink darken-2 waves-effect waves-light", id: "button-submit-sign-up" %>
-            </div>
+      <div class="field">
+        <%= f.label :password do %>
+          <span><%= t ".password" %>&nbsp;<% if @minimum_password_length %>
+            <em><%= t ".characters_minimum", length: @minimum_password_length %></em>
           <% end %>
-          <div class="row center">
-            <p><%= t ".have_an_account" %> <%= link_to t(".login"), new_user_session_path %></p>
-          </div>
-        </div>
+          </span>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password" %>
       </div>
-    </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, t(".password_confirmation") %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="ui one column grid">
+      <div class="actions center aligned column">
+        <%= f.submit t(".sign_up"), class: "ui large primary button" %>
+      </div>
+      </div>
+    <% end %>
   </div>
 </div>

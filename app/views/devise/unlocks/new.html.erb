@@ -1,16 +1,18 @@
-<h4><%= t ".resend_unlock" %></h4>
+<div class="ui two column stackable centered grid">
+  <div class="column">
+    <div class="ui header"><%= t ".resend_unlock" %></div>
 
-<%= form_for resource, as: resource_name, url: unlock_path(resource_name), html: {method: :post} do |f| %>
-  <%= devise_error_messages! %>
+    <%= form_for resource, as: resource_name, url: unlock_path(resource_name), html: {method: :post, class: "ui segment form"} do |f| %>
+      <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email, t(".email") %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="field">
+        <%= f.label :email, t(".email") %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit t(".resend_unlock"), class: "ui primary button" %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-    <%= f.submit t(".resend_unlock"), class: "btn waves-effect waves-light" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

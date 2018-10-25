@@ -9,4 +9,13 @@ module ApplicationHelper
     gravatar_id = Digest::MD5::hexdigest(user.email).downcase
     "https://www.gravatar.com/avatar/#{gravatar_id}.jpg?d=identicon&s=350"
   end
+
+  def flash_class level
+    case level
+    when "success" then "ui green message"
+    when "alert" then "ui red message"
+    when "error" then "ui red message"
+    when "notice" then "ui blue message"
+    end
+  end
 end

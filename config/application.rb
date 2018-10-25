@@ -31,5 +31,8 @@ module Pr21802MusicListening
     config.generators.system_tests = nil
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      "<div class=\"field error\">#{html_tag}</div>".html_safe
+    }
   end
 end

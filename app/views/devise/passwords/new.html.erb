@@ -1,18 +1,20 @@
-<h4><%= t ".forgot_password" %></h4>
+<div class="ui two column stackable centered grid">
+  <div class="column">
+    <div class="ui header"><%= t ".forgot_password" %></div>
 
-<%= form_for resource, as: resource_name, url: password_path(resource_name), html: {method: :post} do |f| %>
-  <%= devise_error_messages! %>
+    <%= form_for resource, as: resource_name, url: password_path(resource_name), html: {method: :post, class: "ui segment form"} do |f| %>
+      <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email do %>
-      <span><%= t ".email" %></span>
+      <div class="field">
+        <%= f.label :email do %>
+          <span><%= t ".email" %></span>
+        <% end %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit t(".send_me"), class: "ui primary button" %>
+      </div>
     <% end %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
-
-  <div class="actions">
-    <%= f.submit t(".send_me"), class: "btn waves-effect waves-light" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

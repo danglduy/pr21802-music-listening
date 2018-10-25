@@ -15,7 +15,6 @@ gem "font-awesome-rails"
 gem "font-awesome-sass"
 gem "jbuilder", "~> 2.5"
 gem "jquery-rails", "~> 4.3", ">= 4.3.3"
-gem "materialize-sass", "~> 1.0"
 gem "mysql2", ">= 0.4.4", "< 0.6.0"
 gem "omniauth", "~> 1.8", ">= 1.8.1"
 gem "omniauth-facebook", "~> 5.0.0"
@@ -34,7 +33,6 @@ gem "toastr-rails"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "webpacker", "~> 3.5", ">= 3.5.5"
-gem "pg", "~> 1.1.3"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

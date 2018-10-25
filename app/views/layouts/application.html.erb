@@ -7,21 +7,24 @@
 
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   </head>
-
   <body>
-    <%= render partial: "shared/header" %>
-    <% flash.each do |message_type, message| %>
-      <% message_type = "success" if message_type == "notice" %>
-      <% message_type = "danger" if message_type == "alert" %>
-      <div class="col-md-12">
-        <div class="alert alert-<%= message_type %>">
-          <%= message %>
-        </div>
+    <div class="ui container">
+      <%= render "layouts/header"%>
+      <div class="row">
+        <% flash.each do |message_type, message| %>
+          <div class="col-md-12">
+            <div class="<%= flash_class message_type %> closable">
+              <i class="close icon"></i>
+              <%= message %>
+            </div>
+          </div>
+        <% end %>
+        <%= yield %>
+        <%= render "layouts/footer" %>
       </div>
-    <% end %>
-    <%= yield %>
-    <%= render partial: "shared/footer" %>
+    </div>
   </body>
 </html>
