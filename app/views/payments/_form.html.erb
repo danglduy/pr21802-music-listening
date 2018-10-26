@@ -1,0 +1,14 @@
+<%= form_for [:account, payment] do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <article>
+    <%= f.label :plan, t(".plan") %>
+    <%= f.select :plan_id, options_for_select(
+      Plan.order_amount_asc.map{|p| ["$#{p.amount} - #{p.name}", p.id.to_s, {data: {value: p.amount}}]}
+    ) %>
+  </article>
+  <article>
+    <%= hidden_field_tag :stripeToken %>
+  </article>
+  <button id="payButton"><%= t ".pay" %></button>
+<% end %>
+<%= render partial: "stripe" %>

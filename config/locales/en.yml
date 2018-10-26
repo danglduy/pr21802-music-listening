@@ -1,14 +1,46 @@
 en:
   layouts:
     header:
+      account: "Account"
       edit_profile: "Edit profile"
       login: "Login"
       logout: "Logout"
-  logo_header: "Music Listening"
-  base_title: "Music Listening"
+  users:
+    show:
+      account: "Account"
+      subscriptions: "Subscriptions"
+    user_detail:
+      name: "Name"
+      email: "Email"
+      member_since: "Member since"
+    user_subscriptions:
+      subscribe: "Subscribe"
+      package: "Package"
+      expired_at: "Expired at"
+      extend: "Extend"
+      continue_payment: "Continue payment"
   attachments:
     destroy:
       attachment_deleted: "Attachment deleted!"
+  payments:
+    payment_not_found: "Payment not found"
+    plan_not_found: "Plan not found"
+    subscription_not_found: "Subscription not found"
+    form:
+      plan: "Plan:"
+      pay: "Pay"
+    new:
+      pending_payment: "You have been redirected to your last payment"
+    create:
+      payment_success: "Thank you, your payment was successful"
+    update:
+      payment_success: "Thank you, your payment was successful"
+  shared:
+    error_messages:
+      the_form_contains: "The form contains"
+      error: "error"
+  logo_header: "Music Listening"
+  base_title: "Music Listening"
   edit: "Edit"
   delete: "Delete"
   delete_attachment: "Delete attachment"

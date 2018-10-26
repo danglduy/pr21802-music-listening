@@ -1,26 +1,26 @@
 Rails.application.routes.draw do
-  devise_for :users, path: "", path_names: {sign_in: "login",
-    sign_out: "logout", edit: "profile", confirmation: "confirmations"},
-    controllers: {omniauth_callbacks: "omniauth_callbacks",
-    registrations: "registrations", sessions: "users/sessions"}
-    
+  devise_for :users, path: "",
+    path_names: {
+    sign_in: "login", sign_out: "logout",
+    edit: "profile", confirmation: "confirmations"
+  }, controllers: {
+    omniauth_callbacks: "omniauth_callbacks",
+    registrations: "registrations"
+  }
+
   get "player", to: "player#index"
   get "pages/home"
   root to: "pages#home", as: :root
 
   ActiveAdmin.routes(self)
 
-  devise_scope :user do
-    resource :registration,
-      only: [:new, :create, :edit, :update],
-      path: "users",
-      controller: "devise/registrations",
-      as: :user_registration do
-        get :cancel
-      end
-  end
-
   resources :attachments, only: :destroy
+  resource :user, path: :account, as: :account, only: :show do
+    resources :payments, only: [:new, :create, :edit, :update]
+    resources :subscriptions, only: :show do
+      resources :payments, only: [:new, :edit, :index, :show]
+    end
+  end
 
   namespace :api do
     namespace :v1 do

@@ -1,0 +1,16 @@
+<table class="highlight">
+  <tbody>
+    <tr>
+      <td><%= t ".name" %></td>
+      <td><%= current_user.name %></td>
+    </tr>
+    <tr>
+      <td><%= t ".email" %></td>
+      <td><%= current_user.email %></td>
+    </tr>
+    <tr>
+      <td><%= t ".member_since" %></td>
+      <td><%= current_user.created_at %></td>
+    </tr>
+  </tbody>
+</table>
