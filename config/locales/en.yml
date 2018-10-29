@@ -23,6 +23,25 @@ en:
           attributes:
             file:
               content_type: "has the wrong file format"
+  shared:
+    header:
+      my_music: "My music"
+      top_100: "Top 100"
+      subject: "Subject"
+      album: "Album"
+      article: "Article"
+      sign_up: "Sign up"
+      login: "Login"
+      logout: "Logout"
+    footer:
+      connect_us: "Connect us"
+      link_to_YouTube: "YouTube"
+      link_to_Facebook: "Facebook"
+      company_name: "D&T"
+      about_us: "About Us"
+      help: "Help"
+      term_of_use: "Terms of Use"
+      copyright: "© 2018 Copyright D&T Music"
   time:
     formats:
       duration: "%M:%S"
