@@ -10,6 +10,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "cancancan", "~> 2.3"
 gem "config", "~> 1.7"
 gem "devise", "~> 4.5"
+gem "dotenv-rails", "~> 2.5"
 gem "font-awesome-rails"
 gem "font-awesome-sass"
 gem "jbuilder", "~> 2.5"
@@ -21,7 +22,6 @@ gem "omniauth-facebook", "~> 5.0.0"
 gem "omniauth-google-oauth2", "~> 0.5.3"
 gem "omniauth-twitter", "~> 1.4.0"
 gem "paranoia", "~> 2.4", ">= 2.4.1"
-gem "puma", "~> 3.11"
 gem "rails", "~> 5.2.1"
 gem "rails-i18n", "~> 5.1", ">= 5.1.1"
 gem "recaptcha", require: "recaptcha/rails"
@@ -37,11 +37,17 @@ gem "webpacker", "~> 3.5", ">= 3.5.5"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "dotenv-rails", "~> 2.5"
+  gem "puma", "~> 3.11"
   gem "rspec-rails", "~> 3.8"
 end
 
 group :development do
+  gem "capistrano", "~> 3.11"
+  gem "capistrano-bundler", "~> 1.4"
+  gem "capistrano-env-config", "~> 0.3.0"
+  gem "capistrano-passenger", "~> 0.2.0"
+  gem "capistrano-rails", "~> 1.4"
+  gem "capistrano-rbenv", "~> 2.1", ">= 2.1.4"
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
@@ -56,6 +62,10 @@ group :test do
   gem "guard-rspec", "~> 4.7", ">= 4.7.3"
   gem "rb-fsevent", "~> 0.10.3", require: false
   gem "rb-inotify", "~> 0.9.10", require: false
+end
+
+group :production do
+  gem "passenger", "~> 5.3", ">= 5.3.5"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
