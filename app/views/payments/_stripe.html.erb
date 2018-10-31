@@ -1,0 +1,26 @@
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+  var handler = StripeCheckout.configure({
+    key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+    locale: 'auto',
+    name: 'Subscribe',
+    description: $('select#payment_plan_id option:selected').text().split(' - ')[1],
+    token: function(token) {
+      $('input#stripeToken').val(token.id);
+      $('form').submit();
+    }
+  });
+  $('#payButton').on('click', function(e) {
+    e.preventDefault();
+
+    $('#error_explanation').html('');
+    var amount = $('select#payment_plan_id option:selected').data().value;
+
+    amount = parseFloat(amount);
+
+    amount = amount * 100; // Needs to be an integer!
+    handler.open({
+      amount: Math.round(amount)
+    })
+  });
+</script>

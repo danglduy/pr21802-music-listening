@@ -107,3 +107,11 @@ metadata_files.each do |metadata_file|
     filename: imported_track_no.to_s + ". " + imported_title + ".flac"
   ) unless song.file.attached?
 end
+
+package = Package.find_or_create_by name: "Premium"
+Plan.find_or_create_by package: package, name: "Premium 1 month",
+  duration: 30, amount: 5
+Plan.find_or_create_by package: package, name: "Premium 6 months",
+  duration: 180, amount: 30
+Plan.find_or_create_by package: package, name: "Premium 12 year",
+  duration: 365, amount: 50

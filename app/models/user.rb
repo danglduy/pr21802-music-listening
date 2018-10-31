@@ -10,6 +10,10 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :songs, through: :likes
   has_many :playlists, dependent: :destroy
+  has_many :payments, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
+
+  acts_as_paranoid
 
   # has_one_time_password
   # enum otp_module: {disabled: 0, enabled: 1}, _prefix: true
@@ -93,5 +97,9 @@ class User < ApplicationRecord
         return user
       end
     end
+  end
+
+  def subscribed?
+    subscriptions.not_expired.count.positive?
   end
 end

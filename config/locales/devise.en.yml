@@ -96,6 +96,10 @@ en:
         password_placeholder: "Password  (min 6 characters)"
         password_confirmation_placeholder: "Repeat password"
         have_an_account: "Already have an account?"
+        sign_up_with_google: "Sign up with Google"
+        sign_up_with_facebook: "Sign up with Facebook"
+        sign_up_with_twitter: "Sign up with Twitter"
+        login: "Log in"
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
