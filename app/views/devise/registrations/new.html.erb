@@ -6,15 +6,24 @@
     <div class="col s12 m12 l4 center">
       <div class="card-panel">
         <div class="row s12" id="button-sign-up-google">
-          <%= link_to "<i class="fa fa-google-plus"></i>&nbsp; &nbsp; #{t ".sign_up_with_google"}".html_safe, user_google_oauth2_omniauth_authorize_path, class: "btn red darken-1" %>
+          <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn red darken-1" do %>
+            <i class="fa fa-google-plus"></i>&nbsp; &nbsp;
+            <%= t ".sign_up_with_google" %>
+          <% end %>
         </div>
 
         <div class="row s12">
-          <%= link_to "<i class="fa fa-facebook"></i>&nbsp; &nbsp; #{t ".sign_up_with_facebook"}".html_safe, user_facebook_omniauth_authorize_path, class: "btn blue darken-4" %>
+          <%= link_to user_facebook_omniauth_authorize_path, class: "btn blue darken-4" do %>
+            <i class="fa fa-facebook"></i>&nbsp; &nbsp;
+            <%= t ".sign_up_with_facebook" %>
+          <% end %>
         </div>
 
         <div class="row s12">
-          <%= link_to "<i class="fa fa-twitter"></i>&nbsp; &nbsp; #{t ".sign_up_with_twitter"} &nbsp; &nbsp;".html_safe, user_twitter_omniauth_authorize_path, class: "btn cyan darken-1" %>
+          <%= link_to user_twitter_omniauth_authorize_path, class: "btn cyan darken-1" do %>
+            <i class="fa fa-twitter"></i>&nbsp; &nbsp;
+            <%= t ".sign_up_with_twitter" %> &nbsp; &nbsp;
+          <% end %>
         </div>
       </div>
     </div>
@@ -69,7 +78,7 @@
             </div>
 
             <div class="row center">
-            <%= f.submit t ".sign_up", class: "btn pink darken-2 waves-effect waves-light", id: "button-submit-sign-up" %>
+              <%= f.submit t ".sign_up", class: "btn pink darken-2 waves-effect waves-light", id: "button-submit-sign-up" %>
             </div>
           <% end %>
           <div class="row center">
