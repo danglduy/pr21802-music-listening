@@ -66,6 +66,7 @@ class PaymentsController < ApplicationController
   end
 
   def set_subscription
+    return if params[:subscription_id].blank?
     @subscription = Subscription.find_by id: params[:subscription_id]
     return if @subscription.present?
     flash[:notice] = t "payments.subscription_not_found"
