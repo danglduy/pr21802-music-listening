@@ -22,6 +22,13 @@ en:
   attachments:
     destroy:
       attachment_deleted: "Attachment deleted!"
+  dt_mailer:
+    welcome_to: "Welcome to the D&T Music!"
+    new_user:
+      hello: "Hello, "
+      welcome: "Welcome new member!"
+      welcome_content: "Welcome to D&T Music, with our website you can listen musics."
+      thank_you: "Thank you!"
   payments:
     payment_not_found: "Payment not found"
     plan_not_found: "Plan not found"

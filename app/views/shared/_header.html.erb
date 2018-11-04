@@ -89,6 +89,7 @@
           <% else %>
               <li>
                 <a class="dropdown-button valign-wrapper" href="#" data-activates="dropdown1">
+                  <%= image_tag avatar_url(current_user), class: 'circle responsive-img avatar-small' %>&nbsp;
                   <%= link_to current_user.name, account_path %>
                   <i class="material-icons md-36">arrow_drop_down</i>
                 </a>
