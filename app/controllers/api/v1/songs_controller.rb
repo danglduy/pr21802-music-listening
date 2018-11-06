@@ -1,10 +1,18 @@
 module Api
   module V1
-    class SongsController < ApplicationController
+    class SongsController < Api::V1::ApiController
+      before_action :set_artist, only: :index
+      before_action :set_album, only: :index
       before_action :set_song, only: :show
 
       def index
-        @songs = Song.all
+        @songs =
+          if @album
+            @album.songs.order_track_no_asc
+          else
+            @artist ? @artist.songs : Song.all
+          end
+
         respond_to do |format|
           format.json
         end
@@ -17,8 +25,21 @@ module Api
       end
 
       private
+      def set_artist
+        return if params[:artist_id].blank?
+        @artist = Artist.find_by id: params[:artist_id]
+        present_or_not_found @artist
+      end
+
+      def set_album
+        return if params[:album_id].blank?
+        @album = Album.find_by id: params[:album_id]
+        present_or_not_found @album
+      end
+
       def set_song
         @song = Song.find_by id: params[:id]
+        present_or_not_found @song
       end
     end
   end
