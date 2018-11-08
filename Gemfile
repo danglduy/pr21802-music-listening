@@ -60,8 +60,10 @@ group :test do
   gem "email_spec", "~> 2.2"
   gem "factory_bot_rails", "~> 4.11"
   gem "guard-rspec", "~> 4.7", ">= 4.7.3"
+  gem "rails-controller-testing"
   gem "rb-fsevent", "~> 0.10.3", require: false
   gem "rb-inotify", "~> 0.9.10", require: false
+  gem "shoulda-matchers", "~> 4.0.0.rc1"
 end
 
 group :production do
