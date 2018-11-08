@@ -22,6 +22,7 @@ en:
   attachments:
     destroy:
       attachment_deleted: "Attachment deleted!"
+      attachment_delete_error: "Failed to delete attachment!"
   dt_mailer:
     welcome_to: "Welcome to the D&T Music!"
     new_user:

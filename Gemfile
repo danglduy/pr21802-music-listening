@@ -8,6 +8,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "best_in_place", "~> 3.1", ">= 3.1.1"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "cancancan", "~> 2.3"
+gem "carrierwave", "~> 1.2", ">= 1.2.3"
 gem "config", "~> 1.7"
 gem "devise", "~> 4.5"
 gem "dotenv-rails", "~> 2.5"

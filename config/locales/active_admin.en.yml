@@ -11,9 +11,7 @@ en:
     resource:
       index:
         listen: "Listen"
-        download: "Download"
       show:
         listen: "Listen"
-        download: "Download"
         albums: "Albums"
         songs: "Songs"
