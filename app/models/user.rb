@@ -20,7 +20,15 @@ class User < ApplicationRecord
   # enum otp_module: {disabled: 0, enabled: 1}, _prefix: true
   # attr_accessor :otp_code_token
 
-  validates :name, presence: true, length: {minimum: 3, maximum: 25}
+  validates_presence_of :name
+
+  validates_length_of :name,
+    minimum: Settings.user.name.length.minimum,
+    allow_blank: true
+
+  validates_length_of :name,
+    maximum: Settings.user.name.length.maximum,
+    allow_blank: true
 
   def self.find_for_google_oauth2 provider, uid, name, email,
     _signed_in_resource = nil
