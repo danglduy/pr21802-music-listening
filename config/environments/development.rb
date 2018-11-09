@@ -41,11 +41,11 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV['email_address'],
-    port:                 ENV['email_port'],
-    domain:               ENV['email_domain'],
-    user_name:            ENV['email_username'],
-    password:             ENV['email_password'],
+    address:              ENV['address'],
+    port:                 587,
+    domain:               ENV['domain'],
+    user_name:            ENV['user_name'],
+    password:             ENV['password'],
     authentication:       'plain',
     enable_starttls_auto: true
   }

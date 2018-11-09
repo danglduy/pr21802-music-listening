@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
 
   acts_as_paranoid
+  after_create :send_welcome_email
 
   # has_one_time_password
   # enum otp_module: {disabled: 0, enabled: 1}, _prefix: true
@@ -101,5 +102,10 @@ class User < ApplicationRecord
 
   def subscribed?
     subscriptions.not_expired.count.positive?
+  end
+
+  # Sends welcome email.
+  def send_welcome_email
+    DtMailer.new_user(self).deliver
   end
 end

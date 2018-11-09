@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "player", to: "player#index"
   get "pages/home"
   root to: "pages#home", as: :root
+  get "/check-user" => "check_email#check_user"
 
   ActiveAdmin.routes(self)
 
