@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import TrackItem from '../shared/track_item';
 
@@ -45,7 +46,10 @@ class ArtistAlbum extends React.Component {
             </div>
             <div className="album__actions">
               <button className="button-light save">
-                Save
+                <FormattedMessage
+                  id="artist_album.save"
+                  defaultMessage="Save"
+                />
               </button>
               <button className="button-light more">
                 <i className="ion-ios-more" />
@@ -57,7 +61,12 @@ class ArtistAlbum extends React.Component {
           <div className="tracks">
             <div className="tracks__heading">
               <div className="tracks__heading__number">#</div>
-              <div className="tracks__heading__title">Song</div>
+              <div className="tracks__heading__title">
+                <FormattedMessage
+                  id="artist_album.song"
+                  defaultMessage="Song"
+                />
+              </div>
               <div className="tracks__heading__length">
                 <i className="ion-ios-stopwatch-outline" />
               </div>

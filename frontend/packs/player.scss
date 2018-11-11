@@ -217,11 +217,8 @@ body {
   }
 
   &__middle {
-    width: 70%;
-  }
-
-  &__right {
-    width: 15%;
+    width: 85%;
+    overflow-y: scroll;
   }
 
   @media (max-width: 1400px) {
@@ -232,10 +229,6 @@ body {
 
     &__middle {
       width: 80%;
-    }
-
-    &__right {
-      display: none;
     }
 
   }
@@ -727,9 +720,6 @@ body {
 
 .artist {
 
-  height: 617px;
-  overflow-y: scroll;
-
   &__header {
 
     & {
@@ -1057,9 +1047,6 @@ body {
 }
 
 .album {
-
-  height: 617px;
-  overflow-y: scroll;
 
   &__header {
 
@@ -1897,7 +1884,7 @@ body {
     &__meta {
 
       & {
-        width: calc( 100% - 150px );
+        // width: calc( 100% - 150px );
         margin-left: $margin;
 
         display: flex;

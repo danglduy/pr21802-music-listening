@@ -3,7 +3,6 @@ import React from 'react';
 import Navigation from './shared/navigation';
 import Playlist from './shared/playlist';
 import Playing from './shared/playing';
-import Social from './shared/social';
 
 import ArtistIndex from './Artist/artist_index';
 import ArtistShow from './Artist/artist_show';
@@ -37,6 +36,20 @@ class Content extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    let totalHeight = $(window).height();
+    let headerHeight = $('.header').outerHeight();
+    let footerHeight = $('.current-track').outerHeight();
+    let playlistHeight = $('.playlist').outerHeight();
+    let nowPlaying = $('.playing').outerHeight();
+
+    let navHeight = totalHeight - (headerHeight + footerHeight + playlistHeight + nowPlaying);
+    let artistHeight = totalHeight - (headerHeight + footerHeight);
+
+    $('.navigation').css('height' , navHeight);
+    $('.content__middle').css('height' , artistHeight);
+  }
+
   render() {
     let mainContent;
 
@@ -64,9 +77,6 @@ class Content extends React.Component {
           <Playing />
         </div>
         {mainContent}
-        <div className="content__right">
-          <Social />
-        </div>
       </section>
     );
   }

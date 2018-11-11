@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 class CurrentTrack extends React.Component {
   constructor(props) {
@@ -22,7 +23,10 @@ class CurrentTrack extends React.Component {
         </div>
         <div className="current-track__options">
           <a href="#" className="lyrics">
-            Lyrics
+            <FormattedMessage
+              id="current_track.lyrics"
+              defaultMessage="Lyrics"
+            />
           </a>
           <span className="controls">
             <a href="#" className="control">
@@ -36,7 +40,12 @@ class CurrentTrack extends React.Component {
             </a>
             <a href="#" className="control devices">
               <i className="ion-ios-phone-portrait" />
-              <span>Devices Available</span>
+              <span>
+                <FormattedMessage
+                  id="current_track.devices_available"
+                  defaultMessage="Devices Available"
+                />
+              </span>
             </a>
             <a href="#" className="control volume">
               <i className="ion-ios-volume-high" />
