@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 class Header extends React.Component {
   constructor(props) {
@@ -17,7 +18,11 @@ class Header extends React.Component {
           </span>
         </div>
         <div className="search">
-          <input type="text" placeholder="Search" />
+          <FormattedMessage id="header.search" defaultMessage="Search">
+            {msg => (
+              <input type="text" placeholder= {msg} />
+            )}
+          </FormattedMessage>
         </div>
         <div className="user">
           <div className="user__notifications">
@@ -56,13 +61,28 @@ class Header extends React.Component {
                 aria-labelledby="dropdownMenu1"
               >
                 <li>
-                  <a href="/account">Account</a>
+                  <a href="/account">
+                    <FormattedMessage
+                      id="header.account"
+                      defaultMessage="Account"
+                    />
+                  </a>
                 </li>
                 <li>
-                  <a href="#">Settings</a>
+                  <a href="#">
+                    <FormattedMessage
+                      id="header.settings"
+                      defaultMessage="Settings"
+                    />
+                  </a>
                 </li>
                 <li>
-                  <a href="#">Log Out</a>
+                  <a href="#">
+                    <FormattedMessage
+                      id="header.logout"
+                      defaultMessage="Log Out"
+                    />
+                  </a>
                 </li>
               </ul>
             </div>

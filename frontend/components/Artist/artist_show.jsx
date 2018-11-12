@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import ArtistAlbum from './album';
 
@@ -41,12 +42,18 @@ class ArtistShow extends React.Component {
     let popularContent;
     let top5;
     let top10;
+    let countlast5;
 
     if (albums.length > 0) {
       albumsContent = (
         <div className="overview__albums">
           <div className="overview__albums__head">
-            <span className="section-title">Albums</span>
+            <span className="section-title">
+              <FormattedMessage
+                id="artist_show.albums"
+                defaultMessage="Albums"
+              />
+            </span>
             <span className="view-type">
               <i className="fa fa-list list active" />
               <i className="fa fa-th-large card" />
@@ -64,6 +71,7 @@ class ArtistShow extends React.Component {
     if (songs.length > 0) {
       top5 = songs.slice(0, 5)
       top10 = songs.slice(0, 10)
+      countlast5 = top10.length - top5.length;
       popularContent = (
         <div>
           <div className="tracks">
@@ -89,7 +97,11 @@ class ArtistShow extends React.Component {
           {
             top10.length > 5 &&
               <button className="show-more button-light">
-                Show {top10.length - top5.length} More
+                <FormattedMessage
+                  id="artist_show.show_more"
+                  defaultMessage="Show {0} More"
+                  values={[countlast5]}
+                />
               </button>
           }
         </div>
@@ -108,14 +120,27 @@ class ArtistShow extends React.Component {
                 />
               </div>
               <div className="artist__info__meta">
-                <div className="artist__info__type">Artist</div>
+                <div className="artist__info__type">
+                  <FormattedMessage
+                    id="artist_show.artist"
+                    defaultMessage="Artist"
+                  />
+                </div>
                 <div className="artist__info__name">{ artist.name }</div>
                 <div className="artist__info__actions">
                   <button className="button-dark">
                     <i className="ion-ios-play" />
-                    Play
+                    <FormattedMessage
+                      id="artist_show.play"
+                      defaultMessage="Play"
+                    />
                   </button>
-                  <button className="button-light">Follow</button>
+                  <button className="button-light">
+                    <FormattedMessage
+                      id="artist_show.follow"
+                      defaultMessage="Follow"
+                    />
+                  </button>
                   <button className="button-light more">
                     <i className="ion-ios-more" />
                   </button>
@@ -125,7 +150,10 @@ class ArtistShow extends React.Component {
             <div className="artist__listeners">
               <div className="artist__listeners__count">15,662,810</div>
               <div className="artist__listeners__label">
-                Monthly Listeners
+                <FormattedMessage
+                  id="artist_show.monthly_listeners"
+                  defaultMessage="Monthly Listeners"
+                />
               </div>
             </div>
             <div className="artist__navigation">
@@ -137,7 +165,10 @@ class ArtistShow extends React.Component {
                     role="tab"
                     data-toggle="tab"
                   >
-                    Overview
+                    <FormattedMessage
+                      id="artist_show.overview"
+                      defaultMessage="Overview"
+                    />
                   </a>
                 </li>
                 <li role="presentation">
@@ -147,7 +178,10 @@ class ArtistShow extends React.Component {
                     role="tab"
                     data-toggle="tab"
                   >
-                    Related Artists
+                    <FormattedMessage
+                      id="artist_show.related_artists"
+                      defaultMessage="Related Artists"
+                    />
                   </a>
                 </li>
               </ul>
@@ -170,7 +204,12 @@ class ArtistShow extends React.Component {
               >
                 <div className="overview">
                   <div className="overview__artist">
-                    <div className="section-title">Latest Release</div>
+                    <div className="section-title">
+                      <FormattedMessage
+                        id="artist_show.latest_release"
+                        defaultMessage="Latest Release"
+                      />
+                    </div>
                     <div className="latest-release">
                       <div className="latest-release__art">
                         <img
@@ -190,12 +229,21 @@ class ArtistShow extends React.Component {
                       </div>
                     </div>
 
-                    <div className="section-title">Popular</div>
+                    <div className="section-title">
+                      <FormattedMessage
+                        id="artist_show.popular"
+                        defaultMessage="Popular"
+                      />
+                    </div>
                     { popularContent }
-
                   </div>
                   <div className="overview__related">
-                    <div className="section-title">Related Artists</div>
+                    <div className="section-title">
+                      <FormattedMessage
+                        id="artist_show.related_artists"
+                        defaultMessage="Related Artists"
+                      />
+                    </div>
                     <div className="related-artists">
                       <a href="#" className="related-artist">
                         <span className="related-artist__img">

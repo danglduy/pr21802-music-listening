@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 class Playlist extends React.Component {
   constructor(props) {
@@ -10,7 +11,10 @@ class Playlist extends React.Component {
       <section className="playlist">
         <a href="#">
           <i className="ion-ios-add-circle" />
-          New Playlist
+            <FormattedMessage
+              id="playlist.new_playlist"
+              defaultMessage="New Playlist"
+            />
         </a>
       </section>
     );

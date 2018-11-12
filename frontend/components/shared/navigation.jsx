@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -17,20 +18,29 @@ class Navigation extends React.Component {
             className="navigation__list__header"
             href="#main"
           >
-            Main
+            <FormattedMessage
+              id="navigation.main"
+              defaultMessage="Main"
+            />
           </div>
           <div id="main">
             <a href="#" className="navigation__list__item">
               <i className="ion-ios-browsers" />
-              <span>Browse</span>
+              <span>
+                <FormattedMessage
+                  id="navigation.browse"
+                  defaultMessage="Browse"
+                />
+              </span>
             </a>
             <a href="#" className="navigation__list__item">
               <i className="ion-ios-people" />
-              <span>Activity</span>
-            </a>
-            <a href="#" className="navigation__list__item">
-              <i className="ion-ios-radio" />
-              <span>Radio</span>
+              <span>
+                <FormattedMessage
+                  id="navigation.activity"
+                  defaultMessage="Activity"
+                />
+              </span>
             </a>
           </div>
         </div>
@@ -39,20 +49,38 @@ class Navigation extends React.Component {
             className="navigation__list__header"
             href="#yourMusic"
           >
-            Your Music
+            <FormattedMessage
+              id="navigation.yourmusic"
+              defaultMessage="Your Music"
+            />
           </div>
           <div id="yourMusic">
             <a href="#" className="navigation__list__item">
               <i className="ion-ios-musical-note" />
-              <span>Songs</span>
+              <span>
+                <FormattedMessage
+                  id="navigation.songs"
+                  defaultMessage="Songs"
+                />
+              </span>
             </a>
-            <a href="#" className="navigation__list__item" onClick={ () => this.setContent('album_index', 0) }>
+            <a href="javascript:void(0)" className="navigation__list__item" onClick={ () => this.setContent("album_index", 0) }>
               <i className="ion-ios-musical-notes" />
-              <span>Albums</span>
+              <span>
+                <FormattedMessage
+                  id="navigation.albums"
+                  defaultMessage="Albums"
+                />
+              </span>
             </a>
-            <a href="#" className="navigation__list__item" onClick={ () => this.setContent('artist_index', 0) } >
+            <a href="javascript:void(0)" className="navigation__list__item" onClick={ () => this.setContent("artist_index", 0) } >
               <i className="ion-ios-person" />
-              <span>Artists</span>
+              <span>
+                <FormattedMessage
+                  id="navigation.artists"
+                  defaultMessage="Artists"
+                />
+              </span>
             </a>
           </div>
         </div>
@@ -62,7 +90,10 @@ class Navigation extends React.Component {
             role="button"
             href="#playlists"
           >
-            Playlists
+            <FormattedMessage
+              id="navigation.playlists"
+              defaultMessage="Playlists"
+            />
           </div>
           <div id="playlists">
             <a href="#" className="navigation__list__item">

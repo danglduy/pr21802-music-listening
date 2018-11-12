@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import TrackItem from '../shared/track_item';
 
@@ -49,14 +50,27 @@ class AlbumShow extends React.Component {
                 />
               </div>
               <div className="album__info__meta">
-                <div className="album__info__type">Album</div>
+                <div className="album__info__type">
+                  <FormattedMessage
+                    id="artist_show.album"
+                    defaultMessage="album"
+                  />
+                </div>
                 <div className="album__info__name">{ album.name }</div>
                 <div className="album__info__actions">
                   <button className="button-dark">
                     <i className="ion-ios-play" />
-                    Play
+                    <FormattedMessage
+                      id="album_show.play"
+                      defaultMessage="Play"
+                    />
                   </button>
-                  <button className="button-light">Follow</button>
+                  <button className="button-light">
+                    <FormattedMessage
+                      id="album_show.save"
+                      defaultMessage="Save"
+                    />
+                  </button>
                   <button className="button-light more">
                     <i className="ion-ios-more" />
                   </button>
@@ -66,7 +80,10 @@ class AlbumShow extends React.Component {
             <div className="album__listeners">
               <div className="album__listeners__count">15,662,810</div>
               <div className="album__listeners__label">
-                Monthly Listeners
+                <FormattedMessage
+                  id="album_show.monthly_listeners"
+                  defaultMessage="Monthly Listeners"
+                />
               </div>
             </div>
             <div className="album__navigation">
@@ -78,7 +95,10 @@ class AlbumShow extends React.Component {
                     role="tab"
                     data-toggle="tab"
                   >
-                    Overview
+                    <FormattedMessage
+                      id="album_show.overview"
+                      defaultMessage="Overview"
+                    />
                   </a>
                 </li>
                 <li role="presentation">
@@ -88,7 +108,10 @@ class AlbumShow extends React.Component {
                     role="tab"
                     data-toggle="tab"
                   >
-                    Related Albums
+                    <FormattedMessage
+                      id="album_show.related_albums"
+                      defaultMessage="Related Albums"
+                    />
                   </a>
                 </li>
               </ul>
@@ -110,33 +133,13 @@ class AlbumShow extends React.Component {
                 id="album-overview"
               >
                 <div className="overview">
-                  <div className="overview__album">
-                    <div className="section-title">Popular</div>
-                    <div className="tracks">
-                      <div className="track">
-                        <div className="track__art">
-                          <img
-                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/whenDarkOut.jpg"
-                            alt="When It's Dark Out"
-                          />
-                        </div>
-                        <div className="track__number">1</div>
-                        <div className="track__added">
-                          <i className="ion-md-checkmark added" />
-                        </div>
-                        <div className="track__title">Me, Myself & I</div>
-                        <div className="track__explicit">
-                          <span className="label">Explicit</span>
-                        </div>
-                        <div className="track__plays">147,544,165</div>
-                      </div>
-                    </div>
-                    <button className="show-more button-light">
-                      Show 5 More
-                    </button>
-                  </div>
                   <div className="overview__related">
-                    <div className="section-title">Related Albums</div>
+                    <div className="section-title">
+                      <FormattedMessage
+                        id="album_show.related_albums"
+                        defaultMessage="Related Albums"
+                      />
+                    </div>
                     <div className="related-albums">
                       <a href="#" className="related-album">
                         <span className="related-album__img">
@@ -158,7 +161,12 @@ class AlbumShow extends React.Component {
                         <div className="tracks">
                           <div className="tracks__heading">
                             <div className="tracks__heading__number">#</div>
-                            <div className="tracks__heading__title">Song</div>
+                            <div className="tracks__heading__title">
+                              <FormattedMessage
+                                id="album_show.song"
+                                defaultMessage="Song"
+                              />
+                            </div>
                             <div className="tracks__heading__length">
                               <i className="ion-ios-stopwatch-outline" />
                             </div>
