@@ -1,6 +1,6 @@
 json.partial! "song", song: @song
-if @song.file.attached?
-  json.file rails_blob_path(@song.file, disposition: "attachment")
+if @song.file.present?
+  json.file song_attachment_path @song
 else
   json.file nil
 end

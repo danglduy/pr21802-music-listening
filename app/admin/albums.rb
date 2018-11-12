@@ -58,16 +58,7 @@ ActiveAdmin.register Album do
         column :artist
         column :duration
         column :listen do |song|
-          if song.file.attached?
-            link_to t(".listen"),
-              rails_blob_path(song.file, disposition: "preview")
-          end
-        end
-        column :download do |song|
-          if song.file.attached?
-            link_to t(".download"),
-              rails_blob_path(song.file, disposition: "attachment")
-          end
+          link_to t(".listen"), song_attachment_url(song) if song.file.present?
         end
       end
     end

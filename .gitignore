@@ -14,8 +14,8 @@
 !/tmp/.keep
 
 # Ignore uploaded files in development
-/storage/*
-!/storage/.keep
+/uploads/*
+!/uploads/.keep
 
 /node_modules
 /yarn-error.log
@@ -42,3 +42,6 @@ yarn-debug.log*
 #Ignore data import folder
 /import/*
 !/import/.keep
+
+# Ignore carrierwave upload folder
+/public/uploads

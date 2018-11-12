@@ -40,6 +40,7 @@ Song.find_or_create_by(
   album: album2
 )
 
+User.skip_callback :create, :after, :send_welcome_email
 user = User.find_or_initialize_by(
   name: "123123",
   email: "123@123.com"
@@ -48,8 +49,11 @@ user.password = "123123"
 user.skip_confirmation!
 user.add_role :admin unless user.has_role? :admin
 user.save!
+User.set_callback :create, :after, :send_welcome_email
 
 metadata_files = Dir.glob("import/*.flac.json")
+metadata_files += Dir.glob("import/*.m4a.json")
+
 metadata_files.each do |metadata_file|
   metadata = JSON.parse(File.read(metadata_file))
 
@@ -102,10 +106,9 @@ metadata_files.each do |metadata_file|
     category: category
   ) if category.present?
 
-  song.file.attach(
-    io: File.open(imported_filename),
-    filename: imported_track_no.to_s + ". " + imported_title + ".flac"
-  ) unless song.file.attached?
+  song.file = File.open(imported_filename) if song.file.blank?
+  song.save!
+
 end
 
 package = Package.find_or_create_by name: "Premium"

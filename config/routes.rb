@@ -15,7 +15,10 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  resources :attachments, only: :destroy
+  scope "/songs/:song_id", as: "song" do
+    resource :attachment, only: [:show, :destroy]
+  end
+
   resource :user, path: :account, as: :account, only: :show do
     resources :payments, only: [:new, :create, :edit, :update]
     resources :subscriptions, only: :show do

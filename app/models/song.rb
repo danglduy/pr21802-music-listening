@@ -7,7 +7,7 @@ class Song < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :users, through: :likes
 
-  has_one_attached :file
+  mount_uploader :file, FileUploader
 
   scope :order_track_no_asc, ->{order track_no: :asc}
 

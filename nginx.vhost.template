@@ -1,0 +1,28 @@
+server {
+  listen 80;
+  listen [::]:80 ipv6only=on;
+
+  server_name DOMAIN;
+  passenger_enabled on;
+  rails_env    production;
+
+  # Set maximum upload size
+  client_max_body_size 200M;
+
+  passenger_set_header X-Sendfile-Type "X-Accel-Redirect";
+  passenger_env_var HTTP_X_ACCEL_MAPPING /home/deploy/music_listening/releases/[\d]+/=/__send_file_accel/;
+  passenger_pass_header X-Accel-Redirect;
+  root         /home/deploy/music_listening/current/public;
+
+  location /__send_file_accel {
+    internal;
+    alias /home/deploy/music_listening/shared;
+  }
+
+  # redirect server error pages to the static page /50x.html
+  error_page   500 502 503 504  /50x.html;
+  location = /50x.html {
+    root   html;
+  }
+
+}
