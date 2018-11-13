@@ -8,7 +8,9 @@ class ArtistIndex extends React.Component {
     this.state = {
       artists: [],
     };
+  }
 
+  componentDidMount() {
     ArtistApiUtil.fetchArtists().then(
       (data) => {
         this.setState({ artists: data });

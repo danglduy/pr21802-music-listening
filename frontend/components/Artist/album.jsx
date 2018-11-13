@@ -10,23 +10,32 @@ class ArtistAlbum extends React.Component {
     super(props);
     this.state = {
       album: this.props.album,
-      songs: []
+      songs: [],
+      songIds: []
+
     };
 
     SongApiUtil.fetchAlbumSongs(this.state.album.id).then(
       (data) => {
-        this.setState({ songs: data });
+        let songIds = [];
+        data.map(song => {
+          songIds.push(song.id);
+        });
+        this.setState({
+          songs: data,
+          songIds: songIds
+        });
       }
     )
   }
 
   render() {
     let songContent;
-    const { album, songs } = this.state;
+    const { album, songs, songIds } = this.state;
 
     songContent = (
       songs.map((song, index) => (
-        <TrackItem song={ song } key={ song.id } />
+        <TrackItem song={ song } key={ song.id } queue={ songIds } queueIndex={ index } />
       ))
     )
 

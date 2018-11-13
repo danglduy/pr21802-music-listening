@@ -15,8 +15,8 @@ class Content extends React.Component {
     super(props);
     this.state = {
       content: 'artist_index',
-      artistId: 3,
-      albumId: 1
+      artistId: 0,
+      albumId: 0
     }
   }
 
@@ -48,6 +48,16 @@ class Content extends React.Component {
 
     $('.navigation').css('height' , navHeight);
     $('.content__middle').css('height' , artistHeight);
+
+    if ($(window).width() <= 768){
+      $('.collapse').removeClass('in');
+      $('.navigation').css('height' , 'auto');
+      $('.artist').css('height' , 'auto');
+    }
+
+    if ($(window).width() > 768){
+      $('.collapse').addClass('in');
+    }
   }
 
   render() {

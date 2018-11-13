@@ -7,6 +7,8 @@ import CurrentTrack from './shared/current_track';
 import { IntlProvider } from 'react-intl';
 import { ENGLISH } from '../locales/en';
 
+import AppProvider from './app_provider'
+
 import 'bootstrap';
 
 class App extends React.Component {
@@ -15,8 +17,6 @@ class App extends React.Component {
     this.state = {
       locale: 'en',
       messages: ENGLISH.messages,
-      currentTrackId: 0,
-      currentTrackSeekTime: 0
     }
   }
 
@@ -26,11 +26,11 @@ class App extends React.Component {
         locale={this.state.locale}
         messages={this.state.messages}
       >
-        <div>
+        <AppProvider>
           <Header />
           <Content />
           <CurrentTrack />
-        </div>
+        </AppProvider>
       </IntlProvider>
     );
   }

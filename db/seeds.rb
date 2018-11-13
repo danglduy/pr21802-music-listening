@@ -1,45 +1,3 @@
-artist1 = Artist.find_or_create_by(
-  name: "Artist 01",
-  info: "A great singer born in 19xx"
-)
-
-album1 = Album.find_or_create_by(
-  name: "Album 02"
-)
-
-Song.find_or_create_by(
-  name: "Track 01",
-  artist: artist1,
-  album: album1
-)
-
-Song.find_or_create_by(
-  name: "Track 02",
-  artist: artist1,
-  album: album1
-)
-
-artist2 = Artist.find_or_create_by(
-  name: "Artist 02",
-  info: "A very great artist born in 19xx"
-)
-
-album2 = Album.find_or_create_by(
-  name: "Album 03"
-)
-
-Song.find_or_create_by(
-  name: "Track 03",
-  artist: artist2,
-  album: album2
-)
-
-Song.find_or_create_by(
-  name: "Track 04",
-  artist: artist2,
-  album: album2
-)
-
 User.skip_callback :create, :after, :send_welcome_email
 user = User.find_or_initialize_by(
   name: "123123",
@@ -83,6 +41,10 @@ metadata_files.each do |metadata_file|
   album = Album.find_or_create_by name: imported_album,
     disc_no: imported_disc_no
   album.year = imported_year if album.year.blank?
+  if album.cover.blank?
+    coverpath = imported_filename + ".jpg"
+    album.cover = File.open(coverpath) if File.file? coverpath
+  end
   album.save!
   artist = Artist.find_or_create_by name: imported_artist
   album_artist = Artist.find_or_create_by name: imported_album_artist

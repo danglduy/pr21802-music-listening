@@ -3,6 +3,8 @@ import { FormattedMessage } from 'react-intl';
 
 import TrackItem from '../shared/track_item';
 
+import { AppContext } from '../app_provider';
+
 import * as AlbumApiUtil from '../../utils/album_api_util';
 import * as SongApiUtil from '../../utils/song_api_util';
 
@@ -12,9 +14,13 @@ class AlbumShow extends React.Component {
     this.state = {
       albumId: this.props.albumId,
       album: {},
-      songs: []
+      songs: [],
+      songIds: []
     };
+  }
 
+
+  componentDidMount() {
     AlbumApiUtil.fetchAlbum(this.state.albumId).then(
       (data) => {
         this.setState({ album: data });
@@ -23,18 +29,27 @@ class AlbumShow extends React.Component {
 
     SongApiUtil.fetchAlbumSongs(this.state.albumId).then(
       (data) => {
-        this.setState({ songs: data });
+        let songIds = [];
+        data.map(song => {
+          songIds.push(song.id);
+        });
+        this.setState({
+          songs: data,
+          songIds: songIds
+        });
       }
     )
   }
 
+
   render() {
-    const { album, songs } = this.state;
+    let globalContext = this.context;
+    const { album, songs, songIds } = this.state;
     let songContent;
 
     songContent = (
-      songs.map(song => (
-        <TrackItem song={ song } key={ song.id } />
+      songs.map((song, index) => (
+        <TrackItem song={ song } key={ song.id } queue={ songIds } queueIndex={ index }/>
       ))
     )
 
@@ -45,7 +60,7 @@ class AlbumShow extends React.Component {
             <div className="album__info">
               <div className="profile__img">
                 <img
-                  src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/g_eazy_propic.jpg"
+                  src={ album.cover }
                   alt={ album.name }
                 />
               </div>
@@ -58,7 +73,8 @@ class AlbumShow extends React.Component {
                 </div>
                 <div className="album__info__name">{ album.name }</div>
                 <div className="album__info__actions">
-                  <button className="button-dark">
+                  <button className="button-dark"
+                    onClick={() => {globalContext.dispatch("START", songIds)}} >
                     <i className="ion-ios-play" />
                     <FormattedMessage
                       id="album_show.play"
@@ -189,4 +205,5 @@ class AlbumShow extends React.Component {
   }
 }
 
+AlbumShow.contextType = AppContext;
 export default AlbumShow;

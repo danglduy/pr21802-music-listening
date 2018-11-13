@@ -26,7 +26,7 @@ export const ENGLISH = {
     'artist_album.save': 'Save',
 
     'artist_show.albums': 'Albums',
-    'artist_show.show_more': 'Show {0} more',
+    'artist_show.show_more': 'Show {last5} more',
     'artist_show.artist': 'Artist',
     'artist_show.play': 'Play',
     'artist_show.follow': 'Follow',
@@ -41,6 +41,8 @@ export const ENGLISH = {
     'album_show.monthly_listeners': 'Monthly Listeners',
     'album_show.overview': 'Overview',
     'album_show.related_albums': 'Related Albums',
-    'album_show.song': 'Song'
+    'album_show.song': 'Song',
+
+    'track_item.play': 'Play'
   }
 }
