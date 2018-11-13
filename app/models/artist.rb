@@ -5,5 +5,7 @@ class Artist < ApplicationRecord
   has_many :album_artists, dependent: :destroy
   has_many :albums, through: :album_artists
 
+  mount_uploader :cover, CoverUploader
+
   validates_presence_of :name
 end

@@ -1,5 +1,5 @@
 ActiveAdmin.register Artist do
-  permit_params :name, :info
+  permit_params :name, :info, :cover
 
   controller do
     def scoped_collection
@@ -15,6 +15,7 @@ ActiveAdmin.register Artist do
     f.inputs do
       f.input :name
       f.input :info
+      f.input :cover, as: :file
     end
     f.actions
   end
@@ -22,6 +23,9 @@ ActiveAdmin.register Artist do
   index do
     selectable_column
     id_column
+    column :cover do |artist|
+      image_tag artist.cover_url(:thumb) if artist.cover.present?
+    end
     column :name
     column :info
     column :total_tracks do |artist|
@@ -32,6 +36,9 @@ ActiveAdmin.register Artist do
 
   show do
     attributes_table do
+      row :cover do |artist|
+        image_tag artist.cover_url if artist.cover.present?
+      end
       row :name
       row :info
       row :total_albums do |artist|
