@@ -1,5 +1,5 @@
 ActiveAdmin.register Album do
-  permit_params :name, :disc_no, :year, artist_ids: []
+  permit_params :name, :disc_no, :year, :cover, artist_ids: []
   config.sort_order = "name_asc"
 
   controller do
@@ -17,6 +17,7 @@ ActiveAdmin.register Album do
       f.input :artists
       f.input :year
       f.input :disc_no
+      f.input :cover, as: :file
     end
     f.actions
   end
@@ -24,6 +25,9 @@ ActiveAdmin.register Album do
   index do
     selectable_column
     id_column
+    column :cover do |album|
+      image_tag album.cover_url(:thumb) if album.cover.present?
+    end
     column :name
     column :album_artists do |album|
       album.artists.map do |artist|
@@ -37,6 +41,9 @@ ActiveAdmin.register Album do
 
   show do
     attributes_table do
+      row :cover do |album|
+        image_tag album.cover_url if album.cover.present?
+      end
       row :name
       row :disc_no
       row :album_artists do
