@@ -5,9 +5,9 @@
     </li>
   <% end %>
 
-  <% category.childen.sort_by {|e| e[:tag]}.each do |childen| %>
-    <% if child.published %>
-      <%= render '/shared/sub_category', category: childen %>
+  <% category.children.sort_by {|e| e[:tag]}.each do |children| %>
+    <% if children.published %>
+      <%= render '/shared/sub_category', category: children %>
     <% end %>
   <% end %>
 <% else %>

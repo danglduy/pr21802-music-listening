@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require jquery
 //= require toastr
+//= require ckeditor/init
 //= require_tree .
 
   $(document).on('turbolinks:load', function() {
