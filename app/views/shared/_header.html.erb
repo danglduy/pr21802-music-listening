@@ -1,4 +1,36 @@
 <header>
+  <ul id="dropdown1" class="dropdown-content">
+    <li class="item_category_mobile">
+      <%= link_to edit_user_registration_path do %>
+        <i class="material-icons md-24 icon-cate-in-mobile">settings</i><%= t ".profile" %>
+      <% end %>
+    </li>
+
+    <li class="divider"></li>
+
+    <li class="item_category_mobile">
+      <%= link_to account_path do %>
+        <i class="material-icons md-24 icon-cate-in-mobile">payment</i><%= t ".payment" %>
+      <% end %>
+    </li>
+    
+    <li class="divider"></li>
+
+    <li class="item_category_mobile">
+      <%= link_to destroy_user_session_path, method: :delete, title: 'Logout' do %>
+        <i class="material-icons md-24 icon-cate-in-mobile">settings_power</i><%= t ".logout" %>
+      <% end %>
+    </li>
+  </ul>
+
+  <ul id="dropdown2" class="dropdown-content">
+    <% Category.all.includes(:parent, :child).sort_by {|e| e[:tag]}.each do |category| %>
+      <% if category.parent.blank? %>
+        <%= render "/shared/sub_category", category: category %>
+      <% end %>
+    <% end %>
+  </ul>
+
   <nav class="blue-grey darken-3 z-depth-2" id="nav-header-page">
     <div class="container" id="customize-home-container">
       <div class="nav-wrapper">
@@ -29,11 +61,12 @@
 
           <li class="li-list-item-top-menu">
             <ul class="ul-list-item-header">
-              <a class="link-to-item-header" href="#">
+            <a class="dropdown-button valign-wrapper" href="#" data-target="dropdown2">
                 <li class="li-list-item-header">
                   <i class="material-icons md-24 icon-in-top-menu">subject</i>
                 </li>
                 <li class="li-list-item-header"><%= t ".subject" %></li>
+                <i class="material-icons md-36">arrow_drop_down</i>
               </a>
             </ul>
           </li>
@@ -88,9 +121,9 @@
               </li>
           <% else %>
               <li>
-                <a class="dropdown-button valign-wrapper" href="#" data-activates="dropdown1">
+                <a class="dropdown-button valign-wrapper" href="#" data-target="dropdown1">
                   <%= image_tag avatar_url(current_user), class: 'circle responsive-img avatar-small' %>&nbsp;
-                  <%= link_to current_user.name, account_path %>
+                  <%= current_user.name %>
                   <i class="material-icons md-36">arrow_drop_down</i>
                 </a>
               </li>

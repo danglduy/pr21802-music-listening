@@ -75,6 +75,8 @@ en:
           other: "is too long (maximum is %{count} characters)"
   shared:
     header:
+      profile: "Profile"
+      payment: "Payment"
       my_music: "My music"
       top_100: "Top 100"
       subject: "Subject"

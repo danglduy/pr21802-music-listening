@@ -1,0 +1,11 @@
+<div id="rightpanel">
+  <div class="card">
+    <ul>
+      <% Category.all.includes(:parent, :childen).sort_by {|e| e[:tag]}.each do |category| %>
+        <% if category.parent.blank? %>
+          <%= render "/shared/sub_category", category: category %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

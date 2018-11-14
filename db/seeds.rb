@@ -80,3 +80,8 @@ Plan.find_or_create_by package: package, name: "Premium 6 months",
   duration: 180, amount: 30
 Plan.find_or_create_by package: package, name: "Premium 12 year",
   duration: 365, amount: 50
+
+root_category = Category.create(name: 'Parent 1', published: true, tag: 0)
+for i in 1..5
+  category = Category.create(name: 'Music Category ' + i.to_s, parent_id: root_category.id, published: true, tag: i)
+end
