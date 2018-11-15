@@ -1,5 +1,8 @@
 import React from 'react';
 
+import {constants} from '../constants/constants';
+
+import * as UserApiUtil from '../utils/user_api_util';
 import * as SongApiUtil from '../utils/song_api_util';
 import * as ArtistApiUtil from '../utils/artist_api_util';
 import * as AlbumApiUtil from '../utils/album_api_util';
@@ -15,116 +18,105 @@ class AppProvider extends React.Component {
       currentTrackArtist: '',
       currentTrackCoverUrl: '',
       currentTrackUrl: '',
+      currentQueueType: '',
+      currentQueueId: '',
+      currentQueueIndex: 0,
+      currentQueue: [],
+      currentContentType: constants.ARTIST,
+      currentContentMethod: constants.INDEX,
+      currentContentId: '',
+      currentUserId: null,
       isPlaying: false,
-      queue: [],
-      queueIndex: 0,
       dispatch: this.dispatch,
     }
   }
 
-  dispatch = (action_type, songIds = [], queueIndex = 0) => {
-    if (action_type === 'START') {
-      this.addToQueue(songIds, true, queueIndex);
+  dispatch = (action_type) => {
+    if (action_type === constants.START) {
+      const {currentQueue, currentQueueIndex} = this.state;
+      this.startAudio(currentQueue, currentQueueIndex);
     }
 
-    if (action_type === 'RESUME') {
+    if (action_type === constants.RESUME) {
       this.resumeAudio();
     }
 
-    if (action_type == 'PAUSE') {
+    if (action_type == constants.PAUSE) {
       this.pauseAudio();
     }
 
-    if (action_type == 'STOP') {
+    if (action_type == constants.STOP) {
       this.stopAudio();
     }
 
-    if (action_type == 'NEXT') {
+    if (action_type == constants.NEXT) {
       this.nextAudio();
     }
 
-    if (action_type == 'PREV') {
+    if (action_type == constants.PREV) {
       this.prevAudio();
     }
   }
 
-  addToQueue = (songIds, start = false, index = 0) => {
-    if (start === true) {
-      this.startAudio(songIds, index);
-      this.setState({
-        queue: songIds
-      });
-    } else {
-      let { queue } = this.state;
-      newQueue = queue.concat(songIds);
-      this.setState({
-        queue: newQueue
-      });
-    }
-  }
-
   startAudio = (queue, index) => {
-    SongApiUtil.fetchSong(queue[index]).then(
-      (data) => {
-        ArtistApiUtil.fetchArtist(data.artist_id).then(
-          (artist) => {
-            this.setState({
-              currentTrackArtist: artist.name
-            })
-          }
-        )
-        AlbumApiUtil.fetchAlbum(data.album_id).then(
-          (album) => {
-            this.setState({
-              currentTrackCoverUrl: album.thumb
-            })
-          }
-        )
-
+    let track = queue[index];
+    ArtistApiUtil.fetchArtist(track.artist_id).then(
+      (artist) => {
         this.setState({
-          currentTrackName: data.name,
-          currentTrackUrl: data.file,
-          queueIndex: index
+          currentTrackArtist: artist.name
         })
-
-        let player = document.getElementById('player');
-
-        player.ontimeupdate = () => {
-          let percent = (player.currentTime / player.duration) * 100;
-          let progressbar =
-            document.querySelector('#song-progress .noUi-origin');
-          progressbar.style = 'left: ' + percent + '%;';
-          let currentplayingdiv =
-            document.querySelector('.current-track__progress__start');
-          currentplayingdiv.innerText = Math.floor(player.currentTime);
-          let currentpendingdiv =
-            document.querySelector('.current-track__progress__finish');
-          currentpendingdiv.innerText =
-            Math.floor(player.duration - player.currentTime);
-        }
-
-        player.onended = () => {
-          let progressbar =
-            document.querySelector('#song-progress .noUi-origin');
-          progressbar.style = 'left: 0%';
-          if (queue[index + 1]) {
-            this.startAudio(queue, index + 1);
-          } else {
-            this.setState({
-              isPlaying: false
-            })
-          }
-        }
-
-        player.play();
-
-        this.setState({
-          currentTrackId: queue[index],
-          currentTrackDuration: data.duration,
-          isPlaying: true
-        });
       }
     )
+    AlbumApiUtil.fetchAlbum(track.album_id).then(
+      (album) => {
+        this.setState({
+          currentTrackCoverUrl: album.thumb
+        })
+      }
+    )
+
+    this.setState({
+      currentTrackName: track.name,
+      currentTrackUrl: track.file,
+      currentQueueIndex: index
+    })
+
+    let player = document.getElementById('player');
+    player.src = track.file;
+    player.ontimeupdate = () => {
+      let percent = (player.currentTime / player.duration) * 100;
+      let progressbar =
+        document.querySelector('#song-progress .noUi-origin');
+      progressbar.style = 'left: ' + percent + '%;';
+      let currentplayingdiv =
+        document.querySelector('.current-track__progress__start');
+      currentplayingdiv.innerText = Math.floor(player.currentTime);
+      let currentpendingdiv =
+        document.querySelector('.current-track__progress__finish');
+      currentpendingdiv.innerText =
+        Math.floor(player.duration - player.currentTime);
+    }
+
+    player.onended = () => {
+      let progressbar =
+        document.querySelector('#song-progress .noUi-origin');
+      progressbar.style = 'left: 0%';
+      if (queue[index + 1]) {
+        this.startAudio(queue, index + 1);
+      } else {
+        this.setState({
+          isPlaying: false
+        })
+      }
+    }
+
+    player.play();
+
+    this.setState({
+      currentTrackId: track.id,
+      currentTrackDuration: track.duration,
+      isPlaying: true
+    });
   }
 
   resumeAudio = () => {
@@ -156,9 +148,9 @@ class AppProvider extends React.Component {
 
   nextAudio = () => {
     let player = document.getElementById('player');
-    const { queue, queueIndex } = this.state;
-    if (queue[queueIndex + 1]) {
-      this.startAudio(queue, queueIndex + 1);
+    const {currentQueue, currentQueueIndex} = this.state;
+    if (currentQueue[currentQueueIndex + 1]) {
+      this.startAudio(currentQueue, currentQueueIndex + 1);
     } else {
       this.stopAudio();
     }
@@ -166,9 +158,9 @@ class AppProvider extends React.Component {
 
   prevAudio = () => {
     let player = document.getElementById('player');
-    const { queue, queueIndex } = this.state;
-    if (queue[queueIndex - 1]) {
-      this.startAudio(queue, queueIndex - 1);
+    const {currentQueue, currentQueueIndex} = this.state;
+    if (currentQueue[currentQueueIndex - 1]) {
+      this.startAudio(currentQueue, currentQueueIndex - 1);
     } else {
       this.stopAudio();
     }

@@ -1,5 +1,9 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
+
+import {AppContext} from '../app_provider';
+
+import * as UserApiUtil from '../../utils/user_api_util';
 
 class Header extends React.Component {
   constructor(props) {
@@ -93,4 +97,5 @@ class Header extends React.Component {
   }
 }
 
+Header.contextType = AppContext;
 export default Header;
