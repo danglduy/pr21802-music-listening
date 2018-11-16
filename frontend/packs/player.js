@@ -13,7 +13,7 @@ $(document).ready(function() {
   var slider = document.getElementById('song-volume');
 
   noUiSlider.create(slider, {
-    start: [ 50 ],
+    start: [ 100 ],
     range: {
       'min': [   0 ],
       'max': [ 100 ]

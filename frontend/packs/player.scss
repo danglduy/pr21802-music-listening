@@ -218,7 +218,7 @@ body {
 
   &__middle {
     width: 85%;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   @media (max-width: 1400px) {
@@ -253,7 +253,7 @@ body {
     padding: $padding;
     background: $light-black;
     color: $grey;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   &__list {
@@ -472,7 +472,7 @@ body {
       }
     }
 
-    .play {
+    .play, .pause {
       font-size: $xx-large;
     }
 

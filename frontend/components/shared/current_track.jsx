@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { AppContext } from '../app_provider';
 import { FormattedMessage } from 'react-intl';
 
 class CurrentTrack extends React.Component {
@@ -7,19 +9,29 @@ class CurrentTrack extends React.Component {
   }
 
   render() {
+    let globalContext = this.context;
+    let playButton;
+
+    if (globalContext.isPlaying === true) {
+      playButton =  <a className="ion-ios-pause pause" onClick={() => globalContext.dispatch("PAUSE")} />
+    } else {
+      playButton =  <a className="ion-ios-play play" onClick={() => globalContext.dispatch("RESUME")} />
+    }
+
     return (
       <section className="current-track">
+        <audio id="player" src={ globalContext.currentTrackUrl } ></audio>
         <div className="current-track__actions">
-          <a className="ion-ios-skip-backward" />
-          <a className="ion-ios-play play" />
-          <a className="ion-ios-skip-forward" />
+          <a className="ion-ios-skip-backward" onClick={() => {globalContext.dispatch("PREV");}} />
+          {playButton}
+          <a className="ion-ios-skip-forward" onClick={() => {globalContext.dispatch("NEXT");}} />
         </div>
         <div className="current-track__progress">
-          <div className="current-track__progress__start">0:01</div>
+          <div className="current-track__progress__start"></div>
           <div className="current-track__progress__bar">
             <div id="song-progress" />
           </div>
-          <div className="current-track__progress__finish">3:07</div>
+          <div className="current-track__progress__finish"></div>
         </div>
         <div className="current-track__options">
           <a href="#" className="lyrics">
@@ -58,4 +70,5 @@ class CurrentTrack extends React.Component {
   }
 }
 
+CurrentTrack.contextType = AppContext;
 export default CurrentTrack;

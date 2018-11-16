@@ -8,7 +8,9 @@ class AlbumIndex extends React.Component {
     this.state = {
       albums: [],
     };
+  }
 
+  componentDidMount() {
     AlbumApiUtil.fetchAlbums().then(
       (data) => {
         this.setState({ albums: data });
@@ -32,7 +34,7 @@ class AlbumIndex extends React.Component {
               className="media-card__image"
               style={{
                 backgroundImage:
-                'url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/hoodie.jpg)'
+                `url(${ album.cover })`
               }}
             >
               <i className="ion-ios-play" />

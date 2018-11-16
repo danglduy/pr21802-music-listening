@@ -16,7 +16,9 @@ class ArtistShow extends React.Component {
       albums: [],
       songs: []
     };
+  }
 
+  componentDidMount() {
     ArtistApiUtil.fetchArtist(this.state.artistId).then(
       (data) => {
         this.setState({ artist: data });
@@ -95,12 +97,12 @@ class ArtistShow extends React.Component {
             }
           </div>
           {
-            top10.length > 5 &&
+            countlast5 > 0 &&
               <button className="show-more button-light">
                 <FormattedMessage
                   id="artist_show.show_more"
-                  defaultMessage="Show {0} More"
-                  values={[countlast5]}
+                  defaultMessage="Show { last5 } More"
+                  values={{ last5: countlast5 }}
                 />
               </button>
           }

@@ -1,35 +1,36 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import * as SongApiUtil from '../../utils/song_api_util';
+import { AppContext } from '../app_provider';
 
 class TrackItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       song: this.props.song,
-      url: ''
+      queueIndex: this.props.queueIndex,
+      queue: this.props.queue
     };
   }
 
-  playAudio = (songId) => {
-    SongApiUtil.fetchSong(songId).then(
-      (data) => {
-        var a = new Audio(data.file);
-        a.play();
-      }
-    )
-  }
-
   render() {
-    const { song } = this.state;
-
+    const { song, queue, queueIndex } = this.state;
+    let globalContext = this.context;
+    let playButton;
+    if (song.duration) {
+      playButton =
+        <a href="javascript:void(0)"
+          onClick={() => globalContext.dispatch("START", queue, queueIndex)}>
+          <FormattedMessage
+            id="track_item.play"
+            defaultMessage="Play"/>
+        </a>
+    }
     return (
       <div className="track" key={ song.id }>
         <div className="track__number">{ song.track_no }</div>
         <div className="track__added">
-          { song.duration !== null &&
-            <a href="javascript:void(0)" onClick={ () => this.playAudio(this.state.song.id) }>Play</a>
-          }
+          {playButton}
         </div>
         <div className="track__title">{ song.name }</div>
         <div className="track__length">{ song.duration }</div>
@@ -38,4 +39,5 @@ class TrackItem extends React.Component {
   }
 }
 
+TrackItem.contextType = AppContext;
 export default TrackItem;
