@@ -1,0 +1,16 @@
+<%= semantic_form_for [:admin, @playlist] do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :user %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit %>
+    <li class="cancel">
+      <% if action_name == "edit" %>
+        <%= link_to t(".cancel"), admin_song_path(@playlist) %>
+      <% else %>
+        <%= link_to t(".cancel"), admin_songs_path %>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>

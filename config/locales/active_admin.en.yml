@@ -7,6 +7,10 @@ en:
       form:
         cancel: "Cancel"
         delete_attachment: "Delete attachment"
+    playlists:
+      form:
+        cancel: "Cancel"
+        delete_attachment: "Delete attachment"
   active_admin:
     resource:
       index:
