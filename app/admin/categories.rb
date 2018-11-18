@@ -6,11 +6,11 @@ ActiveAdmin.register Category do
   filter :tag
   filter :published
 
-  config.sort_order = 'tag_asc'
-  #sortable tree: false, sorting_attribute: :tag
+  config.sort_order = "tag_asc"
+  # sortable tree: false, sorting_attribute: :tag
 
   index do
-    label :name
+    column :name
     actions
   end
 
@@ -25,7 +25,7 @@ ActiveAdmin.register Category do
   end
 
   form do |f|
-    f.inputs 'Category Details' do
+    f.inputs "Category Details" do
       f.input :parent
       f.input :name
       f.input :published

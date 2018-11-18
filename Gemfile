@@ -3,15 +3,17 @@ git_source(:github){|repo| "https://github.com/#{repo}.git"}
 
 ruby "2.5.1"
 
-gem "activeadmin", "~> 1.3", ">= 1.3.1"
+gem "activeadmin", "1.3.1"
 gem "bcrypt", "~> 3.1.7"
 gem "best_in_place", "~> 3.1", ">= 3.1.1"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "cancancan", "~> 2.3"
 gem "carrierwave", "~> 1.2", ">= 1.2.3"
 gem "config", "~> 1.7"
+gem "ckeditor"
 gem "devise", "~> 4.5"
 gem "dotenv-rails", "~> 2.5"
+gem "fog", "~> 2.1.0"
 gem "font-awesome-rails"
 gem "font-awesome-sass"
 gem "jbuilder", "~> 2.5"
@@ -23,6 +25,7 @@ gem "omniauth", "~> 1.8", ">= 1.8.1"
 gem "omniauth-facebook", "~> 5.0.0"
 gem "omniauth-google-oauth2", "~> 0.5.3"
 gem "omniauth-twitter", "~> 1.4.0"
+gem "paperclip", "~> 6.0.0"
 gem "paranoia", "~> 2.4", ">= 2.4.1"
 gem "rails", "~> 5.2.1"
 gem "rails-i18n", "~> 5.1", ">= 5.1.1"
@@ -36,9 +39,6 @@ gem "toastr-rails"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "webpacker", "~> 3.5", ">= 3.5.5"
-gem "ckeditor"
-gem "paperclip", "~> 6.0.0"
-gem "fog", "~> 2.1.0"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]

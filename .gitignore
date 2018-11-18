@@ -43,5 +43,9 @@ yarn-debug.log*
 /import/*
 !/import/.keep
 
+/public/system/*
+!/public/system/.keep
+
+
 # Ignore carrierwave upload folder
 /public/uploads

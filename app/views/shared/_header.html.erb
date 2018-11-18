@@ -13,7 +13,7 @@
         <i class="material-icons md-24 icon-cate-in-mobile">payment</i><%= t ".payment" %>
       <% end %>
     </li>
-    
+
     <li class="divider"></li>
 
     <li class="item_category_mobile">
@@ -24,7 +24,7 @@
   </ul>
 
   <ul id="dropdown2" class="dropdown-content">
-    <% Category.all.includes(:parent, :child).sort_by {|e| e[:tag]}.each do |category| %>
+    <% Category.all.includes(:parent, :children).sort_by {|e| e[:tag]}.each do |category| %>
       <% if category.parent.blank? %>
         <%= render "/shared/sub_category", category: category %>
       <% end %>
