@@ -11,6 +11,8 @@ en:
       form:
         cancel: "Cancel"
         delete_attachment: "Delete attachment"
+    slides:
+      no_photo: "No photo yet"
   active_admin:
     resource:
       index:
@@ -19,3 +21,5 @@ en:
         listen: "Listen"
         albums: "Albums"
         songs: "Songs"
+      new:
+        upload_image: "Upload JPG/PNG/GIF image"

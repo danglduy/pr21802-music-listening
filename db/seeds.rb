@@ -9,6 +9,11 @@ user.add_role :admin unless user.has_role? :admin
 user.save!
 User.set_callback :create, :after, :send_welcome_email
 
+root_category = Category.create(name: "Parent 1", published: true, tag: 0)
+for i in 1..5
+  category = Category.create(name: "Music Category " + i.to_s, parent_id: root_category.id, published: true, tag: i)
+end
+
 metadata_files = Dir.glob("import/*.flac.json")
 metadata_files += Dir.glob("import/*.m4a.json")
 
