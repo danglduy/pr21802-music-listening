@@ -7,5 +7,7 @@ export const constants = {
   RESUME: 'RESUME',
   PAUSE: 'PAUSE',
   STOP: 'STOP',
-  NEXT: 'PREV'
+  NEXT: 'NEXT',
+  PREV: 'PREV',
+  SEARCH: 'SEARCH'
 }

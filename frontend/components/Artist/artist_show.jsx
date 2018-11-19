@@ -1,6 +1,9 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import {AppContext} from '../app_provider';
+import {constants} from '../../constants/constants';
+
 import ArtistAlbum from './album';
 
 import * as ArtistApiUtil from '../../utils/artist_api_util';
@@ -16,6 +19,19 @@ class ArtistShow extends React.Component {
       albums: [],
       songs: []
     };
+  }
+
+  playArtist = (artist) => {
+    let globalContext = this.context;
+    SongApiUtil.fetchArtistSongs(artist.id).then(
+      (songs) => {
+        globalContext.currentQueue = songs;
+        globalContext.currentQueueType = constants.ARTIST;
+        globalContext.currentQueueId = artist.id;
+        globalContext.currentQueueIndex = 0;
+        globalContext.dispatch(constants.START);
+      }
+    )
   }
 
   componentDidMount() {
@@ -130,7 +146,8 @@ class ArtistShow extends React.Component {
                 </div>
                 <div className="artist__info__name">{artist.name}</div>
                 <div className="artist__info__actions">
-                  <button className="button-dark">
+                  <button className="button-dark"
+                    onClick={() => {this.playArtist(artist)}}>
                     <i className="ion-ios-play" />
                     <FormattedMessage
                       id="artist_show.play"
@@ -287,4 +304,5 @@ class ArtistShow extends React.Component {
   }
 }
 
+ArtistShow.contextType = AppContext;
 export default ArtistShow;

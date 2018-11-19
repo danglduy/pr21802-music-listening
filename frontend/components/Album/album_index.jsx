@@ -43,7 +43,8 @@ class AlbumIndex extends React.Component {
     let playButton;
     let globalContext = this.context;
     const {isPlaying, currentQueueId, currentQueueType} = globalContext;
-    if (currentQueueId === album.id) {
+
+    if (currentQueueId === album.id && currentQueueType === constants.ALBUM) {
       if (isPlaying === true) {
         playButton =
           <i className="ion-ios-pause" onClick={() => {globalContext.dispatch(constants.PAUSE)}}/>
@@ -62,7 +63,6 @@ class AlbumIndex extends React.Component {
     let globalContext = this.context;
     const {albums} = this.state;
     let albumsContent;
-    let playButton;
 
     if (albums.length > 0) {
       albumsContent = (

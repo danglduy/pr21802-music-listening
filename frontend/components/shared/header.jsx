@@ -2,12 +2,33 @@ import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {AppContext} from '../app_provider';
+import {constants} from '../../constants/constants';
 
 import * as UserApiUtil from '../../utils/user_api_util';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      searchString: ''
+    }
+  }
+
+  onSearchSubmit = (e) => {
+    e.preventDefault();
+    let globalContext = this.context;
+    const {searchString} = this.state;
+    globalContext.currentSearchString = searchString;
+    globalContext.dispatch(constants.SEARCH);
+    this.setContent(constants.SEARCH, constants.SHOW)
+  }
+
+  onSearchChange = (e) => {
+    this.setState({searchString: e.target.value})
+  }
+
+  setContent = (contentType, contentMethod, contentId) => {
+    this.props.setContent(contentType, contentMethod, contentId);
   }
 
   render() {
@@ -24,7 +45,14 @@ class Header extends React.Component {
         <div className="search">
           <FormattedMessage id="header.search" defaultMessage="Search">
             {msg => (
-              <input type="text" placeholder= {msg} />
+              <form onSubmit={this.onSearchSubmit.bind(this)} >
+                <input
+                  type="text"
+                  value={this.state.searchString}
+                  placeholder= {msg}
+                  onChange={this.onSearchChange.bind(this)}
+                />
+              </form>
             )}
           </FormattedMessage>
         </div>

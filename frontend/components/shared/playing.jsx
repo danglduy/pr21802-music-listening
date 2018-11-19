@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {AppContext} from '../app_provider';
+import {constants} from '../../constants/constants';
 
 class Playing extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Playing extends React.Component {
     return (
       <section className="playing">
         <div className="playing__art">
-          <a href="javascript:void(0)" onClick={() => {this.setContent(currentQueueType, 'SHOW', currentQueueId)}}>
+          <a href="javascript:void(0)" onClick={() => {this.setContent(currentQueueType, constants.SHOW, currentQueueId)}}>
           <img
             src={globalContext.currentTrackCoverUrl}
             alt="Album Art"

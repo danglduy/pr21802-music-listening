@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Header from './shared/header';
 import Content from './content';
-import CurrentTrack from './shared/current_track';
 
 import {IntlProvider} from 'react-intl';
 import {ENGLISH} from '../locales/en';
@@ -19,7 +17,7 @@ class App extends React.Component {
     this.state = {
       locale: 'en',
       messages: ENGLISH.messages,
-      currentUserId: null,
+      currentUserId: null
     }
   }
 
@@ -30,13 +28,10 @@ class App extends React.Component {
         messages={this.state.messages}
       >
         <AppProvider>
-          <Header />
           <Content />
-          <CurrentTrack />
         </AppProvider>
       </IntlProvider>
     );
   }
 }
-
 export default App;

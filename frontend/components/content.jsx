@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 
 import {constants} from '../constants/constants';
 import {AppContext} from './app_provider';
 
+import Header from './shared/header';
 import Navigation from './shared/navigation';
 import Playlist from './shared/playlist';
 import Playing from './shared/playing';
+import CurrentTrack from './shared/current_track';
 
 import ArtistIndex from './Artist/artist_index';
 import ArtistShow from './Artist/artist_show';
@@ -14,6 +16,8 @@ import AlbumIndex from './Album/album_index';
 import AlbumShow from './Album/album_show';
 
 import PlaylistShow from './Playlist/playlist_show';
+
+import SearchResult from './Search/search_result';
 
 class Content extends React.Component {
   constructor(props) {
@@ -82,17 +86,23 @@ class Content extends React.Component {
       if (currentContentMethod === constants.SHOW) {
         mainContent = <PlaylistShow playlistId={currentContentId} />
       }
+    } else if (currentContentType === constants.SEARCH) {
+      mainContent = <SearchResult setContent={this.setContent} />
     }
 
     return (
-      <section className="content">
-        <div className="content__left">
-          <Navigation setContent={this.setContent}/>
-          <Playlist />
-          <Playing setContent={this.setContent}/>
-        </div>
-        {mainContent}
-      </section>
+      <Fragment>
+        <Header setContent={this.setContent}/>
+        <section className="content">
+          <div className="content__left">
+            <Navigation setContent={this.setContent}/>
+            <Playlist />
+            <Playing setContent={this.setContent}/>
+          </div>
+          {mainContent}
+        </section>
+        <CurrentTrack />
+      </Fragment>
     );
   }
 }

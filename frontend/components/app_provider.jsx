@@ -6,6 +6,7 @@ import * as UserApiUtil from '../utils/user_api_util';
 import * as SongApiUtil from '../utils/song_api_util';
 import * as ArtistApiUtil from '../utils/artist_api_util';
 import * as AlbumApiUtil from '../utils/album_api_util';
+import * as SearchApiUtil from '../utils/search_api_util';
 
 const AppContext = React.createContext();
 
@@ -25,6 +26,10 @@ class AppProvider extends React.Component {
       currentContentType: constants.ARTIST,
       currentContentMethod: constants.INDEX,
       currentContentId: '',
+      currentSearchString: '',
+      currentSearchResultArtists: [],
+      currentSearchResultAlbums: [],
+      currentSearchResultSongs: [],
       currentUserId: null,
       isPlaying: false,
       dispatch: this.dispatch,
@@ -55,6 +60,10 @@ class AppProvider extends React.Component {
 
     if (action_type == constants.PREV) {
       this.prevAudio();
+    }
+
+    if (action_type == constants.SEARCH) {
+      this.onSearch();
     }
   }
 
@@ -164,6 +173,19 @@ class AppProvider extends React.Component {
     } else {
       this.stopAudio();
     }
+  }
+
+  onSearch = () => {
+    const {currentSearchString} = this.state;
+    SearchApiUtil.fetchSearchResults(currentSearchString).then(
+      (data) => {
+        this.setState({
+          currentSearchResultArtists: data.artists,
+          currentSearchResultAlbums: data.albums,
+          currentSearchResultSongs: data.songs
+        })
+      }
+    )
   }
 
   render() {
