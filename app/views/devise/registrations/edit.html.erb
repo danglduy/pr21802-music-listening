@@ -1,49 +1,77 @@
-<h4><%= t ".edit", resource_name: resource_name.to_s.humanize %></h4>
+<div class="container" id="customize-home-container">
 
-<%= form_for resource, as: resource_name, url: registration_path(resource_name), html: {method: :put} do |f| %>
-  <%= devise_error_messages! %>
+  <div class="row">
+    <div class="col s12 m4 l2"></div>
+    <div class="col s12 m4 l8">
+      <div class="card" id="wrapper-user-profile">
+        <div class="title-order-page">
+          <%= t ".edit_profile" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :name, t(".name")  %>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+        <div class="card-content">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
+
+              <%= render partial: "shared/devise_message" %>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons md-36 prefix icon-account-profile-material">account_circle</i>&nbsp;
+                  <%= f.text_field :name, id: "name", class: "edit_profile", placeholder: t(".name"), autofocus: true %>
+                  <span id="show-message-name" style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= t ".can_not_blank" %></span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons md-36 prefix icon-account-profile-material">email</i>&nbsp;
+                  <%= f.email_field :email, id: "email", placeholder: t(".email"), class: "edit_profile" %>
+                  <span id="show-message-email" style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= t ".can_not_blank" %></span>
+                </div>
+              </div>
+
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                  <div><%= t(".waiting", resource: resource.unconfirmed_email) %></div>
+              <% end %>
+
+              <h5 class="left"><%= t ".change_password" %></h5>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons md-36 prefix icon-account-material">lock_outline</i>&nbsp;
+                  <%= f.password_field :password, id: "profile_change_password", placeholder: t(".new_password"), autocomplete: "off" %>
+                  <i class="material-icons md-36" id="InforCheckPasswordLength">done</i>
+                  <i class="material-icons md-36" id="InforCheckPasswordLengthError">error</i>
+                  <span id="show-message-password"></span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons md-36 prefix icon-account-material">vpn_key</i>&nbsp;
+                  <%= f.password_field :password_confirmation, id: "profile_password_confirmation", placeholder: t(".confirm_password"), autocomplete: "off" %>
+                  <i class="material-icons md-36" id="InforCheckPasswordMatch">done</i>
+                  <i class="material-icons md-36" id="InforCheckPasswordError">error</i>
+                </div>
+              </div>
+
+              <h5 class="left"><%= t ".current_passsword_title" %></h5>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons md-36 prefix icon-account-material">lock_outline</i>&nbsp;
+                  <%= f.password_field :current_password, id: "profile_current_password", class: "edit_profile", placeholder: t(".current_password"), autocomplete: "off" %>
+                  <br><span id="show-message-current-password" style="color: red"><%= t ".must_be_enter" %></span>
+                </div>
+              </div>
+
+              <div class="row center">
+                <button class="btn waves-effect waves-light" type="submit" name="action"><%= t ".save" %></button>
+                &nbsp;&nbsp;<%= link_to t(".back"), :back, class: "btn waves-effect waves-light" %>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m4 l2"></div>
   </div>
-
-  <div class="field">
-    <%= f.label :email, t(".email") %>
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div><%= t ".waiting", unconfirmed_email: resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password, t(".password") %>
-    <i>
-      <%= t ".leave_blank" %>
-    </i>
-    <br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <em><%= t ".characters_minimum", length: @minimum_password_length %></em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, t(".password_confirmation") %>
-    <br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password, t(".current_password") %>
-    <i><%= t ".need_confirm" %></i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit t(".update"), class: "btn waves-effect waves-light" %>
-  </div>
-<% end %>
-
-<%= link_to t(".back"), :back %>
+</div>

@@ -170,12 +170,12 @@ main {
     font-size: 16px;
   }
 
-  #leftpanel {
+  #rightpanel {
     min-height: 1000px;
     margin-top: 23px;
   }
 
-  .left-menu-tab {
+  .right-menu-tab {
     margin-top: -14px;
   }
 
@@ -1149,7 +1149,7 @@ main {
     padding-top: 20px;
   }
 
-  #nav-header-shop {
+  #nav-header-page {
     height: 80px;
     line-height: 80px;
   }
@@ -1796,5 +1796,562 @@ main {
 @media only screen and (min-width: 760px) {
   #container-clock {
     padding-left: 50px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .container-youtube-on-top-task-blog {
+    width: 100%;
+    height: 480px;
+    margin: 30px auto;
+  }
+
+  #container-clock {
+    padding-left: 80px;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  #container-clock {
+    padding-left: 100px;
+  }
+
+  .guide-message-steps-order {
+    margin-left: 40px !important;
+  }
+
+  select#user_country {
+    display: block;
+    margin-left: 5px;
+    width: 87%;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+  }
+
+  #logo-baokim {
+    width: 75%;
+    height: auto;
+  }
+
+  #select-telco-phone-card {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  #image-logo-payment {
+    width: 65%;
+    height: auto;
+  }
+
+  .container-youtube-on-top-task-blog {
+    width: 100%;
+    height: 550px;
+    margin: 30px auto;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .row .title-field-in-no-modal-cart {
+    padding: 10px 0;
+    text-align: right;
+  }
+}
+
+@media only screen and (min-width: 920px) {
+  #container-clock {
+    padding-left: 120px;
+  }
+
+  .container-youtube-on-top-task-blog {
+    width: 100%;
+    height: 650px;
+    margin: 30px auto;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #container-clock {
+    padding-left: 150px;
+  }
+
+  .row .col .col-larger-customize {
+    width: 50%;
+  }
+
+  .col.s12.m6.l4.col-larger-author-customize {
+    width: 50%;
+  }
+
+  #col-larger-customize-blog {
+    width: 33.3333333333%;
+  }
+
+  #category-blog-larger {
+    display: block;
+  }
+
+  #category-blog-mobile {
+    display: none;
+  }
+
+  #category-home-page-larger {
+    display: block;
+  }
+
+  #category-home-page-mobile {
+    display: none;
+  }
+
+  #landing-page-in-show {
+    display: block;
+  }
+
+  #landing-page-in-show-mobile {
+    display: none;
+  }
+
+  #main-content-show {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .div-show-blog-article {
+    padding: 60px;
+  }
+
+  #blog-card-action {
+    padding: 10px 10px;
+  }
+
+  #modal-blog {
+    width: 50%;
+    max-height: 100%;
+  }
+
+  .modal .modal-content {
+    padding: 20px 60px;
+  }
+
+  #th-table-item-title, #th-table-space-title, #td-table-image-item, #td-table-space-quantity {
+    display: table-cell;
+  }
+
+  .td-table-space-total {
+    display: block;
+  }
+
+  #td-adj-number {
+    display: block;
+  }
+
+  #note-fill-user-info {
+    margin-bottom: 20px;
+    margin-top: 80px;
+    margin-left: 20px;
+    font-weight: bold;
+  }
+
+  #collapsible-body-user-in-cart {
+    padding: 10px;
+  }
+
+  #modal-cart {
+    padding-bottom: 20px;
+    max-height: 90%;
+    width: 85%;
+  }
+
+  #customize-list-order-container {
+    width: 70%;
+    max-width: 1280px;
+  }
+
+  .wrapper-author-profile {
+    padding: 20px 30px 0 50px;
+  }
+
+  input#user_name.user-infomation-modal-cart {
+    width: 70%;
+  }
+
+  input#user_address.user-infomation-modal-cart {
+    width: 70%;
+    margin-top: 15px;
+  }
+
+  input#user_city.user-infomation-modal-cart {
+    width: 70%;
+    margin-top: 15px;
+  }
+
+  input#user_zipcode.user-infomation-modal-cart {
+    width: 70%;
+    margin-top: 15px;
+  }
+
+  input#user_email.user-infomation-modal-cart {
+    width: 70%;
+  }
+
+  input#user_password.user-infomation-modal-cart {
+    width: 70%;
+  }
+
+  input#user_phone.user-infomation-modal-cart {
+    width: 70%;
+  }
+
+  input#user_address.user-infomation-no-modal-cart {
+    width: 70%;
+    //margin-top: 15px;
+  }
+
+  input#user_city.user-infomation-no-modal-cart {
+    width: 70%;
+    //margin-top: 15px;
+  }
+
+  input#user_zipcode.user-infomation-no-modal-cart {
+    width: 70%;
+    //margin-top: 15px;
+  }
+
+  input#user_name.user-infomation-no-modal-cart {
+    width: 70%;
+  }
+
+  input#user_email.user-infomation-no-modal-cart {
+    width: 70%;
+  }
+
+  input#user_password.user-infomation-no-modal-cart {
+    width: 70%;
+  }
+
+  input#user_phone.user-infomation-no-modal-cart {
+    width: 70%;
+  }
+
+  #category-order-show {
+    display: block;
+  }
+
+  #address-modal-cart {
+    margin-top: -16px;
+  }
+
+  #city-modal-cart {
+    margin-top: -16px;
+  }
+
+  #zipcode-modal-cart {
+    margin-top: -16px;
+  }
+
+  #country-modal-cart {
+    margin-top: -16px;
+  }
+
+  #note-exist-email {
+    color: red;
+    margin-left: 30px;
+  }
+
+  #card-show-cart-no-modal {
+    padding: 0 0.75rem;
+  }
+
+  #contain-order-show {
+    padding: 0 0.75rem;
+  }
+
+  #card-contain-order {
+    padding: 24px;
+  }
+
+  .row .table-preview-order {
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-bottom: 0;
+  }
+
+  #button-paypal-order {
+    margin-top: 0;
+    margin-left: 20px;
+  }
+
+  .row .logo-gateway {
+    margin-left: 60px;
+    padding-bottom: 10px;
+  }
+
+  .td-table-space-total-order {
+    display: block;
+  }
+
+  .wrapper-order-profile {
+    padding: 35px 30px 20px 50px;
+    color: #37474f;
+  }
+
+  #image-avatar-order-list-mobile {
+    display: none;
+  }
+
+  #image-avatar-order-list-larger {
+    display: block;
+  }
+
+  .render-task-note {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  #div-show-chapter-content {
+    padding: 0 50px;
+  }
+
+  input#profile_current_password {
+    margin-left: 45px;
+    width: 90%;
+  }
+
+  input#profile_password_confirmation {
+    width: 90%;
+  }
+
+  input#profile_change_password {
+    width: 90%;
+  }
+
+  div#content-message-inbox-mail {
+    padding: 0 60px;
+  }
+
+  #col-course-customize-history-order {
+    width: 33.333333%;
+  }
+
+  #col-book-customize-history-order {
+    width: 33.333333%;
+  }
+
+  #col-product-customize-history-order {
+    width: 33.333333%;
+  }
+
+  .guide-message-steps-order {
+    text-align: center;
+  }
+
+  select#user_country {
+    display: block;
+    margin-left: 5px;
+    width: 72%;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+  }
+
+  #image-logo-payment {
+    width: 50%;
+    height: auto;
+  }
+
+  .container-youtube-on-top-task-blog {
+    width: 100%;
+    height: 720px;
+    margin: 30px auto;
+  }
+}
+
+@media only screen and (min-width: 1050px) {
+  #container-clock {
+    padding-left: 180px;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  #logo-baokim {
+    width: 55%;
+    height: auto;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #container-clock {
+    padding-left: 250px;
+  }
+}
+
+@media only screen and (min-width: 1360px) {
+  #container-clock {
+    padding-left: 280px;
+  }
+
+  #card-content-clock {
+    padding: 24px;
+  }
+
+  #logo-baokim {
+    width: 40%;
+    height: auto;
+  }
+
+  input#user_name.validate {
+    margin: 0 0 15px 40px;
+    width: 90%;
+  }
+
+  input#user_email.validate {
+    margin: 0 0 15px 40px;
+    width: 90%;
+  }
+
+  input#user_password {
+    width: 90%;
+  }
+
+  input#user_password.validate {
+    margin: 0 0 15px 40px;
+    width: 90%;
+  }
+
+  input#user_password_confirmation.validate {
+    margin: 0 0 15px 40px;
+    width: 90%;
+  }
+
+  input#user_password_confirmation {
+    width: 90%;
+  }
+
+  input#current_password.validate {
+    margin: 0 0 15px 40px;
+  }
+
+  input#user_otp_code_token {
+    width: 90%;
+  }
+
+  .card-embed-link {
+    display: block;
+  }
+
+  #subtitle-banner-news {
+    display: block;
+  }
+
+  .row-space-home-page {
+    display: block;
+  }
+
+  .card-banner-news {
+    min-height: 530px;
+  }
+
+  #col-larger-customize-blog {
+    width: 25%;
+  }
+
+  .row .col .col-larger-customize {
+    width: 33.3333333%;
+  }
+
+  .row .col .col-larger-customize-class-room {
+    width: 38%;
+  }
+
+  .features-course {
+    text-align: left;
+    margin-left: 80px;
+  }
+
+  .authors-container {
+    padding: 20px;
+  }
+
+  #main-content-show {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  #modal-blog {
+    width: 35%;
+    max-height: 100%;
+  }
+
+  .col.s12.m6.l4.col-larger-author-customize {
+    width: 33.3333333333%;
+  }
+
+  input#user_name.user-infomation-modal-cart {
+    width: 80%;
+  }
+
+  input#user_address.user-infomation-modal-cart {
+    width: 80%;
+    margin-top: 15px;
+  }
+
+  input#user_city.user-infomation-modal-cart {
+    width: 80%;
+    margin-top: 15px;
+  }
+
+  input#user_zipcode.user-infomation-modal-cart {
+    width: 80%;
+    margin-top: 15px;
+  }
+
+  input#user_email.user-infomation-modal-cart {
+    width: 80%;
+  }
+
+  input#user_password.user-infomation-modal-cart {
+    width: 80%;
+  }
+
+  input#user_phone.user-infomation-modal-cart {
+    width: 80%;
+  }
+
+  #col-course-customize-history-order {
+    width: 25%;
+  }
+
+  #col-book-customize-history-order {
+    width: 25%;
+  }
+
+  #col-product-customize-history-order {
+    width: 25%;
+  }
+
+  input#phone_card_code.inputs-phone-card-order {
+    border: 1px solid darkgray;
+    padding-left: 10px;
+    border-radius: 10px;
+    width: 80%;
+  }
+
+  input#phone_card_serial.inputs-phone-card-order {
+    border: 1px solid darkgray;
+    padding-left: 10px;
+    border-radius: 10px;
+    width: 80%;
+  }
+
+  #select-telco-phone-card {
+    margin-left: 150px;
+    text-align: right;
+  }
+
+  #image-logo-payment {
+    width: 35%;
+    height: auto;
   }
 }
