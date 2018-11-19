@@ -46,7 +46,14 @@ metadata_files.each do |metadata_file|
     album.cover = File.open(coverpath) if File.file? coverpath
   end
   album.save!
+
   artist = Artist.find_or_create_by name: imported_artist
+  if artist.cover.blank?
+    coverpath = imported_filename + ".jpg"
+    artist.cover = File.open(coverpath) if File.file? coverpath
+  end
+  artist.save!
+
   album_artist = Artist.find_or_create_by name: imported_album_artist
 
   AlbumArtist.find_or_create_by album: album, artist: album_artist
