@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 import ArtistAlbum from './album';
 
@@ -21,25 +21,25 @@ class ArtistShow extends React.Component {
   componentDidMount() {
     ArtistApiUtil.fetchArtist(this.state.artistId).then(
       (data) => {
-        this.setState({ artist: data });
+        this.setState({artist: data});
       }
     )
 
     AlbumApiUtil.fetchArtistAlbums(this.state.artistId).then(
       (data) => {
-        this.setState({ albums: data });
+        this.setState({albums: data});
       }
     )
 
     SongApiUtil.fetchArtistSongs(this.state.artistId).then(
       (data) => {
-        this.setState({ songs: data });
+        this.setState({songs: data});
       }
     )
   }
 
   render() {
-    const { artist, albums, songs } = this.state;
+    const {artist, albums, songs} = this.state;
     let albumsContent;
     let popularContent;
     let top5;
@@ -79,18 +79,18 @@ class ArtistShow extends React.Component {
           <div className="tracks">
             {
               top5.map((song, index) => (
-                <div className="track" key={ song.id }>
+                <div className="track" key={song.id}>
                   <div className="track__art">
                     <img
                       src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/whenDarkOut.jpg"
                       alt="When It's Dark Out"
                     />
                   </div>
-                  <div className="track__number">{ index + 1 }</div>
+                  <div className="track__number">{index + 1}</div>
                   <div className="track__added">
                     <i className="ion-md-checkmark added" />
                   </div>
-                  <div className="track__title">{ song.name }</div>
+                  <div className="track__title">{song.name}</div>
                   <div className="track__plays">147,544,165</div>
                 </div>
               ))
@@ -102,7 +102,7 @@ class ArtistShow extends React.Component {
                 <FormattedMessage
                   id="artist_show.show_more"
                   defaultMessage="Show { last5 } More"
-                  values={{ last5: countlast5 }}
+                  values={{last5: countlast5}}
                 />
               </button>
           }
@@ -117,8 +117,8 @@ class ArtistShow extends React.Component {
             <div className="artist__info">
               <div className="profile__img">
                 <img
-                  src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/g_eazy_propic.jpg"
-                  alt={ artist.name }
+                  src={artist.cover}
+                  alt={artist.name}
                 />
               </div>
               <div className="artist__info__meta">
@@ -128,7 +128,7 @@ class ArtistShow extends React.Component {
                     defaultMessage="Artist"
                   />
                 </div>
-                <div className="artist__info__name">{ artist.name }</div>
+                <div className="artist__info__name">{artist.name}</div>
                 <div className="artist__info__actions">
                   <button className="button-dark">
                     <i className="ion-ios-play" />
@@ -237,7 +237,7 @@ class ArtistShow extends React.Component {
                         defaultMessage="Popular"
                       />
                     </div>
-                    { popularContent }
+                    {popularContent}
                   </div>
                   <div className="overview__related">
                     <div className="section-title">

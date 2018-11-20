@@ -1,6 +1,8 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
+import {FormattedMessage} from 'react-intl';
+
+import {constants} from '../../constants/constants';
 import TrackItem from '../shared/track_item';
 
 import * as SongApiUtil from '../../utils/song_api_util';
@@ -10,20 +12,13 @@ class ArtistAlbum extends React.Component {
     super(props);
     this.state = {
       album: this.props.album,
-      songs: [],
-      songIds: []
-
+      songs: []
     };
 
     SongApiUtil.fetchAlbumSongs(this.state.album.id).then(
       (data) => {
-        let songIds = [];
-        data.map(song => {
-          songIds.push(song.id);
-        });
         this.setState({
-          songs: data,
-          songIds: songIds
+          songs: data
         });
       }
     )
@@ -31,11 +26,18 @@ class ArtistAlbum extends React.Component {
 
   render() {
     let songContent;
-    const { album, songs, songIds } = this.state;
+    const {album, songs} = this.state;
 
     songContent = (
       songs.map((song, index) => (
-        <TrackItem song={ song } key={ song.id } queue={ songIds } queueIndex={ index } />
+        <TrackItem
+          key={song.id}
+          song={song}
+          queue={songs}
+          queueIndex={index}
+          queueType={constants.ALBUM}
+          queueId={song.album_id}
+        />
       ))
     )
 
@@ -44,14 +46,14 @@ class ArtistAlbum extends React.Component {
         <div className="album__info">
           <div className="album__info__art">
             <img
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/whenDarkOut.jpg"
-              alt={ album.name }
+              src={album.cover}
+              alt={album.name}
             />
           </div>
           <div className="album__info__meta">
             <div className="album__year">2015</div>
             <div className="album__name">
-              { album.name }
+              {album.name}
             </div>
             <div className="album__actions">
               <button className="button-light save">

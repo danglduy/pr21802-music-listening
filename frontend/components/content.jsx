@@ -1,5 +1,8 @@
 import React from 'react';
 
+import {constants} from '../constants/constants';
+import {AppContext} from './app_provider';
+
 import Navigation from './shared/navigation';
 import Playlist from './shared/playlist';
 import Playing from './shared/playing';
@@ -10,37 +13,36 @@ import ArtistShow from './Artist/artist_show';
 import AlbumIndex from './Album/album_index';
 import AlbumShow from './Album/album_show';
 
+import PlaylistShow from './Playlist/playlist_show';
+
 class Content extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: 'artist_index',
-      artistId: 0,
-      albumId: 0
+      currentContentType: constants.ARTIST,
+      currentContentMethod: constants.INDEX,
+      currentContentId: '',
     }
   }
 
-  setContent = (newContent, id) => {
+  setContent = (contentType, contentMethod, contentId = 0) => {
+    let globalContext = this.context;
+    globalContext.currentContentType = contentType;
+    globalContext.currentContentMethod = contentMethod;
+    globalContext.currentContentId = contentId;
     this.setState({
-      content: newContent
-    });
-    if (newContent === 'artist_show') {
-      this.setState({
-        artistId: id
-      })
-    }
-    if (newContent === 'album_show') {
-      this.setState({
-        albumId: id
-      })
-    }
+      currentContentType: contentType,
+      currentContentMethod: contentMethod,
+      currentContentId: contentId
+    })
   }
 
   componentDidUpdate() {
     let totalHeight = $(window).height();
+
     let headerHeight = $('.header').outerHeight();
     let footerHeight = $('.current-track').outerHeight();
-    let playlistHeight = $('.playlist').outerHeight();
+    let playlistHeight = $('.new_playlist').outerHeight();
     let nowPlaying = $('.playing').outerHeight();
 
     let navHeight = totalHeight - (headerHeight + footerHeight + playlistHeight + nowPlaying);
@@ -62,29 +64,32 @@ class Content extends React.Component {
 
   render() {
     let mainContent;
-
-    if (this.state.content === 'artist_index') {
-      mainContent = <ArtistIndex setContent={ this.setContent } />
-    }
-
-    if (this.state.content === 'artist_show') {
-      mainContent = <ArtistShow artistId={ this.state.artistId } />
-    }
-
-    if (this.state.content === 'album_index') {
-      mainContent = <AlbumIndex setContent={ this.setContent } />
-    }
-
-    if (this.state.content === 'album_show') {
-      mainContent = <AlbumShow albumId={ this.state.albumId } />
+    let globalContext = this.context;
+    const {currentContentType, currentContentMethod, currentContentId} = this.state;
+    if (currentContentType === constants.ARTIST) {
+      if (currentContentMethod === constants.INDEX) {
+        mainContent = <ArtistIndex setContent={this.setContent} />
+      } else if (currentContentMethod === constants.SHOW) {
+        mainContent = <ArtistShow artistId={currentContentId} />
+      }
+    } else if (currentContentType === constants.ALBUM) {
+      if (currentContentMethod === constants.INDEX) {
+        mainContent = <AlbumIndex setContent={this.setContent} />
+      } else if (currentContentMethod === constants.SHOW) {
+        mainContent = <AlbumShow albumId={currentContentId} />
+      }
+    } else if (currentContentType === constants.PLAYLIST) {
+      if (currentContentMethod === constants.SHOW) {
+        mainContent = <PlaylistShow playlistId={currentContentId} />
+      }
     }
 
     return (
       <section className="content">
         <div className="content__left">
-          <Navigation setContent={ this.setContent }/>
+          <Navigation setContent={this.setContent}/>
           <Playlist />
-          <Playing />
+          <Playing setContent={this.setContent}/>
         </div>
         {mainContent}
       </section>
@@ -92,4 +97,5 @@ class Content extends React.Component {
   }
 }
 
+Content.contextType = AppContext;
 export default Content;

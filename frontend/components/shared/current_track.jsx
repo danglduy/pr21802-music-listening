@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { AppContext } from '../app_provider';
-import { FormattedMessage } from 'react-intl';
+import {AppContext} from '../app_provider';
+import {FormattedMessage} from 'react-intl';
 
 class CurrentTrack extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class CurrentTrack extends React.Component {
 
     return (
       <section className="current-track">
-        <audio id="player" src={ globalContext.currentTrackUrl } ></audio>
+        <audio id="player" src="" ></audio>
         <div className="current-track__actions">
           <a className="ion-ios-skip-backward" onClick={() => {globalContext.dispatch("PREV");}} />
           {playButton}

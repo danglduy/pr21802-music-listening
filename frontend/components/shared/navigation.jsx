@@ -1,13 +1,17 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+
+import {FormattedMessage} from 'react-intl';
+
+import {constants} from '../../constants/constants';
+import PlaylistItems from './playlist_items';
 
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  setContent = (newContent, id) => {
-    this.props.setContent(newContent, id)
+  setContent = (contentType, contentMethod, contentId) => {
+    this.props.setContent(contentType, contentMethod, contentId)
   }
 
   render() {
@@ -64,7 +68,7 @@ class Navigation extends React.Component {
                 />
               </span>
             </a>
-            <a href="javascript:void(0)" className="navigation__list__item" onClick={ () => this.setContent("album_index", 0) }>
+            <a href="javascript:void(0)" className="navigation__list__item" onClick={() => this.setContent(constants.ALBUM, constants.INDEX)}>
               <i className="ion-ios-musical-notes" />
               <span>
                 <FormattedMessage
@@ -73,7 +77,7 @@ class Navigation extends React.Component {
                 />
               </span>
             </a>
-            <a href="javascript:void(0)" className="navigation__list__item" onClick={ () => this.setContent("artist_index", 0) } >
+            <a href="javascript:void(0)" className="navigation__list__item" onClick={() => this.setContent(constants.ARTIST, constants.INDEX)} >
               <i className="ion-ios-person" />
               <span>
                 <FormattedMessage
@@ -84,24 +88,7 @@ class Navigation extends React.Component {
             </a>
           </div>
         </div>
-        <div className="navigation__list">
-          <div
-            className="navigation__list__header"
-            role="button"
-            href="#playlists"
-          >
-            <FormattedMessage
-              id="navigation.playlists"
-              defaultMessage="Playlists"
-            />
-          </div>
-          <div id="playlists">
-            <a href="#" className="navigation__list__item">
-              <i className="ion-ios-musical-notes" />
-              <span>Doo Wop</span>
-            </a>
-          </div>
-        </div>
+        <PlaylistItems setContent={this.setContent} />
       </section>
     );
   }

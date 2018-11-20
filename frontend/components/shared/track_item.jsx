@@ -1,7 +1,8 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import {constants} from '../../constants/constants';
+import {FormattedMessage} from 'react-intl';
 
-import { AppContext } from '../app_provider';
+import {AppContext} from '../app_provider';
 
 class TrackItem extends React.Component {
   constructor(props) {
@@ -9,31 +10,94 @@ class TrackItem extends React.Component {
     this.state = {
       song: this.props.song,
       queueIndex: this.props.queueIndex,
-      queue: this.props.queue
+      queue: this.props.queue,
+      queueType: this.props.queueType,
+      queueId: this.props.queueId
     };
   }
 
+  componentDidUpdate() {
+    let totalHeight = $(window).height();
+    let headerHeight = $('.header').outerHeight();
+    let footerHeight = $('.current-track').outerHeight();
+    let playlistHeight = $('.new_playlist').outerHeight();
+    let nowPlaying = $('.playing').outerHeight();
+
+    let navHeight = totalHeight - (headerHeight + footerHeight + playlistHeight + nowPlaying);
+    let artistHeight = totalHeight - (headerHeight + footerHeight);
+
+    $('.navigation').css('height' , navHeight);
+    $('.content__middle').css('height' , artistHeight);
+
+    if ($(window).width() <= 768){
+      $('.collapse').removeClass('in');
+      $('.navigation').css('height' , 'auto');
+      $('.artist').css('height' , 'auto');
+    }
+
+    if ($(window).width() > 768){
+      $('.collapse').addClass('in');
+    }
+  }
+
+  setQueueAndPlay = () => {
+    let globalContext = this.context;
+    const {queue, queueType, queueId, queueIndex} = this.state;
+    globalContext.currentQueueType = queueType;
+    globalContext.currentQueue = queue;
+    globalContext.currentQueueId = queueId;
+    globalContext.currentQueueIndex = queueIndex;
+    globalContext.dispatch(constants.START);
+  }
+
   render() {
-    const { song, queue, queueIndex } = this.state;
+    const {song, queue, queueIndex, queueType} = this.state;
     let globalContext = this.context;
     let playButton;
-    if (song.duration) {
-      playButton =
-        <a href="javascript:void(0)"
-          onClick={() => globalContext.dispatch("START", queue, queueIndex)}>
-          <FormattedMessage
-            id="track_item.play"
-            defaultMessage="Play"/>
-        </a>
+    let track_no;
+    track_no = song.track_no;
+    if (queueType === constants.PLAYLIST) {
+      track_no = song.index;
     }
+
+    if (song.file) {
+      if (song.id === globalContext.currentTrackId) {
+        if (globalContext.isPlaying === true) {
+          playButton =
+            <a href="javascript:void(0)"
+              onClick={() => globalContext.dispatch(constants.PAUSE)}>
+              <FormattedMessage
+                id="track_item.pause"
+                defaultMessage="Pause"/>
+            </a>
+        } else {
+          playButton =
+            <a href="javascript:void(0)"
+              onClick={() => globalContext.dispatch(constants.RESUME)}>
+              <FormattedMessage
+                id="track_item.resume"
+                defaultMessage="Resume"/>
+            </a>
+        }
+      } else {
+        playButton =
+          <a href="javascript:void(0)"
+            onClick={() => this.setQueueAndPlay()}>
+            <FormattedMessage
+              id="track_item.play"
+              defaultMessage="Play"/>
+          </a>
+      }
+    }
+
     return (
-      <div className="track" key={ song.id }>
-        <div className="track__number">{ song.track_no }</div>
+      <div className="track" key={song.id}>
+        <div className="track__number">{track_no}</div>
         <div className="track__added">
           {playButton}
         </div>
-        <div className="track__title">{ song.name }</div>
-        <div className="track__length">{ song.duration }</div>
+        <div className="track__title">{song.name}</div>
+        <div className="track__length">{song.duration}</div>
       </div>
     )
   }

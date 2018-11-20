@@ -33,7 +33,7 @@ $(document).ready(function() {
     let totalHeight = $(window).height();
     let headerHeight = $('.header').outerHeight();
     let footerHeight = $('.current-track').outerHeight();
-    let playlistHeight = $('.playlist').outerHeight();
+    let playlistHeight = $('.new_playlist').outerHeight();
     let nowPlaying = $('.playing').outerHeight();
 
     let navHeight = totalHeight - (headerHeight + footerHeight + playlistHeight + nowPlaying);

@@ -35,7 +35,7 @@ export const ENGLISH = {
     'artist_show.related_artists': 'Related Artists',
     'artist_show.popular': 'Popular',
 
-    'album_show.albums': 'Albums',
+    'album_show.album': 'Album',
     'album_show.play': 'Play',
     'album_show.save': 'Save',
     'album_show.monthly_listeners': 'Monthly Listeners',
@@ -43,6 +43,16 @@ export const ENGLISH = {
     'album_show.related_albums': 'Related Albums',
     'album_show.song': 'Song',
 
-    'track_item.play': 'Play'
+    'track_item.play': 'Play',
+    'track_item.pause': 'Pause',
+    'track_item.resume': 'Resume',
+
+    'playlist_show.playlist': 'Playlist',
+    'playlist_show.play': 'Play',
+    'playlist_show.save': 'Save',
+    'playlist_show.monthly_listeners': 'Monthly Listeners',
+    'playlist_show.overview': 'Overview',
+    'playlist_show.related_playlists': 'Related Playlists',
+    'playlist_show.song': 'Song'
   }
 }
