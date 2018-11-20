@@ -14,4 +14,3 @@ json.songs @playlist.playlist_songs.index_asc do |playlist_song|
     json.file nil
   end
 end
-
