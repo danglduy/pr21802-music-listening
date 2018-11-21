@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       scope "/users/:user_id", as: "user" do
         resources :playlists, only: [:index, :show]
       end
+      resources :search, only: :index
     end
   end
 end

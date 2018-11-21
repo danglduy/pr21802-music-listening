@@ -25,7 +25,7 @@ module Api
       end
 
       def set_playlist
-        @playlist = Playlist.find_by params[:id]
+        @playlist = Playlist.find_by id: params[:id]
         present_or_not_found @playlist
       end
     end

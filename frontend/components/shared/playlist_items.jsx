@@ -20,14 +20,16 @@ class PlaylistItems extends React.Component {
     let globalContext = this.context;
     let currentUserId = globalContext.currentUserId;
     UserApiUtil.fetchCurrentUser().then(
-      user =>  PlaylistApiUtil.fetchUserPlaylists(user.id).then(
-        (playlists) => {
-          this.setState({
-            playlists: playlists
-          });
-          globalContext.currentUserId = user.id;
-        }
-      )
+      user => {
+        PlaylistApiUtil.fetchUserPlaylists(user.id).then(
+          (playlists) => {
+            this.setState({
+              playlists: playlists
+            });
+            globalContext.currentUserId = user.id;
+          }
+        )
+      }
     )
   }
 
@@ -39,18 +41,20 @@ class PlaylistItems extends React.Component {
     let playlistItems;
     let globalContext = this.context;
     const {playlists} = this.state;
-    playlistItems = (
-      playlists.map(playlist => (
-        <a href="#"
-          className="navigation__list__item"
-          key={playlist.id}
-          onClick={() => this.setContent(constants.PLAYLIST, constants.SHOW, playlist.id)}
-        >
-          <i className="ion-ios-musical-notes" />
-          <span>{playlist.name}</span>
-        </a>
-      ))
-    )
+    if (playlists.length > 0) {
+      playlistItems = (
+        playlists.map(playlist => (
+          <a href="#"
+            className="navigation__list__item"
+            key={playlist.id}
+            onClick={() => this.setContent(constants.PLAYLIST, constants.SHOW, playlist.id)}
+          >
+            <i className="ion-ios-musical-notes" />
+            <span>{playlist.name}</span>
+          </a>
+        ))
+      )
+    }
 
     return (
       <div className="navigation__list">

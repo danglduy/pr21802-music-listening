@@ -29,6 +29,7 @@ gem "paperclip", "~> 6.0.0"
 gem "paranoia", "~> 2.4", ">= 2.4.1"
 gem "rails", "~> 5.2.1"
 gem "rails-i18n", "~> 5.1", ">= 5.1.1"
+gem "ransack", "~> 2.1"
 gem "recaptcha"
 gem "rolify", "~> 5.2"
 gem "rubocop", "~> 0.54.0", require: false

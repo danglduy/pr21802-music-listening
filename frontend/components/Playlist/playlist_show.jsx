@@ -15,25 +15,33 @@ class PlaylistShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: this.props.userId,
-      playlistId: this.props.playlistId,
+      playlistId: 0,
       playlist: {},
       songs: []
     };
   }
 
-  componentDidMount() {
-    let globalContext = this.context;
-    const {playlistId} = this.state;
-    const {currentUserId} = globalContext;
-    PlaylistApiUtil.fetchUserPlaylist(currentUserId, playlistId).then(
+  getPlaylist = (userId, playlistId) => {
+    console.log(userId);
+    PlaylistApiUtil.fetchUserPlaylist(userId, playlistId).then(
       (data) => {
         this.setState({
+          playlistId: playlistId,
           playlist: data,
           songs: data.songs,
         });
       }
     )
+  }
+
+  componentDidMount() {
+    let globalContext = this.context;
+    this.getPlaylist(globalContext.currentUserId, this.props.playlistId)
+  }
+
+  componentDidUpdate() {
+    if (this.state.playlistId === this.props.playlistId) {return}
+    this.getPlaylist(globalContext.currentUserId, this.props.playlistId)
   }
 
   playPlaylist = (playlist) => {

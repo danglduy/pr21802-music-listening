@@ -9,9 +9,13 @@ user.add_role :admin unless user.has_role? :admin
 user.save!
 User.set_callback :create, :after, :send_welcome_email
 
-root_category = Category.create(name: "Parent 1", published: true, tag: 0)
+root_category = Category.find_or_create_by name: "Parent 1",
+  published: true, tag: 0
 for i in 1..5
-  category = Category.create(name: "Music Category " + i.to_s, parent_id: root_category.id, published: true, tag: i)
+  category = Category.find_or_create_by(
+    name: "Music Category " + i.to_s, parent_id: root_category.id,
+    published: true, tag: i
+  )
 end
 
 metadata_files = Dir.glob("import/*.flac.json")
@@ -64,6 +68,9 @@ metadata_files.each do |metadata_file|
   AlbumArtist.find_or_create_by album: album, artist: album_artist
   if imported_genre.present?
     category = Category.find_or_create_by name: imported_genre
+    category.published = true if category.published.blank?
+    category.tag = 0 if category.tag.blank?
+    category.save!
   end
 
   song = Song.find_or_create_by(
@@ -92,8 +99,3 @@ Plan.find_or_create_by package: package, name: "Premium 6 months",
   duration: 180, amount: 30
 Plan.find_or_create_by package: package, name: "Premium 12 year",
   duration: 365, amount: 50
-
-root_category = Category.create(name: 'Parent 1', published: true, tag: 0)
-for i in 1..5
-  category = Category.create(name: 'Music Category ' + i.to_s, parent_id: root_category.id, published: true, tag: i)
-end
