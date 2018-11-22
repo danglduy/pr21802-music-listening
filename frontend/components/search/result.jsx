@@ -1,45 +1,61 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { AppContext } from '../app_provider';
 import { constants } from '../../constants/constants';
 
+import * as SearchApiUtil from '../../utils/search_api_util';
+
 class SearchResult extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      artists: [],
+      albums: [],
+      songs: []
+    }
   }
 
-  setContent = (contentType, contentMethod, contentId) => {
-    this.props.setContent(contentType, contentMethod, contentId)
+  componentDidMount() {
+    const { match } = this.props;
+    SearchApiUtil.fetchSearchResults(match.params.q).then(
+      data => {
+        this.setState({
+          artists: data.artists,
+          albums: data.albums,
+          songs: data.songs
+        })
+      }
+    )
   }
 
   render() {
-    let globalContext = this.context;
     let artistsContent, albumsContent, songsContent;
-    if (globalContext.currentSearchResultArtists.length > 0) {
+    const { artists, albums, songs } = this.state;
+    if (artists.length > 0) {
       artistsContent = (
-        globalContext.currentSearchResultArtists.map(artist => (
+        artists.map(artist => (
           <div className="media-card" key={artist.id}>
             <div
               className="media-card__image"
               style={{
                 backgroundImage:
-                  `url(${artist.cover})`
+                `url(${artist.cover})`
               }}
             >
               <i className="ion-ios-play" />
             </div>
-            <a className="media-card__footer"
-              onClick={() => this.setContent(constants.ARTIST, constants.SHOW, artist.id)}>
+            <Link to={`/artist/${artist.id}`} className="media-card__footer">
               {artist.name}
-            </a>
+            </Link>
           </div>
         ))
       )
     }
 
-    if (globalContext.currentSearchResultAlbums.length > 0) {
+    if (albums.length > 0) {
       albumsContent = (
-        globalContext.currentSearchResultAlbums.map(album => (
+        albums.map(album => (
           <div className="media-card" key={album.id}>
             <div
               className="media-card__image"
@@ -47,10 +63,10 @@ class SearchResult extends React.Component {
             >
               <i className="ion-ios-play" />
             </div>
-            <a className="media-card__footer"
-              onClick={() => this.setContent(constants.ALBUM, constants.SHOW, album.id)}>
+
+            <Link to={`/albums/${album.id}`} className="media-card__footer">
               {album.name}
-            </a>
+            </Link>
           </div>
         ))
       )

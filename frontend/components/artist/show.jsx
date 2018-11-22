@@ -14,7 +14,6 @@ class ArtistShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      artistId: this.props.artistId,
       artist: {},
       albums: [],
       songs: []
@@ -35,19 +34,21 @@ class ArtistShow extends React.Component {
   }
 
   componentDidMount() {
-    ArtistApiUtil.fetchArtist(this.state.artistId).then(
+    const { match } = this.props;
+
+    ArtistApiUtil.fetchArtist(match.params.id).then(
       data => {
         this.setState({ artist: data });
       }
     )
 
-    AlbumApiUtil.fetchArtistAlbums(this.state.artistId).then(
+    AlbumApiUtil.fetchArtistAlbums(match.params.id).then(
       data => {
         this.setState({ albums: data });
       }
     )
 
-    SongApiUtil.fetchArtistSongs(this.state.artistId).then(
+    SongApiUtil.fetchArtistSongs(match.params.id).then(
       (data) => {
         this.setState({ songs: data });
       }

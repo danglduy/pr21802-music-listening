@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import { Link } from 'react-router-dom';
 
 import {AppContext} from '../app_provider';
 import {constants} from '../../constants/constants';
@@ -36,10 +37,6 @@ class CategoryShow extends React.Component {
     let {category} = this.props;
     if (category.id === this.state.category.id) {return}
     this.getAlbums(category);
-  }
-
-  setContent = (contentType, contentMethod, contentId) => {
-    this.props.setContent(contentType, contentMethod, contentId)
   }
 
   playAlbum = (album) => {
@@ -93,11 +90,10 @@ class CategoryShow extends React.Component {
             >
               {this.playButton(album)}
             </div>
-            <a className="media-card__footer"
-              onClick={() => this.setContent(constants.ALBUM, constants.SHOW, album.id)}
+            <Link to={`/albums/${album.id}`} className="media-card__footer">
             >
               {album.name}
-            </a>
+            </Link>
           </div>
         )))
     }

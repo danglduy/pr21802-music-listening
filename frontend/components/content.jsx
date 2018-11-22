@@ -1,7 +1,16 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
+import { withRouter } from 'react-router';
 
-import {constants} from '../constants/constants';
-import {AppContext} from './app_provider';
+import {
+  Route,
+  Link,
+  Switch,
+  Redirect,
+} from 'react-router-dom'
+
+import { constants } from '../constants/constants';
+
+import * as MiscUtils from '../utils/misc_utils';
 
 import Header from './shared/header';
 import Navigation from './shared/navigation';
@@ -24,88 +33,50 @@ import SearchResult from './search/result';
 class Content extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentContentType: constants.CATEGORY,
-      currentContentMethod: constants.INDEX,
-      currentContentId: '',
-    }
   }
 
-  setContent = (contentType, contentMethod, contentId = 0) => {
-    let globalContext = this.context;
-    globalContext.currentContentType = contentType;
-    globalContext.currentContentMethod = contentMethod;
-    globalContext.currentContentId = contentId;
-    this.setState({
-      currentContentType: contentType,
-      currentContentMethod: contentMethod,
-      currentContentId: contentId
-    })
+  componentDidMount() {
+    MiscUtils.setWindowSize();
   }
 
-  componentDidUpdate() {
-    let totalHeight = $(window).height();
-
-    let headerHeight = $('.header').outerHeight();
-    let footerHeight = $('.current-track').outerHeight();
-    let playlistHeight = $('.new_playlist').outerHeight();
-    let nowPlaying = $('.playing').outerHeight();
-
-    let navHeight = totalHeight - (headerHeight + footerHeight + playlistHeight + nowPlaying);
-    let artistHeight = totalHeight - (headerHeight + footerHeight);
-
-    $('.navigation').css('height' , navHeight);
-    $('.content__middle').css('height' , artistHeight);
-
-    if ($(window).width() <= 768){
-      $('.collapse').removeClass('in');
-      $('.navigation').css('height' , 'auto');
-      $('.artist').css('height' , 'auto');
-    }
-
-    if ($(window).width() > 768){
-      $('.collapse').addClass('in');
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      MiscUtils.setWindowSize();
     }
   }
 
   render() {
-    let mainContent;
-    let globalContext = this.context;
-    const {currentContentType, currentContentMethod, currentContentId} = this.state;
-    if (currentContentType === constants.ARTIST) {
-      if (currentContentMethod === constants.INDEX) {
-        mainContent = <ArtistIndex setContent={this.setContent} />
-      } else if (currentContentMethod === constants.SHOW) {
-        mainContent = <ArtistShow artistId={currentContentId} />
-      }
-    } else if (currentContentType === constants.ALBUM) {
-      if (currentContentMethod === constants.INDEX) {
-        mainContent = <AlbumIndex setContent={this.setContent} />
-      } else if (currentContentMethod === constants.SHOW) {
-        mainContent = <AlbumShow albumId={currentContentId} />
-      }
-    } else if (currentContentType === constants.PLAYLIST) {
-      if (currentContentMethod === constants.SHOW) {
-        mainContent = <PlaylistShow playlistId={currentContentId} />
-      }
-    } else if (currentContentType === constants.SEARCH) {
-      mainContent = <SearchResult setContent={this.setContent} />
-    } else if (currentContentType === constants.CATEGORY) {
-      if (currentContentMethod === constants.INDEX) {
-        mainContent = <CategoryIndex setContent={this.setContent} />
-      }
-    }
+    const Artists = ({ match }) => (
+      <Fragment>
+        <Route exact path={`${match.url}`} component={ ArtistIndex } />
+        <Route path={`${match.url}/:id`} component={ ArtistShow } />
+      </Fragment>
+    )
+
+    const Albums = ({ match }) => (
+      <Fragment>
+        <Route exact path={`${match.url}`} component={ AlbumIndex } />
+        <Route path={`${match.url}/:id`} component={ AlbumShow } />
+      </Fragment>
+    )
 
     return (
       <Fragment>
-        <Header setContent={this.setContent}/>
+        <Header />
         <section className="content">
           <div className="content__left">
-            <Navigation setContent={this.setContent}/>
+            <Navigation />
             <Playlist />
-            <Playing setContent={this.setContent}/>
+            <Playing />
           </div>
-          {mainContent}
+          <Switch>
+            <Route exact path ="/" component={ CategoryIndex } />
+            <Route path="/artists" component={ Artists } />
+            <Route path="/albums" component={ Albums } />
+            <Route path="/playlists/:id" component={ PlaylistShow } />
+            <Route path="/search/:q" component={ SearchResult } />
+            <Redirect from="*" to="/" />
+          </Switch>
         </section>
         <CurrentTrack />
       </Fragment>
@@ -113,5 +84,4 @@ class Content extends React.Component {
   }
 }
 
-Content.contextType = AppContext;
-export default Content;
+export default withRouter(Content);

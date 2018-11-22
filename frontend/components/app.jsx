@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import Content from './content';
 
@@ -28,10 +29,13 @@ class App extends React.Component {
         messages={this.state.messages}
       >
         <AppProvider>
-          <Content />
+          <Router basename="/player">
+            <Content />
+          </Router>
         </AppProvider>
       </IntlProvider>
     );
   }
 }
+
 export default App;
