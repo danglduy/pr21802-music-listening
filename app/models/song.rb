@@ -11,6 +11,7 @@ class Song < ApplicationRecord
   mount_uploader :file, FileUploader
 
   scope :order_track_no_asc, ->{order track_no: :asc}
+  scope :order_album_no, ->{order album_id: :asc}
 
   validates_presence_of :name
 end

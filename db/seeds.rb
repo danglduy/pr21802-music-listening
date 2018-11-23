@@ -87,6 +87,11 @@ metadata_files.each do |metadata_file|
     category: category
   ) if category.present?
 
+  AlbumCategory.find_or_create_by(
+    album: album,
+    category: category
+  ) if category.present?
+
   song.file = File.open(imported_filename) if song.file.blank?
   song.save!
 
