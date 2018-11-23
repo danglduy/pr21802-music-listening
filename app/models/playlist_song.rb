@@ -3,7 +3,6 @@ class PlaylistSong < ApplicationRecord
   belongs_to :song
 
   validates_presence_of :index
-  acts_as_paranoid
 
   after_save :update_playlist
 

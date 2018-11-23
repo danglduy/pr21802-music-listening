@@ -31,6 +31,11 @@ ActiveAdmin.register Song do
     column :file do |song|
       link_to t(".listen"), song_attachment_url(song) if song.file.present?
     end
+    column :genres do |song|
+      song.categories.map do |category|
+        raw link_to(category.name, admin_category_path(category))
+      end.join(", ").html_safe
+    end
     actions
   end
 

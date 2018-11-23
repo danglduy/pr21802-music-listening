@@ -1,5 +1,5 @@
 ActiveAdmin.register Album do
-  permit_params :name, :disc_no, :year, :cover, artist_ids: []
+  permit_params :name, :disc_no, :year, :cover, artist_ids: [], category_ids: []
   config.sort_order = "name_asc"
 
   controller do
@@ -17,6 +17,7 @@ ActiveAdmin.register Album do
       f.input :artists
       f.input :year
       f.input :disc_no
+      f.input :categories
       f.input :cover, as: :file
     end
     f.actions
@@ -34,6 +35,11 @@ ActiveAdmin.register Album do
         raw link_to(artist.name, admin_artist_path(artist))
       end.join(", ").html_safe
     end
+    column :genres do |album|
+      album.categories.map do |category|
+        raw link_to(category.name, admin_category_path(category))
+      end.join(", ").html_safe
+    end
     column :year
     column :disc_no
     actions
@@ -49,6 +55,11 @@ ActiveAdmin.register Album do
       row :album_artists do
         album.artists.map do |artist|
           raw link_to(artist.name, admin_artist_path(artist))
+        end.join(", ").html_safe
+      end
+      row :genres do
+        album.categories.map do |category|
+          raw link_to(category.name, admin_category_path(category))
         end.join(", ").html_safe
       end
       row :year

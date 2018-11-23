@@ -61,7 +61,7 @@ ActiveAdmin.register Artist do
     end
 
     if artist.songs.present?
-      table_for artist.songs do
+      table_for artist.songs.order_album_no do
         h4 t(".songs")
         column :name do |song|
           link_to song.name, admin_song_path(song)
@@ -72,6 +72,9 @@ ActiveAdmin.register Artist do
         end
         column :year do |song|
           song.album.year
+        end
+        column :listen do |song|
+          link_to t(".listen"), song_attachment_url(song) if song.file.present?
         end
       end
     end
