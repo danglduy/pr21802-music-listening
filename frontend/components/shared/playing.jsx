@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {AppContext} from '../app_provider';
-import {constants} from '../../constants/constants';
+import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
 
 class Playing extends React.Component {
   constructor(props) {
@@ -15,17 +15,18 @@ class Playing extends React.Component {
 
   render() {
     let globalContext = this.context;
-    const {currentQueueType, currentQueueId} = globalContext;
+    const { currentQueueType, currentQueueId } = globalContext;
 
     return (
       <section className="playing">
         <div className="playing__art">
-          <a href="javascript:void(0)" onClick={() => {this.setContent(currentQueueType, constants.SHOW, currentQueueId)}}>
-          <img
-            src={globalContext.currentTrackCoverUrl}
-            alt="Album Art"
-          />
-        </a>
+          <a href="javascript:void(0)"
+            onClick={() => { this.setContent(currentQueueType, constants.SHOW, currentQueueId) }}>
+            <img
+              src={globalContext.currentTrackCoverUrl}
+              alt="Album Art"
+            />
+          </a>
         </div>
         <div className="playing__song">
           <a className="playing__song__name">{globalContext.currentTrackName}</a>

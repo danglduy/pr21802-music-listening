@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {AppContext} from '../app_provider';
-import {constants} from '../../constants/constants';
+import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
 
 class SearchResult extends React.Component {
   constructor(props) {
@@ -23,13 +23,14 @@ class SearchResult extends React.Component {
               className="media-card__image"
               style={{
                 backgroundImage:
-                `url(${artist.cover})`
+                  `url(${artist.cover})`
               }}
             >
               <i className="ion-ios-play" />
             </div>
             <a className="media-card__footer"
-              onClick={() => this.setContent(constants.ARTIST, constants.SHOW, artist.id)}>{artist.name}
+              onClick={() => this.setContent(constants.ARTIST, constants.SHOW, artist.id)}>
+              {artist.name}
             </a>
           </div>
         ))
@@ -42,15 +43,13 @@ class SearchResult extends React.Component {
           <div className="media-card" key={album.id}>
             <div
               className="media-card__image"
-              style={{
-                backgroundImage:
-                `url(${album.cover})`
-              }}
+              style={{ backgroundImage: `url(${album.cover})` }}
             >
               <i className="ion-ios-play" />
             </div>
             <a className="media-card__footer"
-              onClick={() => this.setContent(constants.ALBUM, constants.SHOW, album.id)}>{album.name}
+              onClick={() => this.setContent(constants.ALBUM, constants.SHOW, album.id)}>
+              {album.name}
             </a>
           </div>
         ))

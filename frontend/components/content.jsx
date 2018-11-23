@@ -9,21 +9,23 @@ import Playlist from './shared/playlist';
 import Playing from './shared/playing';
 import CurrentTrack from './shared/current_track';
 
-import ArtistIndex from './Artist/artist_index';
-import ArtistShow from './Artist/artist_show';
+import CategoryIndex from './category/index';
 
-import AlbumIndex from './Album/album_index';
-import AlbumShow from './Album/album_show';
+import ArtistIndex from './artist/index';
+import ArtistShow from './artist/show';
 
-import PlaylistShow from './Playlist/playlist_show';
+import AlbumIndex from './album/index';
+import AlbumShow from './album/show';
 
-import SearchResult from './Search/search_result';
+import PlaylistShow from './playlist/show';
+
+import SearchResult from './search/result';
 
 class Content extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentContentType: constants.ARTIST,
+      currentContentType: constants.CATEGORY,
       currentContentMethod: constants.INDEX,
       currentContentId: '',
     }
@@ -88,6 +90,10 @@ class Content extends React.Component {
       }
     } else if (currentContentType === constants.SEARCH) {
       mainContent = <SearchResult setContent={this.setContent} />
+    } else if (currentContentType === constants.CATEGORY) {
+      if (currentContentMethod === constants.INDEX) {
+        mainContent = <CategoryIndex setContent={this.setContent} />
+      }
     }
 
     return (

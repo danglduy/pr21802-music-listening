@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {AppContext} from '../app_provider';
-import {constants} from '../../constants/constants';
+import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
 
 import * as AlbumApiUtil from '../../utils/album_api_util';
 import * as SongApiUtil from '../../utils/song_api_util';
@@ -16,8 +16,8 @@ class AlbumIndex extends React.Component {
 
   componentDidMount() {
     AlbumApiUtil.fetchAlbums().then(
-      (data) => {
-        this.setState({albums: data});
+      data => {
+        this.setState({ albums: data });
       }
     )
   }
@@ -29,8 +29,8 @@ class AlbumIndex extends React.Component {
   playAlbum = (album) => {
     let globalContext = this.context;
     SongApiUtil.fetchAlbumSongs(album.id).then(
-      (songs) => {
-        globalContext.currentQueue = songs;
+      data => {
+        globalContext.currentQueue = data;
         globalContext.currentQueueType = constants.ALBUM;
         globalContext.currentQueueId = album.id;
         globalContext.currentQueueIndex = 0;
@@ -42,26 +42,29 @@ class AlbumIndex extends React.Component {
   playButton = (album) => {
     let playButton;
     let globalContext = this.context;
-    const {isPlaying, currentQueueId, currentQueueType} = globalContext;
+    const { isPlaying, currentQueueId, currentQueueType } = globalContext;
 
     if (currentQueueId === album.id && currentQueueType === constants.ALBUM) {
       if (isPlaying === true) {
         playButton =
-          <i className="ion-ios-pause" onClick={() => {globalContext.dispatch(constants.PAUSE)}}/>
+          <i className="ion-ios-pause"
+            onClick={() => { globalContext.dispatch(constants.PAUSE) }} />
       } else {
         playButton =
-          <i className="ion-ios-play" onClick={() => {globalContext.dispatch(constants.RESUME)}}/>
+          <i className="ion-ios-play"
+            onClick={() => { globalContext.dispatch(constants.RESUME) }} />
       }
     } else {
       playButton =
-        <i className="ion-ios-play" onClick={() => {this.playAlbum(album)}}/>
+        <i className="ion-ios-play"
+          onClick={() => { this.playAlbum(album) }} />
     }
     return playButton;
   }
 
   render() {
     let globalContext = this.context;
-    const {albums} = this.state;
+    const { albums } = this.state;
     let albumsContent;
 
     if (albums.length > 0) {
@@ -70,10 +73,7 @@ class AlbumIndex extends React.Component {
           <div className="media-card" key={album.id}>
             <div
               className="media-card__image"
-              style={{
-                backgroundImage:
-                `url(${album.cover})`
-              }}
+              style={{ backgroundImage: `url(${album.cover})` }}
             >
               {this.playButton(album)}
             </div>

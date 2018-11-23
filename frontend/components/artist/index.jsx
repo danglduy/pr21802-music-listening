@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {AppContext} from '../app_provider';
-import {constants} from '../../constants/constants';
+import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
 
 import * as ArtistApiUtil from '../../utils/artist_api_util';
 import * as SongApiUtil from '../../utils/song_api_util';
@@ -16,17 +16,17 @@ class ArtistIndex extends React.Component {
 
   componentDidMount() {
     ArtistApiUtil.fetchArtists().then(
-      (data) => {
-        this.setState({artists: data});
+      data => {
+        this.setState({ artists: data });
       }
     )
   }
 
-  playArtist = (artist) => {
+  playArtist = artist => {
     let globalContext = this.context;
     SongApiUtil.fetchArtistSongs(artist.id).then(
-      (songs) => {
-        globalContext.currentQueue = songs;
+      data => {
+        globalContext.currentQueue = data;
         globalContext.currentQueueType = constants.ARTIST;
         globalContext.currentQueueId = artist.id;
         globalContext.currentQueueIndex = 0;
@@ -35,21 +35,24 @@ class ArtistIndex extends React.Component {
     )
   }
 
-  playButton = (artist) => {
+  playButton = artist => {
     let playButton;
     let globalContext = this.context;
-    const {isPlaying, currentQueueId, currentQueueType} = globalContext;
+    const { isPlaying, currentQueueId, currentQueueType } = globalContext;
     if (currentQueueId === artist.id && currentQueueType === constants.ARTIST) {
       if (isPlaying === true) {
         playButton =
-          <i className="ion-ios-pause" onClick={() => {globalContext.dispatch(constants.PAUSE)}}/>
+          <i className="ion-ios-pause"
+            onClick={() => { globalContext.dispatch(constants.PAUSE) }} />
       } else {
         playButton =
-          <i className="ion-ios-play" onClick={() => {globalContext.dispatch(constants.RESUME)}}/>
+          <i className="ion-ios-play"
+            onClick={() => { globalContext.dispatch(constants.RESUME) }} />
       }
     } else {
       playButton =
-        <i className="ion-ios-play" onClick={() => {this.playArtist(artist)}}/>
+        <i className="ion-ios-play"
+          onClick={() => { this.playArtist(artist) }} />
     }
     return playButton;
   }
@@ -59,7 +62,7 @@ class ArtistIndex extends React.Component {
   }
 
   render() {
-    const {artists} = this.state;
+    const { artists } = this.state;
     let artistsContent;
 
     if (artists.length > 0) {
@@ -70,12 +73,15 @@ class ArtistIndex extends React.Component {
               className="media-card__image"
               style={{
                 backgroundImage:
-                `url(${artist.cover})`
+                  `url(${artist.cover})`
               }}
             >
               {this.playButton(artist)}
             </div>
-            <a className="media-card__footer" onClick={() => this.setContent(constants.ARTIST, constants.SHOW, artist.id)}>{artist.name}</a>
+            <a className="media-card__footer"
+              onClick={() => this.setContent(constants.ARTIST, constants.SHOW, artist.id)}>
+              {artist.name}
+            </a>
           </div>
         ))
       )

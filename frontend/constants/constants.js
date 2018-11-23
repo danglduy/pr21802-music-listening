@@ -1,4 +1,5 @@
 export const constants = {
+  CATEGORY: 'CATEGORY',
   ARTIST: 'ARTIST',
   ALBUM: 'ALBUM',
   INDEX: 'INDEX',

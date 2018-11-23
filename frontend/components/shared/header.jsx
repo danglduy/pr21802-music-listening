@@ -1,8 +1,8 @@
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import {AppContext} from '../app_provider';
-import {constants} from '../../constants/constants';
+import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
 
 import * as UserApiUtil from '../../utils/user_api_util';
 
@@ -17,14 +17,14 @@ class Header extends React.Component {
   onSearchSubmit = (e) => {
     e.preventDefault();
     let globalContext = this.context;
-    const {searchString} = this.state;
+    const { searchString } = this.state;
     globalContext.currentSearchString = searchString;
     globalContext.dispatch(constants.SEARCH);
     this.setContent(constants.SEARCH, constants.SHOW)
   }
 
   onSearchChange = (e) => {
-    this.setState({searchString: e.target.value})
+    this.setState({ searchString: e.target.value })
   }
 
   setContent = (contentType, contentMethod, contentId) => {
@@ -49,7 +49,7 @@ class Header extends React.Component {
                 <input
                   type="text"
                   value={this.state.searchString}
-                  placeholder= {msg}
+                  placeholder={msg}
                   onChange={this.onSearchChange.bind(this)}
                 />
               </form>

@@ -1,10 +1,10 @@
 import React from 'react';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import {AppContext} from '../app_provider';
-import {constants} from '../../constants/constants';
+import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
 
-import ArtistAlbum from './album';
+import ArtistAlbum from './_album';
 
 import * as ArtistApiUtil from '../../utils/artist_api_util';
 import * as AlbumApiUtil from '../../utils/album_api_util';
@@ -21,11 +21,11 @@ class ArtistShow extends React.Component {
     };
   }
 
-  playArtist = (artist) => {
+  playArtist = artist => {
     let globalContext = this.context;
     SongApiUtil.fetchArtistSongs(artist.id).then(
-      (songs) => {
-        globalContext.currentQueue = songs;
+      data => {
+        globalContext.currentQueue = data;
         globalContext.currentQueueType = constants.ARTIST;
         globalContext.currentQueueId = artist.id;
         globalContext.currentQueueIndex = 0;
@@ -36,26 +36,26 @@ class ArtistShow extends React.Component {
 
   componentDidMount() {
     ArtistApiUtil.fetchArtist(this.state.artistId).then(
-      (data) => {
-        this.setState({artist: data});
+      data => {
+        this.setState({ artist: data });
       }
     )
 
     AlbumApiUtil.fetchArtistAlbums(this.state.artistId).then(
-      (data) => {
-        this.setState({albums: data});
+      data => {
+        this.setState({ albums: data });
       }
     )
 
     SongApiUtil.fetchArtistSongs(this.state.artistId).then(
       (data) => {
-        this.setState({songs: data});
+        this.setState({ songs: data });
       }
     )
   }
 
   render() {
-    const {artist, albums, songs} = this.state;
+    const { artist, albums, songs } = this.state;
     let albumsContent;
     let popularContent;
     let top5;
@@ -114,13 +114,13 @@ class ArtistShow extends React.Component {
           </div>
           {
             countlast5 > 0 &&
-              <button className="show-more button-light">
-                <FormattedMessage
-                  id="artist_show.show_more"
-                  defaultMessage="Show { last5 } More"
-                  values={{last5: countlast5}}
-                />
-              </button>
+            <button className="show-more button-light">
+              <FormattedMessage
+                id="artist_show.show_more"
+                defaultMessage="Show { last5 } More"
+                values={{ last5: countlast5 }}
+              />
+            </button>
           }
         </div>
       )
@@ -147,7 +147,7 @@ class ArtistShow extends React.Component {
                 <div className="artist__info__name">{artist.name}</div>
                 <div className="artist__info__actions">
                   <button className="button-dark"
-                    onClick={() => {this.playArtist(artist)}}>
+                    onClick={() => { this.playArtist(artist) }}>
                     <i className="ion-ios-play" />
                     <FormattedMessage
                       id="artist_show.play"
@@ -287,7 +287,7 @@ class ArtistShow extends React.Component {
                       className="media-card__image"
                       style={{
                         backgroundImage:
-                        'url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/hoodie.jpg)'
+                          'url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/hoodie.jpg)'
                       }}
                     >
                       <i className="ion-ios-play" />

@@ -1,8 +1,8 @@
 import React from 'react';
-import {constants} from '../../constants/constants';
-import {FormattedMessage} from 'react-intl';
+import { constants } from '../../constants/constants';
+import { FormattedMessage } from 'react-intl';
 
-import {AppContext} from '../app_provider';
+import { AppContext } from '../app_provider';
 
 class TrackItem extends React.Component {
   constructor(props) {
@@ -26,23 +26,23 @@ class TrackItem extends React.Component {
     let navHeight = totalHeight - (headerHeight + footerHeight + playlistHeight + nowPlaying);
     let artistHeight = totalHeight - (headerHeight + footerHeight);
 
-    $('.navigation').css('height' , navHeight);
-    $('.content__middle').css('height' , artistHeight);
+    $('.navigation').css('height', navHeight);
+    $('.content__middle').css('height', artistHeight);
 
-    if ($(window).width() <= 768){
+    if ($(window).width() <= 768) {
       $('.collapse').removeClass('in');
-      $('.navigation').css('height' , 'auto');
-      $('.artist').css('height' , 'auto');
+      $('.navigation').css('height', 'auto');
+      $('.artist').css('height', 'auto');
     }
 
-    if ($(window).width() > 768){
+    if ($(window).width() > 768) {
       $('.collapse').addClass('in');
     }
   }
 
   setQueueAndPlay = () => {
     let globalContext = this.context;
-    const {queue, queueType, queueId, queueIndex} = this.state;
+    const { queue, queueType, queueId, queueIndex } = this.state;
     globalContext.currentQueueType = queueType;
     globalContext.currentQueue = queue;
     globalContext.currentQueueId = queueId;
@@ -51,7 +51,7 @@ class TrackItem extends React.Component {
   }
 
   render() {
-    const {song, queue, queueIndex, queueType} = this.state;
+    const { song, queue, queueIndex, queueType } = this.state;
     let globalContext = this.context;
     let playButton;
     let track_no;
@@ -68,7 +68,7 @@ class TrackItem extends React.Component {
               onClick={() => globalContext.dispatch(constants.PAUSE)}>
               <FormattedMessage
                 id="track_item.pause"
-                defaultMessage="Pause"/>
+                defaultMessage="Pause" />
             </a>
         } else {
           playButton =
@@ -76,7 +76,7 @@ class TrackItem extends React.Component {
               onClick={() => globalContext.dispatch(constants.RESUME)}>
               <FormattedMessage
                 id="track_item.resume"
-                defaultMessage="Resume"/>
+                defaultMessage="Resume" />
             </a>
         }
       } else {
@@ -85,7 +85,7 @@ class TrackItem extends React.Component {
             onClick={() => this.setQueueAndPlay()}>
             <FormattedMessage
               id="track_item.play"
-              defaultMessage="Play"/>
+              defaultMessage="Play" />
           </a>
       }
     }
