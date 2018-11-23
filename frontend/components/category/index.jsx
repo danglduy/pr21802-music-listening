@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { AppContext } from '../app_provider';
 import { constants } from '../../constants/constants';
@@ -21,10 +22,6 @@ class CategoryIndex extends React.Component {
         this.setState({ categories: data });
       }
     )
-  }
-
-  setContent = (contentType, contentMethod, contentId) => {
-    this.props.setContent(contentType, contentMethod, contentId)
   }
 
   render() {
@@ -54,7 +51,6 @@ class CategoryIndex extends React.Component {
           <CategoryShow
             key={category.id}
             category={category}
-            setContent={this.setContent}
           />
         )
       )

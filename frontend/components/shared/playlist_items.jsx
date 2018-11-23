@@ -33,10 +33,6 @@ class PlaylistItems extends React.Component {
     )
   }
 
-  setContent = (contentType, contentMethod, contentId) => {
-    this.props.setContent(contentType, contentMethod, contentId)
-  }
-
   render() {
     let playlistItems;
     let globalContext = this.context;
@@ -44,14 +40,13 @@ class PlaylistItems extends React.Component {
     if (playlists.length > 0) {
       playlistItems = (
         playlists.map(playlist => (
-          <a href="#"
-            className="navigation__list__item"
+          <Link to={`/playlists/${playlist.id}`}
             key={playlist.id}
-            onClick={() => this.setContent(constants.PLAYLIST, constants.SHOW, playlist.id)}
+            className="navigation__list__item">
           >
             <i className="ion-ios-musical-notes" />
             <span>{playlist.name}</span>
-          </a>
+          </Link>
         ))
       )
     }

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { FormattedMessage } from 'react-intl';
 
 import { AppContext } from '../app_provider';
@@ -14,24 +13,23 @@ class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      albumId: this.props.albumId,
       album: {},
       songs: []
     };
   }
 
   componentDidMount() {
-    AlbumApiUtil.fetchAlbum(this.state.albumId).then(
+    const { match } = this.props;
+
+    AlbumApiUtil.fetchAlbum(match.params.id).then(
       data => {
         this.setState({ album: data });
       }
     )
 
-    SongApiUtil.fetchAlbumSongs(this.state.albumId).then(
+    SongApiUtil.fetchAlbumSongs(match.params.id).then(
       data => {
-        this.setState({
-          songs: data
-        });
+        this.setState({ songs: data });
       }
     )
   }

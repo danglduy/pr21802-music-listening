@@ -1,11 +1,11 @@
 import React from 'react';
-import { constants } from '../../constants/constants';
-
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
-import TrackItem from '../shared/track_item';
-
 import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
+
+import TrackItem from '../shared/track_item';
 
 import * as PlaylistApiUtil from '../../utils/playlist_api_util';
 import * as AlbumApiUtil from '../../utils/album_api_util';

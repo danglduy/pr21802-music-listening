@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { AppContext } from '../app_provider';
 import { constants } from '../../constants/constants';
@@ -57,10 +58,6 @@ class ArtistIndex extends React.Component {
     return playButton;
   }
 
-  setContent = (contentType, contentMethod, contentId) => {
-    this.props.setContent(contentType, contentMethod, contentId)
-  }
-
   render() {
     const { artists } = this.state;
     let artistsContent;
@@ -78,10 +75,9 @@ class ArtistIndex extends React.Component {
             >
               {this.playButton(artist)}
             </div>
-            <a className="media-card__footer"
-              onClick={() => this.setContent(constants.ARTIST, constants.SHOW, artist.id)}>
+            <Link to={`/artists/${artist.id}`} className="media-card__footer">
               {artist.name}
-            </a>
+            </Link>
           </div>
         ))
       )

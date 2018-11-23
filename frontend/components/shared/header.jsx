@@ -1,7 +1,7 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
-import { AppContext } from '../app_provider';
 import { constants } from '../../constants/constants';
 
 import * as UserApiUtil from '../../utils/user_api_util';
@@ -16,19 +16,12 @@ class Header extends React.Component {
 
   onSearchSubmit = (e) => {
     e.preventDefault();
-    let globalContext = this.context;
     const { searchString } = this.state;
-    globalContext.currentSearchString = searchString;
-    globalContext.dispatch(constants.SEARCH);
-    this.setContent(constants.SEARCH, constants.SHOW)
+    this.props.history.push(`/search/${searchString}`);
   }
 
   onSearchChange = (e) => {
     this.setState({ searchString: e.target.value })
-  }
-
-  setContent = (contentType, contentMethod, contentId) => {
-    this.props.setContent(contentType, contentMethod, contentId);
   }
 
   render() {
@@ -125,5 +118,4 @@ class Header extends React.Component {
   }
 }
 
-Header.contextType = AppContext;
-export default Header;
+export default withRouter(Header);
