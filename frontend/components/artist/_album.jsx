@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import {constants} from '../../constants/constants';
+import { constants } from '../../constants/constants';
 import TrackItem from '../shared/track_item';
 
 import * as SongApiUtil from '../../utils/song_api_util';
@@ -16,7 +16,7 @@ class ArtistAlbum extends React.Component {
     };
 
     SongApiUtil.fetchAlbumSongs(this.state.album.id).then(
-      (data) => {
+      data => {
         this.setState({
           songs: data
         });
@@ -26,7 +26,7 @@ class ArtistAlbum extends React.Component {
 
   render() {
     let songContent;
-    const {album, songs} = this.state;
+    const { album, songs } = this.state;
 
     songContent = (
       songs.map((song, index) => (

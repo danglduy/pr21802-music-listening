@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {AppContext} from '../app_provider';
-import {constants} from  '../../constants/constants';
-import {FormattedMessage} from 'react-intl';
+import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
+import { FormattedMessage } from 'react-intl';
 
 class CurrentTrack extends React.Component {
   constructor(props) {
@@ -14,18 +14,22 @@ class CurrentTrack extends React.Component {
     let playButton;
 
     if (globalContext.isPlaying === true) {
-      playButton =  <a className="ion-ios-pause pause" onClick={() => globalContext.dispatch(constants.PAUSE)} />
+      playButton = <a className="ion-ios-pause pause"
+        onClick={() => globalContext.dispatch(constants.PAUSE)} />
     } else {
-      playButton =  <a className="ion-ios-play play" onClick={() => globalContext.dispatch(constants.RESUME)} />
+      playButton = <a className="ion-ios-play play"
+        onClick={() => globalContext.dispatch(constants.RESUME)} />
     }
 
     return (
       <section className="current-track">
         <audio id="player" src="" ></audio>
         <div className="current-track__actions">
-          <a className="ion-ios-skip-backward" onClick={() => {globalContext.dispatch(constants.PREV);}} />
+          <a className="ion-ios-skip-backward"
+            onClick={() => { globalContext.dispatch(constants.PREV); }} />
           {playButton}
-          <a className="ion-ios-skip-forward" onClick={() => {globalContext.dispatch(constants.NEXT);}} />
+          <a className="ion-ios-skip-forward"
+            onClick={() => { globalContext.dispatch(constants.NEXT); }} />
         </div>
         <div className="current-track__progress">
           <div className="current-track__progress__start"></div>

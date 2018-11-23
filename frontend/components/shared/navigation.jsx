@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import {constants} from '../../constants/constants';
+import { constants } from '../../constants/constants';
 import PlaylistItems from './playlist_items';
 
 class Navigation extends React.Component {
@@ -28,7 +28,8 @@ class Navigation extends React.Component {
             />
           </div>
           <div id="main">
-            <a href="#" className="navigation__list__item">
+            <a href="javascript:void(0)" className="navigation__list__item"
+              onClick={() => this.setContent(constants.CATEGORY, constants.INDEX)}>
               <i className="ion-ios-browsers" />
               <span>
                 <FormattedMessage
@@ -68,7 +69,8 @@ class Navigation extends React.Component {
                 />
               </span>
             </a>
-            <a href="javascript:void(0)" className="navigation__list__item" onClick={() => this.setContent(constants.ALBUM, constants.INDEX)}>
+            <a href="javascript:void(0)" className="navigation__list__item"
+              onClick={() => this.setContent(constants.ALBUM, constants.INDEX)}>
               <i className="ion-ios-musical-notes" />
               <span>
                 <FormattedMessage
@@ -77,7 +79,8 @@ class Navigation extends React.Component {
                 />
               </span>
             </a>
-            <a href="javascript:void(0)" className="navigation__list__item" onClick={() => this.setContent(constants.ARTIST, constants.INDEX)} >
+            <a href="javascript:void(0)" className="navigation__list__item"
+              onClick={() => this.setContent(constants.ARTIST, constants.INDEX)} >
               <i className="ion-ios-person" />
               <span>
                 <FormattedMessage

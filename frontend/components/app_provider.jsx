@@ -23,7 +23,7 @@ class AppProvider extends React.Component {
       currentQueueId: '',
       currentQueueIndex: 0,
       currentQueue: [],
-      currentContentType: constants.ARTIST,
+      currentContentType: constants.CATEGORY,
       currentContentMethod: constants.INDEX,
       currentContentId: '',
       currentSearchString: '',

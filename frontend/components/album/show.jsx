@@ -1,61 +1,57 @@
 import React from 'react';
-import {constants} from '../../constants/constants';
 
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+
+import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
 
 import TrackItem from '../shared/track_item';
 
-import {AppContext} from '../app_provider';
-
-import * as PlaylistApiUtil from '../../utils/playlist_api_util';
 import * as AlbumApiUtil from '../../utils/album_api_util';
 import * as SongApiUtil from '../../utils/song_api_util';
 
-class PlaylistShow extends React.Component {
+class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playlistId: 0,
-      playlist: {},
+      albumId: this.props.albumId,
+      album: {},
       songs: []
     };
   }
 
-  getPlaylist = (userId, playlistId) => {
-    console.log(userId);
-    PlaylistApiUtil.fetchUserPlaylist(userId, playlistId).then(
-      (data) => {
+  componentDidMount() {
+    AlbumApiUtil.fetchAlbum(this.state.albumId).then(
+      data => {
+        this.setState({ album: data });
+      }
+    )
+
+    SongApiUtil.fetchAlbumSongs(this.state.albumId).then(
+      data => {
         this.setState({
-          playlistId: playlistId,
-          playlist: data,
-          songs: data.songs,
+          songs: data
         });
       }
     )
   }
 
-  componentDidMount() {
+  playAlbum = album => {
     let globalContext = this.context;
-    this.getPlaylist(globalContext.currentUserId, this.props.playlistId)
-  }
-
-  componentDidUpdate() {
-    if (this.state.playlistId === this.props.playlistId) {return}
-    this.getPlaylist(globalContext.currentUserId, this.props.playlistId)
-  }
-
-  playPlaylist = (playlist) => {
-    let globalContext = this.context;
-    globalContext.currentQueue = playlist.songs;
-    globalContext.currentQueueType = constants.PLAYLIST;
-    globalContext.currentQueueId = playlist.id;
-    globalContext.currentQueueIndex = 0;
-    globalContext.dispatch(constants.START);
+    SongApiUtil.fetchAlbumSongs(album.id).then(
+      data => {
+        globalContext.currentQueue = data;
+        globalContext.currentQueueType = constants.ALBUM;
+        globalContext.currentQueueId = album.id;
+        globalContext.currentQueueIndex = 0;
+        globalContext.dispatch(constants.START);
+      }
+    )
   }
 
   render() {
     let globalContext = this.context;
-    const {playlist, songs} = this.state;
+    const { album, songs } = this.state;
     let songContent;
 
     songContent = (
@@ -65,32 +61,44 @@ class PlaylistShow extends React.Component {
           key={song.id}
           queue={songs}
           queueIndex={index}
-          queueType={constants.PLAYLIST}
-          queueId={playlist.id}
+          queueType={constants.ALBUM}
+          queueId={album.id}
         />
       ))
     )
 
     return (
       <div className="content__middle">
-        <div className="playlist">
-          <div className="playlist__header">
-            <div className="playlist__info">
-              <div className="playlist__info__meta">
-                <div className="playlist__info__type">
+        <div className="album is-verified">
+          <div className="album__header">
+            <div className="album__info">
+              <div className="profile__img">
+                <img
+                  src={album.cover}
+                  alt={album.name}
+                />
+              </div>
+              <div className="album__info__meta">
+                <div className="album__info__type">
                   <FormattedMessage
-                    id="artist_show.playlist"
-                    defaultMessage="playlist"
+                    id="artist_show.album"
+                    defaultMessage="album"
                   />
                 </div>
-                <div className="playlist__info__name">{playlist.name}</div>
-                <div className="playlist__info__actions">
+                <div className="album__info__name">{album.name}</div>
+                <div className="album__info__actions">
                   <button className="button-dark"
-                    onClick={() => {this.playPlaylist(playlist)}}>
+                    onClick={() => { this.playAlbum(album) }}>
                     <i className="ion-ios-play" />
                     <FormattedMessage
-                      id="playlist_show.play"
+                      id="album_show.play"
                       defaultMessage="Play"
+                    />
+                  </button>
+                  <button className="button-light">
+                    <FormattedMessage
+                      id="album_show.save"
+                      defaultMessage="Save"
                     />
                   </button>
                   <button className="button-light more">
@@ -99,36 +107,36 @@ class PlaylistShow extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="playlist__navigation">
+            <div className="album__navigation">
               <ul className="nav nav-tabs" role="tablist">
                 <li role="presentation" className="active">
                   <a
-                    href="#playlist-overview"
-                    aria-controls="playlist-overview"
+                    href="#album-overview"
+                    aria-controls="album-overview"
                     role="tab"
                     data-toggle="tab"
                   >
                     <FormattedMessage
-                      id="playlist_show.overview"
+                      id="album_show.overview"
                       defaultMessage="Overview"
                     />
                   </a>
                 </li>
                 <li role="presentation">
                   <a
-                    href="#related-playlists"
-                    aria-controls="related-playlists"
+                    href="#related-albums"
+                    aria-controls="related-albums"
                     role="tab"
                     data-toggle="tab"
                   >
                     <FormattedMessage
-                      id="playlist_show.related_playlists"
+                      id="album_show.related_albums"
                       defaultMessage="Related Albums"
                     />
                   </a>
                 </li>
               </ul>
-              <div className="playlist__navigation__friends">
+              <div className="album__navigation__friends">
                 <a href="#">
                   <img
                     src="http://cdn.devilsworkshop.org/files/2013/01/enlarged-facebook-profile-picture.jpg"
@@ -138,23 +146,23 @@ class PlaylistShow extends React.Component {
               </div>
             </div>
           </div>
-          <div className="playlist__content">
+          <div className="album__content">
             <div className="tab-content">
               <div
                 role="tabpanel"
                 className="tab-pane active"
-                id="playlist-overview"
+                id="album-overview"
               >
                 <div className="overview">
-                  <div className="overview__playlists">
-                    <div className="playlist">
-                      <div className="playlist__tracks">
+                  <div className="overview__albums">
+                    <div className="album">
+                      <div className="album__tracks">
                         <div className="tracks">
                           <div className="tracks__heading">
                             <div className="tracks__heading__number">#</div>
                             <div className="tracks__heading__title">
                               <FormattedMessage
-                                id="playlist_show.song"
+                                id="album_show.song"
                                 defaultMessage="Song"
                               />
                             </div>
@@ -172,14 +180,14 @@ class PlaylistShow extends React.Component {
                   </div>
                 </div>
               </div>
-              <div role="tabpanel" className="tab-pane" id="related-playlists">
+              <div role="tabpanel" className="tab-pane" id="related-albums">
                 <div className="media-cards">
                   <div className="media-card">
                     <div
                       className="media-card__image"
                       style={{
                         backgroundImage:
-                        'url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/hoodie.jpg)'
+                          'url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/hoodie.jpg)'
                       }}
                     >
                       <i className="ion-ios-play" />
@@ -196,5 +204,5 @@ class PlaylistShow extends React.Component {
   }
 }
 
-PlaylistShow.contextType = AppContext;
-export default PlaylistShow;
+AlbumShow.contextType = AppContext;
+export default AlbumShow;

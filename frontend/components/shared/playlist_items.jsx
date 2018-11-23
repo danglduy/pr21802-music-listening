@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import {AppContext} from '../app_provider';
-import {constants} from '../../constants/constants';
+import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
 
 import * as UserApiUtil from '../../utils/user_api_util';
 import * as PlaylistApiUtil from '../../utils/playlist_api_util';
@@ -22,7 +22,7 @@ class PlaylistItems extends React.Component {
     UserApiUtil.fetchCurrentUser().then(
       user => {
         PlaylistApiUtil.fetchUserPlaylists(user.id).then(
-          (playlists) => {
+          playlists => {
             this.setState({
               playlists: playlists
             });
@@ -40,7 +40,7 @@ class PlaylistItems extends React.Component {
   render() {
     let playlistItems;
     let globalContext = this.context;
-    const {playlists} = this.state;
+    const { playlists } = this.state;
     if (playlists.length > 0) {
       playlistItems = (
         playlists.map(playlist => (
