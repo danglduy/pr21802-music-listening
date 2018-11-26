@@ -9,4 +9,9 @@ class Playlist < ApplicationRecord
     allow_destroy: true
 
   acts_as_paranoid
+
+  def related_playlists
+    songs.sample.categories.sample.songs.sample(5).map(&:playlists)
+      .map(&:first).reject{|playlist| playlist.blank? || playlist.id == id}
+  end
 end
