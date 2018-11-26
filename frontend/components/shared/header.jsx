@@ -10,8 +10,19 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentUser: {},
       searchString: ''
     }
+  }
+
+  componentDidMount() {
+    UserApiUtil.fetchCurrentUser().then(
+      data => {
+        this.setState({
+          currentUser: data
+        })
+      }
+    )
   }
 
   onSearchSubmit = (e) => {
@@ -25,16 +36,9 @@ class Header extends React.Component {
   }
 
   render() {
+    const { currentUser } = this.state;
     return (
       <section className="header">
-        <div className="page-flows">
-          <span className="flow">
-            <i className="ion-ios-arrow-back" />
-          </span>
-          <span className="flow">
-            <i className="ion-ios-arrow-forward disabled" />
-          </span>
-        </div>
         <div className="search">
           <FormattedMessage id="header.search" defaultMessage="Search">
             {msg => (
@@ -53,20 +57,9 @@ class Header extends React.Component {
           <div className="user__notifications">
             <i className="ion-md-notifications" />
           </div>
-          <div className="user__inbox">
-            <i className="ion-md-archive" />
-          </div>
           <div className="user__info">
-            <span className="user__info__img">
-              <img
-                src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/adam_proPic.jpg"
-                alt="Profile Picture"
-                className="img-responsive"
-              />
-            </span>
             <span className="user__info__name">
-              <span className="first">Adam</span>
-              <span className="last">Lowenthal</span>
+              <span className="name">{currentUser.name}</span>
             </span>
           </div>
           <div className="user__actions">
@@ -86,23 +79,24 @@ class Header extends React.Component {
                 aria-labelledby="dropdownMenu1"
               >
                 <li>
+                  <a href="/profile">
+                    <FormattedMessage
+                      id="header.profile"
+                      defaultMessage="Profile"
+                    />
+                  </a>
+                </li>
+
+                <li>
                   <a href="/account">
                     <FormattedMessage
-                      id="header.account"
-                      defaultMessage="Account"
+                      id="header.payment"
+                      defaultMessage="Payment"
                     />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
-                    <FormattedMessage
-                      id="header.settings"
-                      defaultMessage="Settings"
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
+                  <a href="/logout">
                     <FormattedMessage
                       id="header.logout"
                       defaultMessage="Log Out"

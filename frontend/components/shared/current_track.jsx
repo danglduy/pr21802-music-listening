@@ -39,12 +39,6 @@ class CurrentTrack extends React.Component {
           <div className="current-track__progress__finish"></div>
         </div>
         <div className="current-track__options">
-          <a href="#" className="lyrics">
-            <FormattedMessage
-              id="current_track.lyrics"
-              defaultMessage="Lyrics"
-            />
-          </a>
           <span className="controls">
             <a href="#" className="control">
               <i className="ion-ios-menu" />
@@ -54,15 +48,6 @@ class CurrentTrack extends React.Component {
             </a>
             <a href="#" className="control">
               <i className="fa fa-refresh" />
-            </a>
-            <a href="#" className="control devices">
-              <i className="ion-ios-phone-portrait" />
-              <span>
-                <FormattedMessage
-                  id="current_track.devices_available"
-                  defaultMessage="Devices Available"
-                />
-              </span>
             </a>
             <a href="#" className="control volume">
               <i className="ion-ios-volume-high" />

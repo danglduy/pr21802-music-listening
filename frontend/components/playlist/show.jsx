@@ -11,21 +11,21 @@ import * as PlaylistApiUtil from '../../utils/playlist_api_util';
 import * as AlbumApiUtil from '../../utils/album_api_util';
 import * as SongApiUtil from '../../utils/song_api_util';
 
+import PlaylistItem from './_playlist';
+
 class PlaylistShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playlistId: 0,
       playlist: {},
       songs: []
     };
   }
 
-  getPlaylist = (userId, playlistId) => {
-    PlaylistApiUtil.fetchUserPlaylist(userId, playlistId).then(
+  getPlaylist = playlistId => {
+    PlaylistApiUtil.fetchPlaylist(playlistId).then(
       data => {
         this.setState({
-          playlistId: playlistId,
           playlist: data,
           songs: data.songs,
         });
@@ -34,17 +34,11 @@ class PlaylistShow extends React.Component {
   }
 
   componentDidMount() {
-    let globalContext = this.context;
-    this.getPlaylist(globalContext.currentUserId, this.props.playlistId)
+    const { match } = this.props;
+    this.getPlaylist(match.params.id)
   }
 
-  componentDidUpdate() {
-    let globalContext = this.context;
-    if (this.state.playlistId === this.props.playlistId) { return }
-    this.getPlaylist(globalContext.currentUserId, this.props.playlistId)
-  }
-
-  playPlaylist = (playlist) => {
+  playPlaylist = playlist => {
     let globalContext = this.context;
     globalContext.currentQueue = playlist.songs;
     globalContext.currentQueueType = constants.PLAYLIST;

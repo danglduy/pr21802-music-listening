@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { AppContext } from '../app_provider';
@@ -9,6 +9,9 @@ import ArtistAlbum from './_album';
 import * as ArtistApiUtil from '../../utils/artist_api_util';
 import * as AlbumApiUtil from '../../utils/album_api_util';
 import * as SongApiUtil from '../../utils/song_api_util';
+
+import ArtistItem from './_artist';
+import AlbumItem from '../album/_album';
 
 class ArtistShow extends React.Component {
   constructor(props) {
@@ -58,7 +61,10 @@ class ArtistShow extends React.Component {
   render() {
     const { artist, albums, songs } = this.state;
     let albumsContent;
+    let songsContent;
+    let contributedAlbums;
     let popularContent;
+    let relatedArtists;
     let top5;
     let top10;
     let countlast5;
@@ -73,10 +79,6 @@ class ArtistShow extends React.Component {
                 defaultMessage="Albums"
               />
             </span>
-            <span className="view-type">
-              <i className="fa fa-list list active" />
-              <i className="fa fa-th-large card" />
-            </span>
           </div>
           {
             albums.map(album => (
@@ -84,6 +86,38 @@ class ArtistShow extends React.Component {
             ))
           }
         </div>
+      )
+    }
+
+    if (artist.related && artist.related.length > 0) {
+      relatedArtists = (
+        artist.related.map(
+          item => (
+            <ArtistItem key={item.id} artist={item} />
+          )
+        )
+      )
+    }
+
+    if (artist.contributed_albums && artist.contributed_albums.length > 0) {
+      contributedAlbums = (
+        <Fragment>
+          <span className="section-title">
+            <FormattedMessage
+              id="artist_show.distrbuted_albums"
+              defaultMessage="Appear on"
+            />
+          </span>
+          <div className="media-cards">
+            {
+              artist.contributed_albums.map(
+                item => (
+                  <AlbumItem key={`cr-${item.id}`} album={item} />
+                )
+              )
+            }
+          </div>
+        </Fragment>
       )
     }
 
@@ -115,13 +149,13 @@ class ArtistShow extends React.Component {
           </div>
           {
             countlast5 > 0 &&
-            <button className="show-more button-light">
-              <FormattedMessage
-                id="artist_show.show_more"
-                defaultMessage="Show { last5 } More"
-                values={{ last5: countlast5 }}
-              />
-            </button>
+              <button className="show-more button-light">
+                <FormattedMessage
+                  id="artist_show.show_more"
+                  defaultMessage="Show { last5 } More"
+                  values={{ last5: countlast5 }}
+                />
+              </button>
           }
         </div>
       )
@@ -205,14 +239,6 @@ class ArtistShow extends React.Component {
                   </a>
                 </li>
               </ul>
-              <div className="artist__navigation__friends">
-                <a href="#">
-                  <img
-                    src="http://cdn.devilsworkshop.org/files/2013/01/enlarged-facebook-profile-picture.jpg"
-                    alt="true"
-                  />
-                </a>
-              </div>
             </div>
           </div>
           <div className="artist__content">
@@ -224,77 +250,17 @@ class ArtistShow extends React.Component {
               >
                 <div className="overview">
                   <div className="overview__artist">
-                    <div className="section-title">
-                      <FormattedMessage
-                        id="artist_show.latest_release"
-                        defaultMessage="Latest Release"
-                      />
-                    </div>
-                    <div className="latest-release">
-                      <div className="latest-release__art">
-                        <img
-                          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/whenDarkOut.jpg"
-                          alt="When It's Dark Out"
-                        />
-                      </div>
-                      <div className="latest-release__song">
-                        <div className="latest-release__song__title">
-                          Drifting (Track Commentary)
-                        </div>
-                        <div className="latest-release__song__date">
-                          <span className="day">4</span>
-                          <span className="month">December</span>
-                          <span className="year">2015</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="section-title">
-                      <FormattedMessage
-                        id="artist_show.popular"
-                        defaultMessage="Popular"
-                      />
-                    </div>
-                    {popularContent}
-                  </div>
-                  <div className="overview__related">
-                    <div className="section-title">
-                      <FormattedMessage
-                        id="artist_show.related_artists"
-                        defaultMessage="Related Artists"
-                      />
-                    </div>
-                    <div className="related-artists">
-                      <a href="#" className="related-artist">
-                        <span className="related-artist__img">
-                          <img
-                            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/hoodie.jpg"
-                            alt="Hoodie Allen"
-                          />
-                        </span>
-                        <span className="related-artist__name">
-                          Hoodie Allen
-                        </span>
-                      </a>
-                    </div>
                   </div>
                   {albumsContent}
+                </div>
+                <div className="overview__albums">
+
+                  {contributedAlbums}
                 </div>
               </div>
               <div role="tabpanel" className="tab-pane" id="related-artists">
                 <div className="media-cards">
-                  <div className="media-card">
-                    <div
-                      className="media-card__image"
-                      style={{
-                        backgroundImage:
-                          'url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/hoodie.jpg)'
-                      }}
-                    >
-                      <i className="ion-ios-play" />
-                    </div>
-                    <a className="media-card__footer">Hoodie Allen</a>
-                  </div>
+                  {relatedArtists}
                 </div>
               </div>
             </div>

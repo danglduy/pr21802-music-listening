@@ -11,3 +11,9 @@ export const fetchUserPlaylist = (userId, playlistId) => (
     response => {return response.data}
   )
 );
+
+export const fetchPlaylist = playlistId => (
+  axios.get(`/api/v1/playlists/${playlistId}.json`).then(
+    response => {return response.data}
+  )
+);

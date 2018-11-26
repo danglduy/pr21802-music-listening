@@ -1,8 +1,10 @@
 import React from 'react';
-import { constants } from '../../constants/constants';
+import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 import { AppContext } from '../app_provider';
+import { constants } from '../../constants/constants';
+
 
 class TrackItem extends React.Component {
   constructor(props) {
@@ -97,6 +99,11 @@ class TrackItem extends React.Component {
           {playButton}
         </div>
         <div className="track__title">{song.name}</div>
+        <div className="track__artist">
+          <Link to={`/artists/${song.artist_id}`}>
+            {song.artist_name}
+          </Link>
+        </div>
         <div className="track__length">{song.duration}</div>
       </div>
     )

@@ -112,7 +112,7 @@ body {
   .user {
 
     & {
-      width: 300px;
+      width: 150px;
       margin-left: auto;
 
       display: flex;
@@ -481,7 +481,7 @@ body {
   &__progress {
 
     & {
-      width: 70%;
+      width: 80%;
       padding: 0 $padding-lg;
       color: $grey;
       font-size: $x-small;
@@ -539,7 +539,7 @@ body {
   &__options {
 
     & {
-      width: 25%;
+      width: 15%;
 
       display: flex;
       flex-flow: row wrap;
@@ -581,7 +581,7 @@ body {
       }
 
       .volume {
-        width: 25%;
+        width: 50%;
 
         display: flex;
         flex-flow: row wrap;
@@ -2031,10 +2031,6 @@ body {
 
     .track {
 
-      &__title {
-        width: auto !important;
-      }
-
       &__explicit {
         display: none;
       }
@@ -2422,14 +2418,6 @@ body {
 
       }
 
-    }
-
-  }
-
-  .track {
-
-    &__title {
-      width: 70%;
     }
 
   }

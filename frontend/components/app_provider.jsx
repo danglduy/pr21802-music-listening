@@ -23,7 +23,6 @@ class AppProvider extends React.Component {
       currentQueueId: '',
       currentQueueIndex: 0,
       currentQueue: [],
-      currentUserId: null,
       isPlaying: false,
       dispatch: this.dispatch,
     }
@@ -53,10 +52,6 @@ class AppProvider extends React.Component {
 
     if (action_type == constants.PREV) {
       this.prevAudio();
-    }
-
-    if (action_type == constants.SEARCH) {
-      this.onSearch();
     }
   }
 
