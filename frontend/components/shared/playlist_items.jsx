@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { FormattedMessage } from 'react-intl';
 
@@ -42,7 +43,7 @@ class PlaylistItems extends React.Component {
         playlists.map(playlist => (
           <Link to={`/playlists/${playlist.id}`}
             key={playlist.id}
-            className="navigation__list__item">
+            className="navigation__list__item"
           >
             <i className="ion-ios-musical-notes" />
             <span>{playlist.name}</span>

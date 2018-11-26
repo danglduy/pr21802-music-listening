@@ -29,28 +29,55 @@ class CategoryIndex extends React.Component {
     const { categories } = this.state;
     let categoriesTabs;
     let categoriesContent;
+    let activeClass;
 
     categoriesTabs = (
-      categories.map(category => (
-        <li role="presentation" className="" key={category.id}>
-          <a
-            href={`#category-${category.id}`}
-            aria-controls={`category-${category.id}`}
-            role="tab"
-            data-toggle="tab"
-          >
-            {category.name}
-          </a>
-        </li>
-      ))
+      categories.map((category, index) => {
+        if (index === 0) {
+          return (
+            <li
+              role="presentation"
+              className="active"
+              key={category.id}
+            >
+              <a
+                href={`#category-${category.id}`}
+                aria-controls={`category-${category.id}`}
+                role="tab"
+                data-toggle="tab"
+              >
+                {category.name}
+              </a>
+            </li>
+          )
+        } else {
+          return (
+            <li
+              role="presentation"
+              className=""
+              key={category.id}
+            >
+              <a
+                href={`#category-${category.id}`}
+                aria-controls={`category-${category.id}`}
+                role="tab"
+                data-toggle="tab"
+              >
+                {category.name}
+              </a>
+            </li>
+          )
+        }
+      })
     )
 
     categoriesContent = (
       categories.map(
-        category => (
+        (category, index) => (
           <CategoryShow
             key={category.id}
             category={category}
+            index={index}
           />
         )
       )

@@ -8,8 +8,6 @@ import {ENGLISH} from '../locales/en';
 
 import AppProvider from './app_provider';
 
-import * as UserApiUtil from '../utils/user_api_util';
-
 import 'bootstrap';
 
 class App extends React.Component {
@@ -17,8 +15,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       locale: 'en',
-      messages: ENGLISH.messages,
-      currentUserId: null
+      messages: ENGLISH.messages
     }
   }
 

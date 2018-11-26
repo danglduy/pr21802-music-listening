@@ -2,7 +2,8 @@ export const ENGLISH = {
   lang: 'en',
   messages: {
     'header.search': 'Search',
-    'header.account': 'Account',
+    'header.profile': 'Profile',
+    'header.payment': 'Payment',
     'header.settings': 'Settings',
     'header.logout': 'Log out',
 
@@ -34,6 +35,7 @@ export const ENGLISH = {
     'artist_show.overview': 'Overview',
     'artist_show.related_artists': 'Related Artists',
     'artist_show.popular': 'Popular',
+    'artist_show.contributed_albums': 'Appear on',
 
     'album_show.album': 'Album',
     'album_show.play': 'Play',

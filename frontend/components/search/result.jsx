@@ -6,6 +6,9 @@ import { constants } from '../../constants/constants';
 
 import * as SearchApiUtil from '../../utils/search_api_util';
 
+import ArtistItem from '../artist/_artist';
+import AlbumItem from '../album/_album';
+
 class SearchResult extends React.Component {
   constructor(props) {
     super(props);
@@ -35,20 +38,7 @@ class SearchResult extends React.Component {
     if (artists.length > 0) {
       artistsContent = (
         artists.map(artist => (
-          <div className="media-card" key={artist.id}>
-            <div
-              className="media-card__image"
-              style={{
-                backgroundImage:
-                `url(${artist.cover})`
-              }}
-            >
-              <i className="ion-ios-play" />
-            </div>
-            <Link to={`/artist/${artist.id}`} className="media-card__footer">
-              {artist.name}
-            </Link>
-          </div>
+          <ArtistItem key={artist.id} artist={artist} />
         ))
       )
     }
@@ -56,18 +46,7 @@ class SearchResult extends React.Component {
     if (albums.length > 0) {
       albumsContent = (
         albums.map(album => (
-          <div className="media-card" key={album.id}>
-            <div
-              className="media-card__image"
-              style={{ backgroundImage: `url(${album.cover})` }}
-            >
-              <i className="ion-ios-play" />
-            </div>
-
-            <Link to={`/albums/${album.id}`} className="media-card__footer">
-              {album.name}
-            </Link>
-          </div>
+          <AlbumItem key={album.id} album={album} />
         ))
       )
     }
@@ -88,5 +67,5 @@ class SearchResult extends React.Component {
     )
   }
 }
-SearchResult.contextType = AppContext;
+
 export default SearchResult;

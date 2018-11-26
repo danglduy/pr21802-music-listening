@@ -9,6 +9,8 @@ import TrackItem from '../shared/track_item';
 import * as AlbumApiUtil from '../../utils/album_api_util';
 import * as SongApiUtil from '../../utils/song_api_util';
 
+import AlbumItem from './_album';
+
 class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
@@ -51,6 +53,7 @@ class AlbumShow extends React.Component {
     let globalContext = this.context;
     const { album, songs } = this.state;
     let songContent;
+    let relatedAlbums;
 
     songContent = (
       songs.map((song, index) => (
@@ -64,6 +67,15 @@ class AlbumShow extends React.Component {
         />
       ))
     )
+
+
+    if (album.related && album.related.length > 0) {
+      relatedAlbums = (
+        album.related.map(item => (
+          <AlbumItem key={item.id} album={item} />
+        ))
+      )
+    }
 
     return (
       <div className="content__middle">
@@ -134,14 +146,6 @@ class AlbumShow extends React.Component {
                   </a>
                 </li>
               </ul>
-              <div className="album__navigation__friends">
-                <a href="#">
-                  <img
-                    src="http://cdn.devilsworkshop.org/files/2013/01/enlarged-facebook-profile-picture.jpg"
-                    alt="true"
-                  />
-                </a>
-              </div>
             </div>
           </div>
           <div className="album__content">
@@ -180,18 +184,7 @@ class AlbumShow extends React.Component {
               </div>
               <div role="tabpanel" className="tab-pane" id="related-albums">
                 <div className="media-cards">
-                  <div className="media-card">
-                    <div
-                      className="media-card__image"
-                      style={{
-                        backgroundImage:
-                          'url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/hoodie.jpg)'
-                      }}
-                    >
-                      <i className="ion-ios-play" />
-                    </div>
-                    <a className="media-card__footer">Hoodie Allen</a>
-                  </div>
+                  {relatedAlbums}
                 </div>
               </div>
             </div>
