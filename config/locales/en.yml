@@ -82,6 +82,7 @@ en:
       subject: "Subject"
       album: "Album"
       article: "Article"
+      player: "Player"
       sign_up: "Sign up"
       login: "Login"
       logout: "Logout"

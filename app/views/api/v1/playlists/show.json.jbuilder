@@ -14,3 +14,6 @@ json.songs @playlist.playlist_songs.index_asc do |playlist_song|
     json.file nil
   end
 end
+json.related @playlist.related_playlists do |playlist|
+  json.partial! "playlist", playlist: playlist
+end

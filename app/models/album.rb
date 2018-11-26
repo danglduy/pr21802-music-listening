@@ -10,4 +10,8 @@ class Album < ApplicationRecord
   scope :order_year_dsc, ->{order year: :desc}
 
   validates_presence_of :name
+
+  def related_albums
+    categories.sample.albums.where.not(id: id).first(5) if categories.present?
+  end
 end

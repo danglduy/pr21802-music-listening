@@ -10,6 +10,8 @@ ActiveAdmin.register Category do
   # sortable tree: false, sorting_attribute: :tag
 
   index do
+    selectable_column
+    id_column
     column :name
     actions
   end
