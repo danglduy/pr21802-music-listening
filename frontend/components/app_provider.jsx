@@ -107,7 +107,20 @@ class AppProvider extends React.Component {
       }
     }
 
-    player.play();
+    let playPromise = player.play();
+
+    if (playPromise !== undefined) {
+      playPromise.then(_ => {
+        // Automatic playback started!
+        // Show playing UI.
+        // We can now safely pause video...
+      })
+        .catch(error => {
+          console.log(error);
+          // Auto-play was prevented
+          // Show paused UI.
+        });
+    }
 
     this.setState({
       currentTrackId: track.id,
