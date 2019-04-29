@@ -10,7 +10,7 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "cancancan", "~> 2.3"
 gem "carrierwave", "~> 1.2", ">= 1.2.3"
 gem "config", "~> 1.7"
-gem "ckeditor"
+gem "ckeditor", "~> 4.3"
 gem "devise", "~> 4.5"
 gem "dotenv-rails", "~> 2.5"
 gem "fog", "~> 2.1.0"
